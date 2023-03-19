@@ -1,6 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RequestController {
     private RequestDatabase requestDatabase = new RequestDatabase();
@@ -9,7 +9,7 @@ public class RequestController {
         requestDatabase.add(new Request(requester, contactNumber, description, objectName, lostOrFound));
     }
 
-    public ArrayList<Request> getAllRequests(){
+    public List<Request> getAllRequests(){
         return requestDatabase.getAllRequests();
     }
 }

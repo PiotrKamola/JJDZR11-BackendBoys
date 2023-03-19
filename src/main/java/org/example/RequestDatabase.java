@@ -1,9 +1,10 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RequestDatabase {
-    private ArrayList<Request> allRequests = new ArrayList<Request>();
+    private List<Request> allRequests = new ArrayList<Request>();
 
     RequestDatabase(){
 
@@ -13,7 +14,7 @@ public class RequestDatabase {
         System.out.println("Added request to database.");
     }
 
-    public ArrayList<Request> getAllRequests(){
+    public List<Request> getAllRequests(){
         return allRequests;
     }
 }
