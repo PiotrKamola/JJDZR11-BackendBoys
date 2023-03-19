@@ -1,20 +1,17 @@
-package org.example;
+package org.example.request;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RequestDatabase {
-    private List<Request> allRequests = new ArrayList<>();
+    private final List<Request> allRequests = new ArrayList<>();
 
-    RequestDatabase(){
-
-    }
     public void add(Request request) {
         allRequests.add(request);
         System.out.println("Added request to database.\n");
     }
 
-    public List<Request> getAllRequests(){
+    public List<Request> getAllRequests() {
         return allRequests;
     }
 }

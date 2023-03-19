@@ -1,9 +1,9 @@
-package org.example;
+package org.example.request;
 
 import java.time.LocalDate;
 
 public class Request {
-//    private enum lostOrFound {
+    //    private enum lostOrFound {
 //    Lost(0),
 //    Found(1);
 //
@@ -17,9 +17,9 @@ public class Request {
     private String objectName;
     private int lostOrFound; // 0 - lost | 1 - found
 
-    private java.time.LocalDate requestDate;
+    private LocalDate requestDate;
 
-    Request(String requester, String contactNumber, String description, String objectName, int lostOrFound){
+    Request(String requester, String contactNumber, String description, String objectName, int lostOrFound) {
         this.requestDate = LocalDate.now();
 
         this.requester = requester;
