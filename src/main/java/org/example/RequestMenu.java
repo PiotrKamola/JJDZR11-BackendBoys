@@ -28,11 +28,9 @@ public class RequestMenu {
                 }
                 break;
             } catch (InputMismatchException | NumberFormatException e) {
-                //scanner.nextLine();   // clear input buffer to not loop when someone give string
                 System.out.println("Wrong number.");
             }
         }
-        //scanner.nextLine();
         return lostOrFound;
     }
 
