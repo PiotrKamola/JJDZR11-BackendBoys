@@ -11,7 +11,7 @@ public class Main {
         RequestMenu requestMenu = new RequestMenu(requestController);
         requestMenu.sendRequestData();
         requestMenu.sendRequestData();
-        requestMenu.sendRequestData();
+        //requestMenu.sendRequestData();
 
 
         for (Request request : requestController.getAllRequests()) {

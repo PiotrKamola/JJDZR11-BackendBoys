@@ -18,20 +18,12 @@ public class RequestMenu {
         return getUserInput("Tell me your contact number: (temporary before adding login user)\n");
     }
 
-    private int getRequestLostOrFound() {
-        int lostOrFound;
-        System.out.println("You found or lost something? (0 - lost | 1 - found) " +
-                "(temporary, later choose from list)");
+    private String getRequestLostOrFound() {
+        String lostOrFound;
         while (true) {
-            try {
-                String userInput = getUserInput("");
-                lostOrFound = Integer.parseInt(userInput);
-                if (lostOrFound != 0 && lostOrFound != 1) {
-                    throw new InputMismatchException();
-                }
+            lostOrFound = getUserInput("You found or lost something (you can choose \"lost\" or \"found\").\n");
+            if(lostOrFound.equals("lost") || lostOrFound.equals("found")){
                 break;
-            } catch (InputMismatchException | NumberFormatException e) {
-                System.out.println("Wrong number.");
             }
         }
         return lostOrFound;
@@ -67,11 +59,7 @@ public class RequestMenu {
     public void printRequest(Request request) {
         System.out.println("-----------------------------------------------------");
         System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber() + ".");
-        if (request.getLostOrFound() == 0) {
-            System.out.print("You lost ");
-        } else {
-            System.out.print("You found ");
-        }
+        System.out.print("You "+request.getLostOrFound()+" :");
         System.out.println(request.getObjectName() + ".");
 
         System.out.println("Description: " + request.getDescription() + ".");

@@ -3,23 +3,15 @@ package org.example.request;
 import java.time.LocalDate;
 
 public class Request {
-    //    private enum lostOrFound {
-//    Lost(0),
-//    Found(1);
-//
-//    lostOrFound(int i) {
-//        this.
-//    }
-//}
     private String requester;
     private String contactNumber;
     private String description;
     private String objectName;
-    private int lostOrFound; // 0 - lost | 1 - found
+    private String lostOrFound;
 
     private LocalDate requestDate;
 
-    Request(String requester, String contactNumber, String description, String objectName, int lostOrFound) {
+    Request(String requester, String contactNumber, String description, String objectName, String lostOrFound) {
         this.requestDate = LocalDate.now();
 
         this.requester = requester;
@@ -61,11 +53,11 @@ public class Request {
         this.objectName = objectName;
     }
 
-    public int getLostOrFound() {
+    public String getLostOrFound() {
         return lostOrFound;
     }
 
-    public void setLostOrFound(int lostOrFound) {
+    public void setLostOrFound(String lostOrFound) {
         this.lostOrFound = lostOrFound;
     }
 
