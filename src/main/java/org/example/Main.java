@@ -1,14 +1,21 @@
 package org.example;
 
+import org.example.request.RequestController;
+import org.example.request.RequestMenu;
+import org.example.request.Request;
+
 public class Main {
-
     public static void main(String[] args) {
-        BrowseByInput browse = new BrowseByInput();
 
-        // call displayAll() to print all records
-        browse.displayAll();
+        RequestController requestController = new RequestController();
+        RequestMenu requestMenu = new RequestMenu(requestController);
+        requestMenu.sendRequestData();
+        requestMenu.sendRequestData();
+        //requestMenu.sendRequestData();
 
-        // call browseRecords() to search for records
-        browse.browseRecords();
+
+        for (Request request : requestController.getAllRequests()) {
+            requestMenu.printRequest(request);
+        }
     }
 }
