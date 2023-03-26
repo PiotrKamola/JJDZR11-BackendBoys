@@ -1,6 +1,5 @@
 package org.example.request;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RequestMenu {

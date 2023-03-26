@@ -8,7 +8,6 @@ public class Request {
     private String description;
     private String objectName;
     private String lostOrFound;
-
     private LocalDate requestDate;
 
     Request(String requester, String contactNumber, String description, String objectName, String lostOrFound) {
