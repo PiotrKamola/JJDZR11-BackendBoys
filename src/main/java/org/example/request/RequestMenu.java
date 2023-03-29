@@ -73,14 +73,14 @@ public class RequestMenu {
 
         printOptions();
         Scanner scanner = new Scanner(System.in);
-        int userChoice = getIntFromUser(scanner, 0, 4, "Proszę o wybór opcji");
+        int userChoice = getIntFromUser(scanner, 0, 4, "Please choose option");
 
         switch (userChoice) {
             case 1 -> {
                 System.out.println("1");
             }
             case 2 -> {
-                System.out.println("2");
+                sendRequestData();
             }
             case 3 -> {
                 System.out.println("3");
@@ -92,12 +92,12 @@ public class RequestMenu {
     }
 
     private int getIntFromUser(Scanner scanner, int minAllowedInt, int maxAllowedInt, String InputMessage) {
-        String errorInputMessage = "Nieprawidłowa wartość! Spróbuj jeszcze raz. ";
+        String errorInputMessage = "Not allowed value! Try again... ";
         int intFromUser = -1;
         boolean isAllowedInput = false;
 
         do {
-            System.out.print(InputMessage + " (dozwolone są liczby całkowite od " + minAllowedInt + " do " + maxAllowedInt + "): ");
+            System.out.print(InputMessage + " (Allowed are only integers from " + minAllowedInt + " to " + maxAllowedInt + "): ");
             if (scanner.hasNextInt()) {
                 intFromUser = scanner.nextInt();
                 if (intFromUser >= minAllowedInt && intFromUser <= maxAllowedInt) {
@@ -118,6 +118,6 @@ public class RequestMenu {
     }
 
     public void printOptions() {
-        System.out.println("MENU\n" + "1. Zaloguj/Zarejestruj\n" + "2. Wyślij Zgłoszenie\n" + "3. Pokaż wszystkie zgłoszenia\n" + "4. Wyszukaj zgłoszenie\n");
+        System.out.println("MENU\n" + "1. Login/Register\n" + "2. Sent request\n" + "3. Show all requests\n" + "4. Find request\n");
     }
 }
