@@ -66,7 +66,7 @@ public class RequestMenu {
             System.out.println(request.getObjectName() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
             System.out.println("Date: " + request.getRequestDate() + ".");
-            System.out.println("-----------------------------------------------------\n");
+            System.out.println("-----------------------------------------------------");
         }
 
     }
@@ -77,31 +77,37 @@ public class RequestMenu {
             System.out.println("Welcome in ZgubaApp!\n");
         }
 
-        printOptions();
-        Scanner scanner = new Scanner(System.in);
-        int userChoice = getIntFromUser(scanner, 0, 4, "Please choose option");
+        boolean isRunning = true;
 
-        switch (userChoice) {
-            case 1 -> {
-                System.out.println("1");
-            }
-            case 2 -> {
-                if (sendRequestData()) {
-                    System.out.println("Request added.");
-                } else {
-                    System.out.println("Some unexpected error has occured, try again...");
+        while (isRunning) {
+            printOptions();
+            Scanner scanner = new Scanner(System.in);
+            int userChoice = getIntFromUser(scanner, 0, 5, "Please choose option");
+
+
+            switch (userChoice) {
+                case 1 -> {
+                    System.out.println("/////// in progress");
                 }
-                runMenu(false);
-            }
-            case 3 -> {
-                System.out.println("Printing all requests...");
-                printRequests(requestController.getAllRequests());
-                System.out.println("END OF PRINTING");
-                runMenu(false);
-
-            }
-            case 4 -> {
-                System.out.println("4");
+                case 2 -> {
+                    if (sendRequestData()) {
+                        System.out.println("Request added.");
+                    } else {
+                        System.out.println("Some unexpected error has occured, try again...");
+                    }
+                }
+                case 3 -> {
+                    System.out.println("Printing all requests...");
+                    printRequests(requestController.getAllRequests());
+                    System.out.println("END OF PRINTING\n");
+                }
+                case 4 -> {
+                    System.out.println("////// in progress");
+                }
+                case 5 -> {
+                    System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
+                    isRunning = false;
+                }
             }
         }
     }
@@ -133,6 +139,6 @@ public class RequestMenu {
     }
 
     public void printOptions() {
-        System.out.println("MENU\n" + "1. Login/Register\n" + "2. Sent request\n" + "3. Show all requests\n" + "4. Find request\n");
+        System.out.println("MENU\n1. Login/Register\n2. Sent request\n3. Show all requests\n4. Find request\n5. Exit\n");
     }
 }
