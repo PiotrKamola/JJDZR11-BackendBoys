@@ -1,5 +1,6 @@
 package org.example.request;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -52,22 +53,27 @@ public class RequestMenu {
         return scanner.nextLine();
     }
 
-    public void printRequest(Request request) {
-        System.out.println("-----------------------------------------------------");
-        System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber() + ".");
-        System.out.print("You " + request.getLostOrFound() + " :");
-        System.out.println(request.getObjectName() + ".");
+    public void printRequests(List<Request> requests) {
+        if (requests.isEmpty()) {
+            System.out.println("There is no requests in database");
+            return;
+        }
 
-        System.out.println("Description: " + request.getDescription() + ".");
+        for (Request request : requests) {
+            System.out.println("-----------------------------------------------------");
+            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber() + ".");
+            System.out.print("You " + request.getLostOrFound() + " :");
+            System.out.println(request.getObjectName() + ".");
+            System.out.println("Description: " + request.getDescription() + ".");
+            System.out.println("Date: " + request.getRequestDate() + ".");
+            System.out.println("-----------------------------------------------------\n");
+        }
 
-        System.out.println("Date: " + request.getRequestDate() + ".");
-
-        System.out.println("-----------------------------------------------------\n");
     }
 
-    public void runMenu(boolean printWelocem) {
+    public void runMenu(boolean printWelcome) {
 
-        if (printWelocem) {
+        if (printWelcome) {
             System.out.println("Welcome in ZgubaApp!\n");
         }
 
@@ -80,10 +86,19 @@ public class RequestMenu {
                 System.out.println("1");
             }
             case 2 -> {
-                sendRequestData();
+                if (sendRequestData()) {
+                    System.out.println("Request added.");
+                } else {
+                    System.out.println("Some unexpected error has occured, try again...");
+                }
+                runMenu(false);
             }
             case 3 -> {
-                System.out.println("3");
+                System.out.println("Printing all requests...");
+                printRequests(requestController.getAllRequests());
+                System.out.println("END OF PRINTING");
+                runMenu(false);
+
             }
             case 4 -> {
                 System.out.println("4");

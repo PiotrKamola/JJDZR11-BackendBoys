@@ -11,14 +11,9 @@ public class ZgubaApp {
 
         RequestController requestController = new RequestController();
         RequestMenu requestMenu = new RequestMenu(requestController);
-//        requestMenu.sendRequestData();
-//        requestMenu.sendRequestData();
-//        requestMenu.sendRequestData();
 
         requestMenu.runMenu(true);
 
-        for (Request request : requestController.getAllRequests()) {
-            requestMenu.printRequest(request);
-        }
+
     }
 }
