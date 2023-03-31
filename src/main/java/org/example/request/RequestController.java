@@ -1,12 +1,14 @@
 package org.example.request;
 
+import org.example.user.User;
+
 import java.util.List;
 
 public class RequestController {
     private final RequestDatabase requestDatabase = new RequestDatabase();
 
-    public void addRequest(String requester, String contactNumber, String description, String objectName, String lostOrFound) {
-        requestDatabase.add(new Request(requester, contactNumber, description, objectName, lostOrFound));
+    public void addRequest(User requester, String lostOrFound, String objectName, String description) {
+        requestDatabase.add(new Request(requester, lostOrFound, objectName, description));
     }
 
     public List<Request> getAllRequests() {

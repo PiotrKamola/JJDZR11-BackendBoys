@@ -8,7 +8,7 @@ public class RequestDatabase {
 
     public void add(Request request) {
         allRequests.add(request);
-        System.out.println("Added request to database.\n");
+        System.out.println("_____________\n Request has been correctly added to database.\n");
     }
 
     public List<Request> getAllRequests() {
