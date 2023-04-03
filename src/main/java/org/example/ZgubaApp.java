@@ -10,7 +10,7 @@ public class ZgubaApp {
         RequestController requestController = new RequestController();
         RequestMenu requestMenu = new RequestMenu(requestController);
 
-        requestMenu.runMenu(true);
+        requestMenu.runMenu();
 
     }
 }

@@ -4,7 +4,7 @@ import org.example.request.RequestMenu;
 
 public class UserController {
 
-    private UserDatabase userDatabase = new UserDatabase();
+    private static final  UserDatabase userDatabase = new UserDatabase();
     private final UserMenu userMenu = new UserMenu();
 
 
@@ -39,13 +39,8 @@ public class UserController {
     }
 
     private boolean isLoginTaken(String login) {
-        for (User user : userDatabase.users) {
-            if (user.getLoginEmail().equals(login)) {
-                return true;
-            }
-
-        }
-        return false;
+        return userDatabase.users.stream()
+                .anyMatch(user -> user.getLoginEmail().equals(login));
     }
 
     public UserMenu getUserMenu() {

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public interface Menu {
 
-    void runMenu(boolean someFlag);
+    void runMenu();
 
     void printOptions();
 

@@ -5,10 +5,8 @@ import org.example.interfaces.Menu;
 public class UserMenu implements Menu {
 
     @Override
-    public void runMenu(boolean someFlag) {
-        if (someFlag) {
+    public void runMenu() {
             System.out.println("\nOnly registered users could send requests.");
-        }
 
         UserController userController = new UserController();
         boolean isRunning = true;

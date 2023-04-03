@@ -15,11 +15,8 @@ public class RequestMenu implements Menu {
     }
 
     @Override
-    public void runMenu(boolean printWelcome) {
-
-        if (printWelcome) {
-            System.out.println("Welcome in ZgubaApp!\n");
-        }
+    public void runMenu() {
+        System.out.println("Welcome in ZgubaApp!\n");
 
         boolean isRunning = true;
 
@@ -27,25 +24,17 @@ public class RequestMenu implements Menu {
             printOptions();
 
             int userChoice = getIntFromUser(1, 5, "Please choose option");
+            UserController userController = new UserController();
 
+            //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
-                case 1 -> {
-                    UserController userController = new UserController();
-                    userController.getUserMenu().runMenu(true);
-                }
+                case 1 -> userController.getUserMenu().runMenu();
                 case 2 -> sendRequestData();
-                case 3 -> {
-                    System.out.println("Printing all requests...");
-                    printRequests(requestController.getAllRequests());
-                    System.out.println("END OF PRINTING\n");
-                }
+                case 3 -> printRequests(requestController.getAllRequests());
                 case 4 -> System.out.println("////// in progress");
-
-                case 5 -> {
-                    System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
-                    isRunning = false;
-                }
+                case 5 -> isRunning = false;
             }
+            System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
         }
     }
 
@@ -60,13 +49,8 @@ public class RequestMenu implements Menu {
             System.out.println("--------\nPlease login/register first if you want to send requests!\n---------");
             return;
         }
-
-        try {
             String lostOrFound = getInputRequestLostOrFound();
             requestController.addRequest(loggedUser, lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription());
-        } catch (Exception e) {
-            System.out.println("Some unexpected error has occured, try again...");
-        }
     }
 
     private String getInputObjectName(String lostOrFound) {
