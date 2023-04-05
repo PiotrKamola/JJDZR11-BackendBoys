@@ -1,61 +1,81 @@
 package org.example.request;
 
+import org.example.interfaces.Menu;
+import org.example.user.User;
+import org.example.user.UserController;
+
 import java.util.List;
-import java.util.Scanner;
 
-
-public class RequestMenu {
+public class RequestMenu implements Menu {
+    public static User loggedUser;
     RequestController requestController;
 
     public RequestMenu(RequestController requestController) {
         this.requestController = requestController;
     }
 
-    private String getRequestRequesterData() {
-        return getUserInput("Tell me your name: (temporary before adding login user)\n");
+    @Override
+    public void runMenu() {
+        System.out.println("Welcome in ZgubaApp!\n");
+
+        boolean isRunning = true;
+
+        while (isRunning) {
+            printOptions();
+
+            int userChoice = getIntFromUser(1, 5, "Please choose option");
+            UserController userController = new UserController();
+
+            //noinspection SwitchStatementWithoutDefaultBranch
+            switch (userChoice) {
+                case 1 -> userController.getUserMenu().runMenu();
+                case 2 -> sendRequestData();
+                case 3 -> printRequests(requestController.getAllRequests());
+                case 4 -> System.out.println("////// in progress");
+                case 5 -> isRunning = false;
+            }
+            System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
+        }
     }
 
-    private String getRequestContactNumberData() {
-        return getUserInput("Tell me your contact number: (temporary before adding login user)\n");
+
+    public void printOptions() {
+        System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Find request\n  5. Exit");
     }
 
-    private String getRequestLostOrFound() {
+
+    public void sendRequestData() {
+        if (loggedUser == null) {
+            System.out.println("--------\nPlease login/register first if you want to send requests!\n---------");
+            return;
+        }
+            String lostOrFound = getInputRequestLostOrFound();
+            requestController.addRequest(loggedUser, lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription());
+    }
+
+    private String getInputObjectName(String lostOrFound) {
+        return getStringFromUser("What have you " + lostOrFound + "? ");
+    }
+
+    private String getInputObjectDescription() {
+        return getStringFromUser("Description: ");
+    }
+
+    private String getInputRequestLostOrFound() {
         String lostOrFound;
         while (true) {
-            lostOrFound = getUserInput("You found or lost something (you can choose \"lost\" or \"found\").\n");
+            lostOrFound = getStringFromUser("You found or lost something (you can choose \"lost\" or \"found\"): ");
             if (lostOrFound.equals("lost") || lostOrFound.equals("found")) {
                 break;
             }
+            System.out.println("(Only allowed words are 'lost' or 'found'. Please try again...)");
         }
         return lostOrFound;
     }
 
-    private String getObjectName() {
-        return getUserInput("What have you lost / found?\n");
-    }
-
-    private String getObjectDescription() {
-        return getUserInput("Description\n");
-    }
-
-    public boolean sendRequestData() {
-        try {
-            requestController.addRequest(getRequestRequesterData(), getRequestContactNumberData(), getObjectDescription(), getObjectName(), getRequestLostOrFound());
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private static String getUserInput(String inputMessage) {
-        System.out.print(inputMessage);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
     public void printRequests(List<Request> requests) {
         if (requests.isEmpty()) {
-            System.out.println("There is no requests in database");
+            System.out.println("There are no requests in database\n---------------------");
             return;
         }
 
@@ -68,77 +88,7 @@ public class RequestMenu {
             System.out.println("Date: " + request.getRequestDate() + ".");
             System.out.println("-----------------------------------------------------");
         }
-
     }
 
-    public void runMenu(boolean printWelcome) {
 
-        if (printWelcome) {
-            System.out.println("Welcome in ZgubaApp!\n");
-        }
-
-        boolean isRunning = true;
-
-        while (isRunning) {
-            printOptions();
-            Scanner scanner = new Scanner(System.in);
-            int userChoice = getIntFromUser(scanner, 0, 5, "Please choose option");
-
-
-            switch (userChoice) {
-                case 1 -> {
-                    System.out.println("/////// in progress");
-                }
-                case 2 -> {
-                    if (sendRequestData()) {
-                        System.out.println("Request added.");
-                    } else {
-                        System.out.println("Some unexpected error has occured, try again...");
-                    }
-                }
-                case 3 -> {
-                    System.out.println("Printing all requests...");
-                    printRequests(requestController.getAllRequests());
-                    System.out.println("END OF PRINTING\n");
-                }
-                case 4 -> {
-                    System.out.println("////// in progress");
-                }
-                case 5 -> {
-                    System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
-                    isRunning = false;
-                }
-            }
-        }
-    }
-
-    private int getIntFromUser(Scanner scanner, int minAllowedInt, int maxAllowedInt, String InputMessage) {
-        String errorInputMessage = "Not allowed value! Try again... ";
-        int intFromUser = -1;
-        boolean isAllowedInput = false;
-
-        do {
-            System.out.print(InputMessage + " (Allowed are only integers from " + minAllowedInt + " to " + maxAllowedInt + "): ");
-            if (scanner.hasNextInt()) {
-                intFromUser = scanner.nextInt();
-                if (intFromUser >= minAllowedInt && intFromUser <= maxAllowedInt) {
-                    isAllowedInput = true;
-                } else {
-                    isAllowedInput = false;
-                }
-            } else {
-                scanner.next(); //clean scanner buffer
-            }
-            if (!isAllowedInput) {
-                System.out.print(errorInputMessage);
-            }
-
-        } while (!isAllowedInput);
-
-        return intFromUser;
-    }
-
-    public void printOptions() {
-        System.out.println("MENU\n1. Login/Register\n2. Sent request\n3. Show all requests\n4. Find request\n5. Exit\n");
-    }
 }
