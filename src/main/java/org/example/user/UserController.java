@@ -21,6 +21,8 @@ public class UserController {
     public void registerUser() {
         String name = userMenu.getUserName();
 
+        String city = userMenu.getUserCity();
+
         String contactNumber = userMenu.getUserContactNumber();
 
         String loginEmail = userMenu.getUserLoginEmail();
@@ -31,7 +33,7 @@ public class UserController {
 
         String password = userMenu.getUserPassword();
 
-        User newUser = new User(name, contactNumber, loginEmail, password);
+        User newUser = new User(name, contactNumber, loginEmail, password, city);
         userDatabase.add(newUser);
         RequestMenu.loggedUser = newUser;
 

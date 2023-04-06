@@ -49,6 +49,8 @@ public class UserMenu implements Menu {
         return getStringFromUser("Please enter your name:");
     }
 
+    public String getUserCity(){ return getStringFromUser("Please enter your city:");}
+
     public String getUserPassword() {
         return getStringFromUser("Please enter your password:");
     }
@@ -56,5 +58,6 @@ public class UserMenu implements Menu {
     public String getUserContactNumber() {
         return getStringFromUser("Please enter your contact number:");
     }
+
 
 }

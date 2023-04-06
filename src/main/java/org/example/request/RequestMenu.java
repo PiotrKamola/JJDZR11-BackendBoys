@@ -34,7 +34,9 @@ public class RequestMenu implements Menu {
                 case 4 -> System.out.println("////// in progress");
                 case 5 -> isRunning = false;
             }
-            System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
+            if(userChoice==5){
+                System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
+            }
         }
     }
 
@@ -50,11 +52,15 @@ public class RequestMenu implements Menu {
             return;
         }
             String lostOrFound = getInputRequestLostOrFound();
-            requestController.addRequest(loggedUser, lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription());
+            requestController.addRequest(loggedUser, lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {
         return getStringFromUser("What have you " + lostOrFound + "? ");
+    }
+
+    private String getCity(String lostOrFound) {
+        return getStringFromUser("In what city you "+lostOrFound+" that?");
     }
 
     private String getInputObjectDescription() {
@@ -82,8 +88,8 @@ public class RequestMenu implements Menu {
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
             System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber() + ".");
-            System.out.print("You " + request.getLostOrFound() + " :");
-            System.out.println(request.getObjectName() + ".");
+            System.out.print("He/She " + request.getLostOrFound() + ": ");
+            System.out.println(request.getObjectName() + " in city: "+request.getCity()+".");
             System.out.println("Description: " + request.getDescription() + ".");
             System.out.println("Date: " + request.getRequestDate() + ".");
             System.out.println("-----------------------------------------------------");

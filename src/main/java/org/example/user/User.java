@@ -4,10 +4,12 @@ public class User {
     private final String loginEmail;
     private final String password;
     private final String name;
+    private final String city;
     private final String contactNumber;
 
-    public User(String name, String contactNumber, String loginEmail, String password) {
+    public User(String name, String contactNumber, String loginEmail, String password, String city) {
         this.name = name;
+        this.city = city;
         this.contactNumber = contactNumber;
         this.loginEmail = loginEmail;
         this.password = password;
@@ -32,5 +34,8 @@ public class User {
 
     public String getContactNumber() {
         return contactNumber;
+    }
+    public String getCity() {
+        return city;
     }
 }
