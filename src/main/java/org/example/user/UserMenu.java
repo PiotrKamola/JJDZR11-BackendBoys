@@ -1,10 +1,10 @@
 package org.example.user;
 
-import org.example.interfaces.Menu;
 
-public class UserMenu implements Menu {
+import org.example.applicationMenu.AppMenu;
 
-    @Override
+public class UserMenu extends AppMenu {
+
     public void runMenu() {
             System.out.println("\nOnly registered users could send requests.");
 
@@ -36,7 +36,7 @@ public class UserMenu implements Menu {
         }
     }
 
-    @Override
+
     public void printOptions() {
         System.out.println("1. Login\n2. Register\n3. Back to MENU");
     }
@@ -58,6 +58,5 @@ public class UserMenu implements Menu {
     public String getUserContactNumber() {
         return getStringFromUser("Please enter your contact number:");
     }
-
 
 }

@@ -1,14 +1,21 @@
-package org.example.browse;
+package org.example.search;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BrowseByInput {
+public class SearchMenu {
+
+
+    public void printOptions() {
+        System.out.println("1. Search by city\n2. Back to MENU");
+    }
+
+
     // instance variable to hold the records
     private ArrayList<String> records;
 
     // constructor to initialize the records
-    public BrowseByInput() {
+    public SearchMenu() {
         records = new ArrayList<String>();
         records.add("John Smith, 123 Main St., Anytown, USA");
         records.add("Jane Doe, 456 Maple Rd., Somewhere, USA");

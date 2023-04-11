@@ -1,14 +1,14 @@
-package org.example.interfaces;
+package org.example.applicationMenu;
 
 import java.util.Scanner;
 
-public interface Menu {
+public abstract class AppMenu {
 
-    void runMenu();
+    protected abstract void runMenu();
 
-    void printOptions();
+    protected abstract void printOptions();
 
-    default String getStringFromUser(String inputMessage) {
+    protected String getStringFromUser(String inputMessage) {
         String errorInputMessage = "No text was entered! Try again...";
         String userInputString;
         boolean isAllowedInput = false;
@@ -28,8 +28,7 @@ public interface Menu {
         return userInputString;
     }
 
-
-     default int getIntFromUser(int minAllowedInt, int maxAllowedInt, String InputMessage) {
+    protected int getIntFromUser(int minAllowedInt, int maxAllowedInt, String InputMessage) {
         Scanner scanner = new Scanner(System.in);
         String errorInputMessage = "Not allowed value! Try again... ";
         int intFromUser = -1;
