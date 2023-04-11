@@ -1,23 +1,17 @@
 package org.example.search;
 
-import org.example.applicationMenu.AppMenu;
+import org.example.request.Request;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class SearchController  {
+public class SearchController {
 
-    SearchMenu browseMenu = new SearchMenu();
+    public List<Request> searchByCity(List<Request> allRequests, String city) {
 
+        List<Request> foundRequests;
+        foundRequests = allRequests.stream().filter(r -> r.getCity().equals(city)).toList();
 
-    public ArrayList<String> browseRecordsByInput(ArrayList<String> records, String input) {
-        ArrayList<String> matchingRecords = new ArrayList<String>();
-
-        for (String record : records) {
-            if (record.contains(input)) {
-                matchingRecords.add(record);
-            }
-        }
-
-        return matchingRecords;
+        return foundRequests;
     }
+
 }

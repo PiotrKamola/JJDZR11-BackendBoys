@@ -36,7 +36,4 @@ public class User {
         return contactNumber;
     }
 
-    public String getCity() {
-        return city;
-    }
 }

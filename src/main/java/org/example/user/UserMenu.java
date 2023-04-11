@@ -1,7 +1,7 @@
 package org.example.user;
 
 
-import org.example.applicationMenu.AppMenu;
+import org.example.abstractMenu.AppMenu;
 
 public class UserMenu extends AppMenu {
 
@@ -9,10 +9,9 @@ public class UserMenu extends AppMenu {
     private static final int REGISTER = 2;
     private static final int BACK_TO_MENU = 3;
 
-    public void runMenu() {
+    public void runMenu(UserController userController) {
         System.out.println("\nOnly registered users could send requests.");
 
-        UserController userController = new UserController();
         boolean isRunning = true;
 
         while (isRunning) {

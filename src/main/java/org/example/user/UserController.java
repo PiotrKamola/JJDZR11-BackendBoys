@@ -25,7 +25,6 @@ public class UserController {
         String contactNumber = userMenu.getUserContactNumber();
 
         String loginEmail = userMenu.getUserLoginEmail();
-
         while (isLoginTaken(loginEmail)) {
             System.out.print("This login is already taken, please type different one:");
             loginEmail = userMenu.getUserLoginEmail();
@@ -45,4 +44,5 @@ public class UserController {
     public UserMenu getUserMenu() {
         return userMenu;
     }
+
 }

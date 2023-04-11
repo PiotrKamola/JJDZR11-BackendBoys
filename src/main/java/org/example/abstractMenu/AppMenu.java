@@ -1,10 +1,8 @@
-package org.example.applicationMenu;
+package org.example.abstractMenu;
 
 import java.util.Scanner;
 
 public abstract class AppMenu {
-
-    protected abstract void runMenu();
 
     protected abstract void printOptions();
 
