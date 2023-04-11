@@ -27,7 +27,6 @@ public class RequestMenu extends AppMenu {
 
         while (isRunning) {
             printOptions();
-
             int userChoice = getIntFromUser(1, 5, "Please choose option");
             UserController userController = new UserController();
 
@@ -39,17 +38,14 @@ public class RequestMenu extends AppMenu {
                 case SEARCH_REQUESTS -> System.out.println("////// in progress");
                 case EXIT_APP -> isRunning = false;
             }
-            if (userChoice == 5) {
-                System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
-            }
         }
+        System.out.println("Goodbye!");
     }
 
 
     public void printOptions() {
         System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
     }
-
 
     public void sendRequestData() {
         if (loggedUser == null) {

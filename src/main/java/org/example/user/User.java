@@ -35,6 +35,7 @@ public class User {
     public String getContactNumber() {
         return contactNumber;
     }
+
     public String getCity() {
         return city;
     }

@@ -2,18 +2,22 @@ package org.example.search;
 
 import org.example.applicationMenu.AppMenu;
 
-public class SearchController extends AppMenu {
+import java.util.ArrayList;
+
+public class SearchController  {
 
     SearchMenu browseMenu = new SearchMenu();
 
 
-    @Override
-    protected void runMenu() {
+    public ArrayList<String> browseRecordsByInput(ArrayList<String> records, String input) {
+        ArrayList<String> matchingRecords = new ArrayList<String>();
 
-    }
+        for (String record : records) {
+            if (record.contains(input)) {
+                matchingRecords.add(record);
+            }
+        }
 
-    @Override
-    protected void printOptions() {
-
+        return matchingRecords;
     }
 }

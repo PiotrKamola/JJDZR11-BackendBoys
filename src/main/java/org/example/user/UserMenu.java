@@ -5,8 +5,12 @@ import org.example.applicationMenu.AppMenu;
 
 public class UserMenu extends AppMenu {
 
+    private static final int LOGIN = 1;
+    private static final int REGISTER = 2;
+    private static final int BACK_TO_MENU = 3;
+
     public void runMenu() {
-            System.out.println("\nOnly registered users could send requests.");
+        System.out.println("\nOnly registered users could send requests.");
 
         UserController userController = new UserController();
         boolean isRunning = true;
@@ -17,7 +21,7 @@ public class UserMenu extends AppMenu {
             int userChoice = getIntFromUser(1, 3, "Please choose option");
 
             switch (userChoice) {
-                case 1 -> {
+                case LOGIN -> {
                     if (userController.loginUser(getUserLoginEmail(), getUserPassword())) {
                         System.out.println("You log in successfully.");
                         isRunning = false;
@@ -25,13 +29,11 @@ public class UserMenu extends AppMenu {
                         System.out.println("______________________________\nEmail or password was not correct! You are NOT log in! \n");
                     }
                 }
-                case 2 -> {
+                case REGISTER -> {
                     userController.registerUser();
                     isRunning = false;
                 }
-                case 3 -> isRunning = false;
-                default -> System.out.println("Not expected value");
-
+                case BACK_TO_MENU -> isRunning = false;
             }
         }
     }
@@ -49,7 +51,9 @@ public class UserMenu extends AppMenu {
         return getStringFromUser("Please enter your name:");
     }
 
-    public String getUserCity(){ return getStringFromUser("Please enter your city:");}
+    public String getUserCity() {
+        return getStringFromUser("Please enter your city:");
+    }
 
     public String getUserPassword() {
         return getStringFromUser("Please enter your password:");
