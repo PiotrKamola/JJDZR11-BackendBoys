@@ -1,32 +1,34 @@
 package org.example.request;
 import org.example.user.User;
+import org.example.user.UserController;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Request {
 
-    private final User requester;
+    private final String requesterLogin;
     private final String objectName;
     private final String description;
     private final String lostOrFound;
-    private final String requestDate;
     private final String city;
+    private final String requestDate;
 
-    Request(User requester, String lostOrFound, String objectName, String description, String city) {
+    Request(String requesterLogin, String lostOrFound, String objectName, String description, String city) {
         this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.city = city;
-        this.requester = requester;
+        this.requesterLogin = requesterLogin;
         this.lostOrFound = lostOrFound;
         this.objectName = objectName;
         this.description = description;
     }
 
-    public User getRequester() {
-        return requester;
+    public String getRequester() {
+        return requesterLogin;
     }
 
-    public String getContactNumber() {
-        return requester.getContactNumber();
+    public String getContactNumber(User loggedUSer) {
+        return loggedUSer.getContactNumber();
     }
 
     public String getDescription() {
