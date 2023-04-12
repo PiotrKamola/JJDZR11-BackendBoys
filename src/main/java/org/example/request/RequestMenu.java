@@ -4,6 +4,7 @@ import org.example.interfaces.Menu;
 import org.example.user.User;
 import org.example.user.UserController;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RequestMenu implements Menu {
@@ -52,7 +53,7 @@ public class RequestMenu implements Menu {
             return;
         }
             String lostOrFound = getInputRequestLostOrFound();
-            requestController.addRequest(loggedUser, lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
+            requestController.addRequest(loggedUser, LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {
@@ -68,13 +69,24 @@ public class RequestMenu implements Menu {
     }
 
     private String getInputRequestLostOrFound() {
-        String lostOrFound;
-        while (true) {
-            lostOrFound = getStringFromUser("You found or lost something (you can choose \"lost\" or \"found\"): ");
-            if (lostOrFound.equals("lost") || lostOrFound.equals("found")) {
-                break;
+        boolean running = true;
+        String lostOrFound = null;
+        while(running) {
+            try{
+                int option = Integer.parseInt(getStringFromUser(LostOrFound.showOptions()));
+                switch (LostOrFound.values()[option]) {
+                    case LOST:
+                        lostOrFound = LostOrFound.LOST.name();
+                        running = false;
+                        break;
+                    case FOUND:
+                        lostOrFound = LostOrFound.FOUND.name();
+                        running = false;
+                        break;
+                }
+            }catch (Exception e){
+                System.out.println("Wrong option, choose again.");
             }
-            System.out.println("(Only allowed words are 'lost' or 'found'. Please try again...)");
         }
         return lostOrFound;
     }
