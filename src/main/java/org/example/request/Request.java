@@ -1,6 +1,6 @@
 package org.example.request;
+
 import org.example.user.User;
-import org.example.user.UserController;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

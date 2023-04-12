@@ -3,6 +3,7 @@ package org.example.abstractMenu;
 import java.util.Scanner;
 
 public abstract class AppMenu {
+    private static String loggedUserLogin;
 
     protected abstract void printOptions();
 
@@ -49,5 +50,20 @@ public abstract class AppMenu {
         } while (!isAllowedInput);
 
         return intFromUser;
+    }
+
+    protected void printLoggedUserInformation(){
+        if (getLoggedUserLogin() == null) {
+            System.out.println("You are NOT logged in.");
+        } else {
+            System.out.println("You (" + getLoggedUserLogin()  + ") are logged in.");
+        }
+    }
+    public String getLoggedUserLogin() {
+        return loggedUserLogin;
+    }
+
+    public void setLoggedUserLogin(String loggedUserLogin) {
+        this.loggedUserLogin = loggedUserLogin;
     }
 }

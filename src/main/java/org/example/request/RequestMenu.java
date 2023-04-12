@@ -12,22 +12,12 @@ public class RequestMenu extends AppMenu {
     private static final int SHOW_ALL_REQUESTS = 3;
     private static final int SEARCH_REQUESTS = 4;
     private static final int EXIT_APP = 5;
-    private static String loggedUser;
     private final RequestController requestController = new RequestController();
     private final UserController userController = new UserController();
+    private final SearchMenu searchMenu = new SearchMenu();
 
     public RequestController getRequestController() {
         return requestController;
-    }
-
-    private final SearchMenu searchMenu = new SearchMenu();
-
-    public static String getLoggedUser() {
-        return loggedUser;
-    }
-
-    public static void setLoggedUser(String loggedUser) {
-        RequestMenu.loggedUser = loggedUser;
     }
 
     public void printRequests(List<Request> requests) {
@@ -38,7 +28,7 @@ public class RequestMenu extends AppMenu {
 
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
-            System.out.println("Customer name: " + request.getRequester() + ", number: " +  request.getContactNumber(userController.getUserByLogin(request.getRequester())) + ".");
+            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber(userController.getUserByLogin(request.getRequester())) + ".");
             System.out.print("He/She " + request.getLostOrFound() + ": ");
             System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
@@ -53,11 +43,7 @@ public class RequestMenu extends AppMenu {
         boolean isRunning = true;
 
         while (isRunning) {
-            if (RequestMenu.getLoggedUser() == null) {
-                System.out.println("You are NOT logged in");
-            } else {
-                System.out.println("You (" + RequestMenu.getLoggedUser()  + ") are logged in");
-            }
+            printLoggedUserInformation();
 
             printOptions();
             int userChoice = getIntFromUser(1, 5, "Please choose option");
@@ -75,16 +61,16 @@ public class RequestMenu extends AppMenu {
     }
 
     public void printOptions() {
-        System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
+        System.out.println("MENU\n  1. Log" + (getLoggedUserLogin() == null ? " in" : " out") + "/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
     }
 
     public void sendRequestData() {
-        if (getLoggedUser() == null) {
+        if (getLoggedUserLogin() == null) {
             System.out.println("--------\nPlease login/register first if you want to send requests!\n---------");
             return;
         }
         String lostOrFound = getInputRequestLostOrFound();
-        requestController.addRequest(getLoggedUser(), lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
+        requestController.addRequest(getLoggedUserLogin(), lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {
