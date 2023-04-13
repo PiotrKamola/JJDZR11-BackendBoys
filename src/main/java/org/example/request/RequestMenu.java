@@ -26,7 +26,7 @@ public class RequestMenu extends AppMenu {
 
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
-            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber() + ".");
+            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getRequester().getContactNumber() + ".");
             System.out.print("He/She " + request.getLostOrFound() + ": ");
             System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
@@ -55,6 +55,7 @@ public class RequestMenu extends AppMenu {
         System.out.println("Goodbye!");
     }
 
+    @Override
     public void printOptions() {
         System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
     }

@@ -37,7 +37,7 @@ public class UserMenu extends AppMenu {
         }
     }
 
-
+    @Override
     public void printOptions() {
         System.out.println("1. Login\n2. Register\n3. Back to MENU");
     }
