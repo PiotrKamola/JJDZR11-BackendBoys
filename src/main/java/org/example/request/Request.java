@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Request {
-
     private final String requesterLogin;
     private final String objectName;
     private final String description;
@@ -14,7 +13,7 @@ public class Request {
     private final String city;
     private final String requestDate;
 
-    Request(String requesterLogin, String lostOrFound, String objectName, String description, String city) {
+    public Request(String requesterLogin, String lostOrFound, String objectName, String description, String city) {
         this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.city = city;
         this.requesterLogin = requesterLogin;
@@ -50,5 +49,6 @@ public class Request {
     public String getCity() {
         return city;
     }
+
 
 }
