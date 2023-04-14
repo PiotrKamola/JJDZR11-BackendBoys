@@ -1,20 +1,40 @@
 package org.example.request;
 
-import org.example.interfaces.Menu;
+import org.example.abstractMenu.AppMenu;
+import org.example.search.SearchMenu;
 import org.example.user.User;
 import org.example.user.UserController;
 
 import java.util.List;
 
-public class RequestMenu implements Menu {
+public class RequestMenu extends AppMenu {
+    private static final int LOGIN_REGISTER = 1;
+    private static final int SENT_REQUEST = 2;
+    private static final int SHOW_ALL_REQUESTS = 3;
+    private static final int SEARCH_REQUESTS = 4;
+    private static final int EXIT_APP = 5;
     public static User loggedUser;
-    RequestController requestController;
+    private final RequestController requestController = new RequestController();
+    private final UserController userController = new UserController();
+    private final SearchMenu searchMenu = new SearchMenu();
 
-    public RequestMenu(RequestController requestController) {
-        this.requestController = requestController;
+    public static void printRequests(List<Request> requests) {
+        if (requests.isEmpty()) {
+            System.out.println("There are no requests in database\n---------------------");
+            return;
+        }
+
+        for (Request request : requests) {
+            System.out.println("-----------------------------------------------------");
+            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getRequester().getContactNumber() + ".");
+            System.out.print("He/She " + request.getLostOrFound() + ": ");
+            System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
+            System.out.println("Description: " + request.getDescription() + ".");
+            System.out.println("Date: " + request.getRequestDate() + ".");
+            System.out.println("-----------------------------------------------------");
+        }
     }
 
-    @Override
     public void runMenu() {
         System.out.println("Welcome in ZgubaApp!\n");
 
@@ -22,37 +42,30 @@ public class RequestMenu implements Menu {
 
         while (isRunning) {
             printOptions();
-
             int userChoice = getIntFromUser(1, 5, "Please choose option");
-            UserController userController = new UserController();
-
-            //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
-                case 1 -> userController.getUserMenu().runMenu();
-                case 2 -> sendRequestData();
-                case 3 -> printRequests(requestController.getAllRequests());
-                case 4 -> System.out.println("////// in progress");
-                case 5 -> isRunning = false;
-            }
-            if(userChoice==5){
-                System.out.println("Goodbye! Maybe next time you will find what you lost or help others to do so.");
+                case LOGIN_REGISTER -> userController.getUserMenu().runMenu(userController);
+                case SENT_REQUEST -> sendRequestData();
+                case SHOW_ALL_REQUESTS -> printRequests(requestController.getAllRequests());
+                case SEARCH_REQUESTS -> searchMenu.runMenu(requestController.getAllRequests());
+                case EXIT_APP -> isRunning = false;
             }
         }
+        System.out.println("Goodbye!");
     }
 
-
+    @Override
     public void printOptions() {
-        System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Find request\n  5. Exit");
+        System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
     }
-
 
     public void sendRequestData() {
         if (loggedUser == null) {
             System.out.println("--------\nPlease login/register first if you want to send requests!\n---------");
             return;
         }
-            String lostOrFound = getInputRequestLostOrFound();
-            requestController.addRequest(loggedUser, Request.LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
+        String lostOrFound = getInputRequestLostOrFound();
+        requestController.addRequest(loggedUser, Request.LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {
@@ -60,7 +73,7 @@ public class RequestMenu implements Menu {
     }
 
     private String getCity(String lostOrFound) {
-        return getStringFromUser("In what city you "+lostOrFound+" that?");
+        return getStringFromUser("In what city you " + lostOrFound + " that?");
     }
 
     private String getInputObjectDescription() {
@@ -90,23 +103,6 @@ public class RequestMenu implements Menu {
         return lostOrFound;
     }
 
-    public void printRequests(List<Request> requests) {
-        if (requests.isEmpty()) {
-            System.out.println("There are no requests in database\n---------------------");
-            return;
-        }
-
-        for (Request request : requests) {
-            System.out.println("-----------------------------------------------------");
-            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber() + ".");
-            System.out.print("He/She " + request.getLostOrFound() + ": ");
-            System.out.println(request.getObjectName() + " in city: "+request.getCity()+".");
-            System.out.println("Description: " + request.getDescription() + ".");
-            System.out.println("Date: " + request.getRequestDate() + ".");
-            System.out.println("-----------------------------------------------------");
-        }
-    }
-
     public String showLostOrFoundOptions(){
         StringBuilder strBuilder = new StringBuilder();
         for(Request.LostOrFound option : Request.LostOrFound.values()){
@@ -114,5 +110,6 @@ public class RequestMenu implements Menu {
         }
         return strBuilder.toString();
     }
+
 
 }
