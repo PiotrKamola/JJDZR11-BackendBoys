@@ -1,14 +1,17 @@
 package org.example.user;
 
-import org.example.interfaces.Menu;
 
-public class UserMenu implements Menu {
+import org.example.abstractMenu.AppMenu;
 
-    @Override
-    public void runMenu() {
-            System.out.println("\nOnly registered users could send requests.");
+public class UserMenu extends AppMenu {
 
-        UserController userController = new UserController();
+    private static final int LOGIN = 1;
+    private static final int REGISTER = 2;
+    private static final int BACK_TO_MENU = 3;
+
+    public void runMenu(UserController userController) {
+        System.out.println("\nOnly registered users could send requests.");
+
         boolean isRunning = true;
 
         while (isRunning) {
@@ -17,7 +20,7 @@ public class UserMenu implements Menu {
             int userChoice = getIntFromUser(1, 3, "Please choose option");
 
             switch (userChoice) {
-                case 1 -> {
+                case LOGIN -> {
                     if (userController.loginUser(getUserLoginEmail(), getUserPassword())) {
                         System.out.println("You log in successfully.");
                         isRunning = false;
@@ -25,13 +28,11 @@ public class UserMenu implements Menu {
                         System.out.println("______________________________\nEmail or password was not correct! You are NOT log in! \n");
                     }
                 }
-                case 2 -> {
+                case REGISTER -> {
                     userController.registerUser();
                     isRunning = false;
                 }
-                case 3 -> isRunning = false;
-                default -> System.out.println("Not expected value");
-
+                case BACK_TO_MENU -> isRunning = false;
             }
         }
     }
@@ -49,7 +50,9 @@ public class UserMenu implements Menu {
         return getStringFromUser("Please enter your name:");
     }
 
-    public String getUserCity(){ return getStringFromUser("Please enter your city:");}
+    public String getUserCity() {
+        return getStringFromUser("Please enter your city:");
+    }
 
     public String getUserPassword() {
         return getStringFromUser("Please enter your password:");
@@ -58,6 +61,5 @@ public class UserMenu implements Menu {
     public String getUserContactNumber() {
         return getStringFromUser("Please enter your contact number:");
     }
-
 
 }

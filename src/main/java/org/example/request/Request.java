@@ -25,10 +25,6 @@ public class Request {
         return requester;
     }
 
-    public String getContactNumber() {
-        return requester.getContactNumber();
-    }
-
     public String getDescription() {
         return description;
     }
