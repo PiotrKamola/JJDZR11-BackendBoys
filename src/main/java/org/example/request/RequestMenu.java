@@ -43,7 +43,6 @@ public class RequestMenu extends AppMenu {
         while (isRunning) {
             printOptions();
             int userChoice = getIntFromUser(1, 5, "Please choose option");
-            //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
                 case LOGIN_REGISTER -> userController.getUserMenu().runMenu(userController);
                 case SENT_REQUEST -> sendRequestData();
@@ -66,7 +65,7 @@ public class RequestMenu extends AppMenu {
             return;
         }
         String lostOrFound = getInputRequestLostOrFound();
-        requestController.addRequest(loggedUser, lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
+        requestController.addRequest(loggedUser, Request.LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {
@@ -82,15 +81,34 @@ public class RequestMenu extends AppMenu {
     }
 
     private String getInputRequestLostOrFound() {
-        String lostOrFound;
-        while (true) {
-            lostOrFound = getStringFromUser("You found or lost something (you can choose \"lost\" or \"found\"): ");
-            if (lostOrFound.equals("lost") || lostOrFound.equals("found")) {
-                break;
+        boolean running = true;
+        String lostOrFound = null;
+        while(running) {
+            try{
+                int option = Integer.parseInt(getStringFromUser(showLostOrFoundOptions()));
+                switch (Request.LostOrFound.values()[option]) {
+                    case LOST:
+                        lostOrFound = Request.LostOrFound.LOST.name();
+                        running = false;
+                        break;
+                    case FOUND:
+                        lostOrFound = Request.LostOrFound.FOUND.name();
+                        running = false;
+                        break;
+                }
+            }catch (Exception e){
+                System.out.println("Wrong option, choose again.");
             }
-            System.out.println("(Only allowed words are 'lost' or 'found'. Please try again...)");
         }
         return lostOrFound;
+    }
+
+    public String showLostOrFoundOptions(){
+        StringBuilder strBuilder = new StringBuilder();
+        for(Request.LostOrFound option : Request.LostOrFound.values()){
+            strBuilder.append(option.ordinal() +". "+ option.getText()+"\n");
+        }
+        return strBuilder.toString();
     }
 
 
