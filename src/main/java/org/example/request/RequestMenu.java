@@ -40,6 +40,7 @@ public class RequestMenu implements Menu {
         }
     }
 
+
     public void printOptions() {
         System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Find request\n  5. Exit");
     }
