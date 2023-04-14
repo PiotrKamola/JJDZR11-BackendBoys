@@ -7,7 +7,7 @@ import java.util.List;
 public class RequestController {
     private final RequestDatabase requestDatabase = new RequestDatabase();
 
-    public void addRequest(User requester, LostOrFound lostOrFound, String objectName, String description, String city) {
+    public void addRequest(User requester, Request.LostOrFound lostOrFound, String objectName, String description, String city) {
         requestDatabase.add(new Request(requester, lostOrFound, objectName, description, city));
     }
 

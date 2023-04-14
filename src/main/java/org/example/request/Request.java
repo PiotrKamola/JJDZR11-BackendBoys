@@ -4,6 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Request {
+    public enum LostOrFound {
+        LOST("Lost"),
+        FOUND("Found");
+
+        public final String text;
+        LostOrFound(String lostOrFoundString){
+            this.text = lostOrFoundString;
+        }
+
+        public String getText(){
+            return text;
+        }
+    }
     private final User requester;
     private final String objectName;
     private final String description;
@@ -37,7 +50,7 @@ public class Request {
     }
 
     public String getLostOrFound() {
-        return lostOrFound.getLostOrFoundString();
+        return lostOrFound.getText();
     }
 
     public String getRequestDate() {

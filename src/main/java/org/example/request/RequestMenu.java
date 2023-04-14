@@ -4,7 +4,6 @@ import org.example.interfaces.Menu;
 import org.example.user.User;
 import org.example.user.UserController;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class RequestMenu implements Menu {
@@ -41,7 +40,6 @@ public class RequestMenu implements Menu {
         }
     }
 
-
     public void printOptions() {
         System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Find request\n  5. Exit");
     }
@@ -53,7 +51,7 @@ public class RequestMenu implements Menu {
             return;
         }
             String lostOrFound = getInputRequestLostOrFound();
-            requestController.addRequest(loggedUser, LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
+            requestController.addRequest(loggedUser, Request.LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {
@@ -73,14 +71,14 @@ public class RequestMenu implements Menu {
         String lostOrFound = null;
         while(running) {
             try{
-                int option = Integer.parseInt(getStringFromUser(LostOrFound.showOptions()));
-                switch (LostOrFound.values()[option]) {
+                int option = Integer.parseInt(getStringFromUser(showLostOrFoundOptions()));
+                switch (Request.LostOrFound.values()[option]) {
                     case LOST:
-                        lostOrFound = LostOrFound.LOST.name();
+                        lostOrFound = Request.LostOrFound.LOST.name();
                         running = false;
                         break;
                     case FOUND:
-                        lostOrFound = LostOrFound.FOUND.name();
+                        lostOrFound = Request.LostOrFound.FOUND.name();
                         running = false;
                         break;
                 }
@@ -108,5 +106,12 @@ public class RequestMenu implements Menu {
         }
     }
 
+    public String showLostOrFoundOptions(){
+        StringBuilder strBuilder = new StringBuilder();
+        for(Request.LostOrFound option : Request.LostOrFound.values()){
+            strBuilder.append(option.ordinal() +". "+ option.getText()+"\n");
+        }
+        return strBuilder.toString();
+    }
 
 }
