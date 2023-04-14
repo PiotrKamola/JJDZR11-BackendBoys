@@ -9,7 +9,7 @@ public class UserController {
 
     public boolean loginUser(String loginEmail, String password) {
         for (User user : userDatabase.users) {
-            if (user.getLoginEmail().equals(loginEmail) || user.getPassword().equals(password)) {
+            if (user.getLoginEmail().equals(loginEmail) && user.getPassword().equals(password)) {
                 RequestMenu.loggedUser = user;
                 return true;
             }
