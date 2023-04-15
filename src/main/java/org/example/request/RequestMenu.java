@@ -15,11 +15,6 @@ public class RequestMenu extends AppMenu {
     private static String loggedUser;
     private final RequestController requestController = new RequestController();
     private final UserController userController = new UserController();
-
-    public RequestController getRequestController() {
-        return requestController;
-    }
-
     private final SearchMenu searchMenu = new SearchMenu();
 
     public static String getLoggedUser() {
@@ -30,6 +25,10 @@ public class RequestMenu extends AppMenu {
         RequestMenu.loggedUser = loggedUser;
     }
 
+    public RequestController getRequestController() {
+        return requestController;
+    }
+
     public void printRequests(List<Request> requests) {
         if (requests.isEmpty()) {
             System.out.println("There are no requests in database\n---------------------");
@@ -38,7 +37,7 @@ public class RequestMenu extends AppMenu {
 
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
-            System.out.println("Customer name: " + request.getRequester() + ", number: " +  request.getContactNumber(userController.getUserByLogin(request.getRequester())) + ".");
+            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber(userController.getUserByLogin(request.getRequester())) + ".");
             System.out.print("He/She " + request.getLostOrFound() + ": ");
             System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
@@ -56,7 +55,7 @@ public class RequestMenu extends AppMenu {
             if (RequestMenu.getLoggedUser() == null) {
                 System.out.println("You are NOT logged in");
             } else {
-                System.out.println("You (" + RequestMenu.getLoggedUser()  + ") are logged in");
+                System.out.println("You (" + RequestMenu.getLoggedUser() + ") are logged in");
             }
 
             printOptions();
@@ -74,6 +73,7 @@ public class RequestMenu extends AppMenu {
         System.out.println("Goodbye!");
     }
 
+    @Override
     public void printOptions() {
         System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
     }
@@ -84,7 +84,7 @@ public class RequestMenu extends AppMenu {
             return;
         }
         String lostOrFound = getInputRequestLostOrFound();
-        requestController.addRequest(getLoggedUser(), lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
+        requestController.addRequest(getLoggedUser(), Request.LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {
@@ -100,15 +100,34 @@ public class RequestMenu extends AppMenu {
     }
 
     private String getInputRequestLostOrFound() {
-        String lostOrFound;
-        while (true) {
-            lostOrFound = getStringFromUser("You found or lost something (you can choose \"lost\" or \"found\"): ");
-            if (lostOrFound.equals("lost") || lostOrFound.equals("found")) {
-                break;
+        boolean running = true;
+        String lostOrFound = null;
+        while (running) {
+            try {
+                int option = Integer.parseInt(getStringFromUser(showLostOrFoundOptions()));
+                switch (Request.LostOrFound.values()[option]) {
+                    case LOST -> {
+                        lostOrFound = Request.LostOrFound.LOST.name();
+                        running = false;
+                    }
+                    case FOUND -> {
+                        lostOrFound = Request.LostOrFound.FOUND.name();
+                        running = false;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Wrong option, choose again.");
             }
-            System.out.println("(Only allowed words are 'lost' or 'found'. Please try again...)");
         }
         return lostOrFound;
+    }
+
+    public String showLostOrFoundOptions() {
+        StringBuilder strBuilder = new StringBuilder();
+        for (Request.LostOrFound option : Request.LostOrFound.values()) {
+            strBuilder.append(option.ordinal()).append(". ").append(option.getText()).append("\n");
+        }
+        return strBuilder.toString();
     }
 
 

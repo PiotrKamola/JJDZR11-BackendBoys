@@ -19,6 +19,7 @@ public class UserMenu extends AppMenu {
 
             int userChoice = getIntFromUser(1, 3, "Please choose option");
 
+            //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
                 case LOGIN -> {
                     if (userController.loginUser(getUserLoginEmail(), getUserPassword())) {
@@ -37,7 +38,7 @@ public class UserMenu extends AppMenu {
         }
     }
 
-
+    @Override
     public void printOptions() {
         System.out.println("1. Login\n2. Register\n3. Back to MENU");
     }

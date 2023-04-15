@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public abstract class AppMenu {
 
-    protected abstract void printOptions();
+    public abstract void printOptions();
 
     protected String getStringFromUser(String inputMessage) {
         String errorInputMessage = "No text was entered! Try again...";
