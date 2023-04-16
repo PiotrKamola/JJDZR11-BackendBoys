@@ -1,6 +1,6 @@
-package org.example.search;
+package pl.isa.BackendBoys.search;
 
-import org.example.request.Request;
+import pl.isa.BackendBoys.request.Request;
 
 import java.util.List;
 

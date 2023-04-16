@@ -1,6 +1,6 @@
-package org.example.abstractMenu;
+package pl.isa.BackendBoys.abstractMenu;
 
-import org.example.request.RequestMenu;
+import pl.isa.BackendBoys.request.RequestMenu;
 
 import java.util.Scanner;
 

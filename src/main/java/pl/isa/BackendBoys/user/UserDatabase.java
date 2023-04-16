@@ -1,4 +1,4 @@
-package org.example.user;
+package pl.isa.BackendBoys.user;
 
 import java.util.ArrayList;
 import java.util.List;

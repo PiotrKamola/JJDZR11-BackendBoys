@@ -1,7 +1,7 @@
-package org.example.jsonService;
+package pl.isa.BackendBoys.jsonService;
 
-import org.example.request.Request;
-import org.example.user.User;
+import pl.isa.BackendBoys.request.Request;
+import pl.isa.BackendBoys.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

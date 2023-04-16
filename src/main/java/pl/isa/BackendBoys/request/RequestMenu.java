@@ -1,8 +1,8 @@
-package org.example.request;
+package pl.isa.BackendBoys.request;
 
-import org.example.abstractMenu.AppMenu;
-import org.example.search.SearchMenu;
-import org.example.user.UserController;
+import pl.isa.BackendBoys.abstractMenu.AppMenu;
+import pl.isa.BackendBoys.search.SearchMenu;
+import pl.isa.BackendBoys.user.UserController;
 
 import java.util.List;
 

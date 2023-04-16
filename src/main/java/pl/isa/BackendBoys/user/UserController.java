@@ -1,6 +1,6 @@
-package org.example.user;
+package pl.isa.BackendBoys.user;
 
-import org.example.request.RequestMenu;
+import pl.isa.BackendBoys.request.RequestMenu;
 
 public class UserController {
 

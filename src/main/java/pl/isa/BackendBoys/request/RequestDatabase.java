@@ -1,4 +1,4 @@
-package org.example.request;
+package pl.isa.BackendBoys.request;
 
 import java.util.ArrayList;
 import java.util.List;

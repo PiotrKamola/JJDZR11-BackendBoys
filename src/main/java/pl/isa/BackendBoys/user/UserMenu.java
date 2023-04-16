@@ -1,7 +1,7 @@
-package org.example.user;
+package pl.isa.BackendBoys.user;
 
-import org.example.abstractMenu.AppMenu;
-import org.example.request.RequestMenu;
+import pl.isa.BackendBoys.abstractMenu.AppMenu;
+import pl.isa.BackendBoys.request.RequestMenu;
 
 public class UserMenu extends AppMenu {
 

@@ -1,4 +1,4 @@
-package org.example.request;
+package pl.isa.BackendBoys.request;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

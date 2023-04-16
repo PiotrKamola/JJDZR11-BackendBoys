@@ -1,4 +1,4 @@
-package org.example.user;
+package pl.isa.BackendBoys.user;
 
 public class User {
     private final String loginEmail;
