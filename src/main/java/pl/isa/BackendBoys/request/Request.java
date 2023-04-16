@@ -1,8 +1,11 @@
 package pl.isa.BackendBoys.request;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
     private final String requesterLogin;
     private final String objectName;
@@ -11,7 +14,16 @@ public class Request {
     private final String requestDate;
     private final String city;
 
-    Request(String requesterLogin, LostOrFound lostOrFound, String objectName, String description, String city) {
+    public Request() {
+        this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.city = null;
+        this.requesterLogin = null;
+        this.lostOrFound = null;
+        this.objectName = null;
+        this.description = null;
+    }
+
+    public Request(String requesterLogin, LostOrFound lostOrFound, String objectName, String description, String city) {
         this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.city = city;
         this.requesterLogin = requesterLogin;
@@ -53,6 +65,7 @@ public class Request {
             this.text = lostOrFoundString;
         }
 
+        @JsonValue
         public String getText() {
             return text;
         }
