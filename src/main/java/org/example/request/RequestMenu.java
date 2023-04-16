@@ -12,18 +12,10 @@ public class RequestMenu extends AppMenu {
     private static final int SHOW_ALL_REQUESTS = 3;
     private static final int SEARCH_REQUESTS = 4;
     private static final int EXIT_APP = 5;
-    private static String loggedUser;
+    public static String loggedUserLogin;
     private final RequestController requestController = new RequestController();
     private final UserController userController = new UserController();
     private final SearchMenu searchMenu = new SearchMenu();
-
-    public static String getLoggedUser() {
-        return loggedUser;
-    }
-
-    public static void setLoggedUser(String loggedUser) {
-        RequestMenu.loggedUser = loggedUser;
-    }
 
     public RequestController getRequestController() {
         return requestController;
@@ -37,7 +29,7 @@ public class RequestMenu extends AppMenu {
 
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
-            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber(userController.getUserByLogin(request.getRequester())) + ".");
+            System.out.println("Customer name: " + request.getRequesterLogin() + ", number: " + userController.getUserByLogin(request.getRequesterLogin()).getContactNumber() + ".");
             System.out.print("He/She " + request.getLostOrFound() + ": ");
             System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
@@ -52,10 +44,10 @@ public class RequestMenu extends AppMenu {
         boolean isRunning = true;
 
         while (isRunning) {
-            if (RequestMenu.getLoggedUser() == null) {
+            if (loggedUserLogin == null) {
                 System.out.println("You are NOT logged in");
             } else {
-                System.out.println("You (" + RequestMenu.getLoggedUser() + ") are logged in");
+                System.out.println("You (" + loggedUserLogin + ") are logged in");
             }
 
             printOptions();
@@ -79,12 +71,12 @@ public class RequestMenu extends AppMenu {
     }
 
     public void sendRequestData() {
-        if (getLoggedUser() == null) {
+        if (loggedUserLogin == null) {
             System.out.println("--------\nPlease login/register first if you want to send requests!\n---------");
             return;
         }
         String lostOrFound = getInputRequestLostOrFound();
-        requestController.addRequest(getLoggedUser(), Request.LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
+        requestController.addRequest(loggedUserLogin, Request.LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {

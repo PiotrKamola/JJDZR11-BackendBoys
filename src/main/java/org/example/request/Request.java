@@ -1,7 +1,5 @@
 package org.example.request;
 
-import org.example.user.User;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,11 +19,7 @@ public class Request {
         this.description = description;
     }
 
-    public String getContactNumber(User loggedUSer) {
-        return loggedUSer.getContactNumber();
-    }
-
-    public String getRequester() {
+    public String getRequesterLogin() {
         return requesterLogin;
     }
 
