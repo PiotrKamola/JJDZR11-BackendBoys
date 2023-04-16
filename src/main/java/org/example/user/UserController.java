@@ -1,5 +1,7 @@
 package org.example.user;
 
+import org.example.request.RequestMenu;
+
 public class UserController {
 
     private final UserDatabase userDatabase = new UserDatabase();
@@ -8,7 +10,7 @@ public class UserController {
     public boolean loginUser(String loginEmail, String password) {
         for (User user : userDatabase.getUsers()) {
             if (user.getLoginEmail().equals(loginEmail) && user.getPassword().equals(password)) {
-                userMenu.setLoggedUserLogin(user.getLoginEmail());
+                RequestMenu.loggedUserLogin = user.getLoginEmail();
                 return true;
             }
         }
@@ -30,7 +32,8 @@ public class UserController {
 
         User newUser = new User(name, contactNumber, loginEmail, password, city);
         userDatabase.add(newUser);
-        userMenu.setLoggedUserLogin(newUser.getLoginEmail());
+        RequestMenu.loggedUserLogin = newUser.getLoginEmail();
+
     }
 
     private boolean isLoginTaken(String login) {

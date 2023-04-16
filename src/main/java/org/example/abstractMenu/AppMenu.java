@@ -1,11 +1,13 @@
 package org.example.abstractMenu;
 
+import org.example.request.RequestMenu;
+
 import java.util.Scanner;
 
 public abstract class AppMenu {
     private static String loggedUserLogin;
 
-    protected abstract void printOptions();
+    public abstract void printOptions();
 
     protected String getStringFromUser(String inputMessage) {
         String errorInputMessage = "No text was entered! Try again...";
@@ -52,18 +54,11 @@ public abstract class AppMenu {
         return intFromUser;
     }
 
-    protected void printLoggedUserInformation(){
-        if (getLoggedUserLogin() == null) {
+    protected void printLoggedUserInformation() {
+        if (RequestMenu.loggedUserLogin == null) {
             System.out.println("You are NOT logged in.");
         } else {
-            System.out.println("You (" + getLoggedUserLogin()  + ") are logged in.");
+            System.out.println("You (" + RequestMenu.loggedUserLogin + ") are logged in.");
         }
-    }
-    public String getLoggedUserLogin() {
-        return loggedUserLogin;
-    }
-
-    public void setLoggedUserLogin(String loggedUserLogin) {
-        this.loggedUserLogin = loggedUserLogin;
     }
 }
