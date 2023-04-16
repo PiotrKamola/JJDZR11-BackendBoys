@@ -1,7 +1,5 @@
 package org.example.request;
 
-import org.example.user.User;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,11 +7,11 @@ public class Request {
     private final String requesterLogin;
     private final String objectName;
     private final String description;
-    private final String lostOrFound;
-    private final String city;
+    private final LostOrFound lostOrFound;
     private final String requestDate;
+    private final String city;
 
-    public Request(String requesterLogin, String lostOrFound, String objectName, String description, String city) {
+    Request(String requesterLogin, LostOrFound lostOrFound, String objectName, String description, String city) {
         this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.city = city;
         this.requesterLogin = requesterLogin;
@@ -22,12 +20,8 @@ public class Request {
         this.description = description;
     }
 
-    public String getRequester() {
+    public String getRequesterLogin() {
         return requesterLogin;
-    }
-
-    public String getContactNumber(User loggedUSer) {
-        return loggedUSer.getContactNumber();
     }
 
     public String getDescription() {
@@ -39,7 +33,7 @@ public class Request {
     }
 
     public String getLostOrFound() {
-        return lostOrFound;
+        return lostOrFound.getText();
     }
 
     public String getRequestDate() {
@@ -50,5 +44,18 @@ public class Request {
         return city;
     }
 
+    public enum LostOrFound {
+        LOST("Lost"), FOUND("Found");
+
+        public final String text;
+
+        LostOrFound(String lostOrFoundString) {
+            this.text = lostOrFoundString;
+        }
+
+        public String getText() {
+            return text;
+        }
+    }
 
 }

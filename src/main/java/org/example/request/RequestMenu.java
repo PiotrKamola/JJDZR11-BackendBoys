@@ -7,11 +7,12 @@ import org.example.user.UserController;
 import java.util.List;
 
 public class RequestMenu extends AppMenu {
-    private static final int LOGIN_REGISTER = 1;
+    private static final int SIGN_REGISTER = 1;
     private static final int SENT_REQUEST = 2;
     private static final int SHOW_ALL_REQUESTS = 3;
     private static final int SEARCH_REQUESTS = 4;
     private static final int EXIT_APP = 5;
+    public static String loggedUserLogin;
     private final RequestController requestController = new RequestController();
     private final UserController userController = new UserController();
     private final SearchMenu searchMenu = new SearchMenu();
@@ -28,7 +29,7 @@ public class RequestMenu extends AppMenu {
 
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
-            System.out.println("Customer name: " + request.getRequester() + ", number: " + request.getContactNumber(userController.getUserByLogin(request.getRequester())) + ".");
+            System.out.println("Requester name: " + request.getRequesterLogin() + ", Login(e-mail): " + userController.getUserByLogin(request.getRequesterLogin()).getContactNumber() + ".");
             System.out.print("He/She " + request.getLostOrFound() + ": ");
             System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
@@ -43,14 +44,18 @@ public class RequestMenu extends AppMenu {
         boolean isRunning = true;
 
         while (isRunning) {
-            printLoggedUserInformation();
+            if (loggedUserLogin == null) {
+                System.out.println("You are NOT logged in");
+            } else {
+                System.out.println("You (" + loggedUserLogin + ") are logged in");
+            }
 
             printOptions();
             int userChoice = getIntFromUser(1, 5, "Please choose option");
 
             //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
-                case LOGIN_REGISTER -> userController.getUserMenu().runMenu(userController);
+                case SIGN_REGISTER -> userController.getUserMenu().runMenu(userController);
                 case SENT_REQUEST -> sendRequestData();
                 case SHOW_ALL_REQUESTS -> printRequests(requestController.getAllRequests());
                 case SEARCH_REQUESTS -> searchMenu.runMenu(this);
@@ -60,17 +65,18 @@ public class RequestMenu extends AppMenu {
         System.out.println("Goodbye!");
     }
 
+    @Override
     public void printOptions() {
-        System.out.println("MENU\n  1. Log" + (getLoggedUserLogin() == null ? " in" : " out") + "/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
+        System.out.println("MENU\n  1. Log" + (loggedUserLogin == null ? " in" : " out") + "/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
     }
 
     public void sendRequestData() {
-        if (getLoggedUserLogin() == null) {
+        if (loggedUserLogin == null) {
             System.out.println("--------\nPlease login/register first if you want to send requests!\n---------");
             return;
         }
         String lostOrFound = getInputRequestLostOrFound();
-        requestController.addRequest(getLoggedUserLogin(), lostOrFound, getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
+        requestController.addRequest(loggedUserLogin, Request.LostOrFound.valueOf(lostOrFound), getInputObjectName(lostOrFound), getInputObjectDescription(), getCity(lostOrFound));
     }
 
     private String getInputObjectName(String lostOrFound) {
@@ -86,15 +92,34 @@ public class RequestMenu extends AppMenu {
     }
 
     private String getInputRequestLostOrFound() {
-        String lostOrFound;
-        while (true) {
-            lostOrFound = getStringFromUser("You found or lost something (you can choose \"lost\" or \"found\"): ");
-            if (lostOrFound.equals("lost") || lostOrFound.equals("found")) {
-                break;
+        boolean running = true;
+        String lostOrFound = null;
+        while (running) {
+            try {
+                int option = Integer.parseInt(getStringFromUser(showLostOrFoundOptions()));
+                switch (Request.LostOrFound.values()[option]) {
+                    case LOST -> {
+                        lostOrFound = Request.LostOrFound.LOST.name();
+                        running = false;
+                    }
+                    case FOUND -> {
+                        lostOrFound = Request.LostOrFound.FOUND.name();
+                        running = false;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Wrong option, choose again.");
             }
-            System.out.println("(Only allowed words are 'lost' or 'found'. Please try again...)");
         }
         return lostOrFound;
+    }
+
+    public String showLostOrFoundOptions() {
+        StringBuilder strBuilder = new StringBuilder();
+        for (Request.LostOrFound option : Request.LostOrFound.values()) {
+            strBuilder.append(option.ordinal()).append(". ").append(option.getText()).append("\n");
+        }
+        return strBuilder.toString();
     }
 
 

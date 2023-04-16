@@ -1,6 +1,7 @@
 package org.example.user;
 
 import org.example.abstractMenu.AppMenu;
+import org.example.request.RequestMenu;
 
 public class UserMenu extends AppMenu {
 
@@ -9,15 +10,21 @@ public class UserMenu extends AppMenu {
     private static final int BACK_TO_MENU = 3;
 
     public void runMenu(UserController userController) {
+        System.out.println("\nOnly registered users could send requests.");
 
         boolean isRunning = true;
 
         while (isRunning) {
-            printLoggedUserInformation();
+            if (RequestMenu.loggedUserLogin == null) {
+                System.out.println("You are NOT logged in");
+            } else {
+                System.out.println("You (" + RequestMenu.loggedUserLogin + ") are logged in");
+            }
             printOptions();
 
             int userChoice = getIntFromUser(1, 3, "Please choose option");
 
+            //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
                 case LOG_IN_OR_OUT -> isRunning = !logIn(userController);
                 case REGISTER -> {
@@ -29,8 +36,9 @@ public class UserMenu extends AppMenu {
         }
     }
 
+    @Override
     public void printOptions() {
-        System.out.println("1. Log " + (getLoggedUserLogin() == null ? "in" : "out") + "\n2. Register\n3. Back to MENU");
+        System.out.println("1. Log " + (RequestMenu.loggedUserLogin == null ? "in" : "out") + "\n2. Register\n3. Back to MENU");
     }
 
     public String getUserLoginEmail() {
@@ -38,18 +46,18 @@ public class UserMenu extends AppMenu {
     }
 
     private boolean logIn(UserController userController) {
-        if (getLoggedUserLogin() == null) {
+        if (RequestMenu.loggedUserLogin == null) {
             if (userController.loginUser(getUserLoginEmail(), getUserPassword())) {
                 System.out.println("You log in successfully.");
                 return true;
             } else {
                 System.out.println("______________________________\nEmail or password was not correct! You are NOT log in! \n");
-                setLoggedUserLogin(null);
+                RequestMenu.loggedUserLogin = null;
                 return false;
             }
         } else {
             System.out.println("______________________________\nYou have been succesfully LOG OUT! \n");
-            setLoggedUserLogin(null);
+            RequestMenu.loggedUserLogin = null;
             return false;
         }
     }
