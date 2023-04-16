@@ -1,6 +1,7 @@
-package org.example;
+package pl.isa.BackendBoys;
 
-import org.example.request.RequestMenu;
+import pl.isa.BackendBoys.jsonService.JsonController;
+import pl.isa.BackendBoys.request.RequestMenu;
 
 public class ZgubaApp {
     public static void main(String[] args) {

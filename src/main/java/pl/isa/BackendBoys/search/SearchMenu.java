@@ -1,7 +1,7 @@
-package org.example.search;
+package pl.isa.BackendBoys.search;
 
-import org.example.abstractMenu.AppMenu;
-import org.example.request.RequestMenu;
+import pl.isa.BackendBoys.abstractMenu.AppMenu;
+import pl.isa.BackendBoys.request.RequestMenu;
 
 public class SearchMenu extends AppMenu {
     private static final int SEARCH_BY_CITY = 1;
