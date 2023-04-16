@@ -1,18 +1,14 @@
 package org.example.search;
 
 import org.example.abstractMenu.AppMenu;
-import org.example.request.Request;
 import org.example.request.RequestMenu;
-
-import java.util.List;
 
 public class SearchMenu extends AppMenu {
     private static final int SEARCH_BY_CITY = 1;
     private static final int BACK_TO_MENU = 0;
-
     private final SearchController searchController = new SearchController();
 
-    public void runMenu(List<Request> allRequests) {
+    public void runMenu(RequestMenu requestMenu) {
         boolean isRunning = true;
 
         while (isRunning) {
@@ -22,7 +18,7 @@ public class SearchMenu extends AppMenu {
             //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
                 case SEARCH_BY_CITY ->
-                        RequestMenu.printRequests(searchController.searchByCity(allRequests, getSearchedCityFromUser()));
+                        requestMenu.printRequests(searchController.searchByCity(requestMenu.getRequestController().getAllRequests(), getSearchedCityFromUser()));
                 case BACK_TO_MENU -> isRunning = false;
             }
         }

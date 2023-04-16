@@ -19,6 +19,7 @@ public class UserMenu extends AppMenu {
 
             int userChoice = getIntFromUser(1, 3, "Please choose option");
 
+            //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
                 case LOGIN -> {
                     if (userController.loginUser(getUserLoginEmail(), getUserPassword())) {
