@@ -23,6 +23,7 @@ public class SearchMenu extends AppMenu {
             }
         }
     }
+
     @Override
     public void printOptions() {
         System.out.println("1. Search by city\n0. Back to MENU");

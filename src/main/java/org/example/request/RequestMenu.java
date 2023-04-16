@@ -7,7 +7,7 @@ import org.example.user.UserController;
 import java.util.List;
 
 public class RequestMenu extends AppMenu {
-    private static final int LOGIN_REGISTER = 1;
+    private static final int SIGN_REGISTER = 1;
     private static final int SENT_REQUEST = 2;
     private static final int SHOW_ALL_REQUESTS = 3;
     private static final int SEARCH_REQUESTS = 4;
@@ -29,7 +29,7 @@ public class RequestMenu extends AppMenu {
 
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
-            System.out.println("Customer name: " + request.getRequesterLogin() + ", number: " + userController.getUserByLogin(request.getRequesterLogin()).getContactNumber() + ".");
+            System.out.println("Requester name: " + request.getRequesterLogin() + ", Login(e-mail): " + userController.getUserByLogin(request.getRequesterLogin()).getContactNumber() + ".");
             System.out.print("He/She " + request.getLostOrFound() + ": ");
             System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
@@ -55,7 +55,7 @@ public class RequestMenu extends AppMenu {
 
             //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
-                case LOGIN_REGISTER -> userController.getUserMenu().runMenu(userController);
+                case SIGN_REGISTER -> userController.getUserMenu().runMenu(userController);
                 case SENT_REQUEST -> sendRequestData();
                 case SHOW_ALL_REQUESTS -> printRequests(requestController.getAllRequests());
                 case SEARCH_REQUESTS -> searchMenu.runMenu(this);
@@ -67,7 +67,7 @@ public class RequestMenu extends AppMenu {
 
     @Override
     public void printOptions() {
-        System.out.println("MENU\n  1. Login/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
+        System.out.println("MENU\n  1. Log" + (loggedUserLogin == null ? " in" : " out") + "/Register\n  2. Sent request\n  3. Show all requests\n  4. Search requests\n  5. Exit");
     }
 
     public void sendRequestData() {

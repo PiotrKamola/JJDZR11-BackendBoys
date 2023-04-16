@@ -1,8 +1,11 @@
 package org.example.abstractMenu;
 
+import org.example.request.RequestMenu;
+
 import java.util.Scanner;
 
 public abstract class AppMenu {
+    private static String loggedUserLogin;
 
     public abstract void printOptions();
 
@@ -49,5 +52,13 @@ public abstract class AppMenu {
         } while (!isAllowedInput);
 
         return intFromUser;
+    }
+
+    protected void printLoggedUserInformation() {
+        if (RequestMenu.loggedUserLogin == null) {
+            System.out.println("You are NOT logged in.");
+        } else {
+            System.out.println("You (" + RequestMenu.loggedUserLogin + ") are logged in.");
+        }
     }
 }

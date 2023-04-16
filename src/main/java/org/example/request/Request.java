@@ -10,6 +10,7 @@ public class Request {
     private final LostOrFound lostOrFound;
     private final String requestDate;
     private final String city;
+
     Request(String requesterLogin, LostOrFound lostOrFound, String objectName, String description, String city) {
         this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.city = city;
@@ -44,8 +45,7 @@ public class Request {
     }
 
     public enum LostOrFound {
-        LOST("Lost"),
-        FOUND("Found");
+        LOST("Lost"), FOUND("Found");
 
         public final String text;
 
