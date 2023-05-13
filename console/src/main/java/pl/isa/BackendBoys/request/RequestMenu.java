@@ -29,7 +29,7 @@ public class RequestMenu extends AppMenu {
 
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
-            System.out.println("Requester name: " + request.getRequesterLogin() + ", Login(e-mail): " + userController.getUserByLogin(request.getRequesterLogin()).getContactNumber() + ".");
+            System.out.println("Login(e-mail): " + request.getRequesterLogin() + ", Telephone: " + userController.getUserByLogin(request.getRequesterLogin()).getContactNumber() + ".");
             System.out.print("He/She " + request.getLostOrFound() + ": ");
             System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
