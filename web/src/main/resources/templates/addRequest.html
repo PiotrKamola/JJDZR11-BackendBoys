@@ -13,6 +13,8 @@
 
     <p> Object Name: <input type="text" th:field="*{objectName}"></p>
 
+    <p>Description: <input type="text" th:field="*{description}"></p>
+
     <p> You lost or found it?:
         <select name="lostOrFound">
             <option th:each="lostOrFound : ${T(__${enum}__).values()}"
@@ -20,12 +22,9 @@
         </select>
     </p>
 
-<!--    <p> You lost or found it?:-->
-<!--        <select name="lostOrFound">-->
-<!--            <option th:each="lostOrFound : ${T(pl.isa.BackendBoys.request.Request.LostOrFound).values()}"-->
-<!--                    th:value="${lostOrFound}" th:text="${lostOrFound}"></option>-->
-<!--        </select>-->
-<!--    </p>-->
+    <p>Date: <input type="date" th:field="*{requestDate}"></p>
+
+    <p>City: <input type="text" th:field="*{city}"></p>
 
     <br>
     <div><input type="submit" th:value="Submit"></div>

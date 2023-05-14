@@ -25,7 +25,7 @@ public class WebRequestController {
         //model.addAttribute("requestToAdd", new Request());
 //        System.out.println(requestToAdd.getRequesterLogin());
 //        System.out.println(requestToAdd);
-        //requestController.addRequest(requestToAdd);
+        requestController.addRequest(requestToAdd);
         model.addAttribute(requestToAdd);
         requestToAdd.nicePrint();
         return "submittedRequest";
