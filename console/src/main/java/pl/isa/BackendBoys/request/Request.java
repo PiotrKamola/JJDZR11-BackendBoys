@@ -7,12 +7,12 @@ import java.time.format.DateTimeFormatter;
 
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
-    private final String requesterLogin;
-    private final String objectName;
-    private final String description;
-    private final LostOrFound lostOrFound;
-    private final String requestDate;
-    private final String city;
+    private String requesterLogin;
+    private String objectName;
+    private String description;
+    private LostOrFound lostOrFound;
+    private String requestDate;
+    private String city;
 
     public Request() {
         this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -71,4 +71,36 @@ public class Request {
         }
     }
 
+    public void setRequesterLogin(String requesterLogin) {
+        this.requesterLogin = requesterLogin;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setLostOrFound(LostOrFound lostOrFound) {
+        this.lostOrFound = lostOrFound;
+    }
+
+    public void setRequestDate(String requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void nicePrint(){
+        System.out.println("Login: "+this.requesterLogin);
+        System.out.println("Object name: "+this.objectName);
+        System.out.println("Description: "+this.description);
+        System.out.println("Lost or Found: "+this.lostOrFound);
+        System.out.println("Date: "+this.requestDate);
+        System.out.println("City: "+this.city);
+    }
 }
