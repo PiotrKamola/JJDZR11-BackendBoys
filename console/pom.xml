@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.isa</groupId>
-    <artifactId>zguba</artifactId>
+    <artifactId>ZgubaApp_console</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Zguba App</name>
 
