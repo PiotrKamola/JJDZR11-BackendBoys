@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Added to database:</h1>
+    <p th:text="'Login: ' + ${request.requesterLogin}"></p>
+    <p th:text="'Lost or Found: ' + ${request.lostOrFound}"></p>
+    <p th:text="'Description: ' + ${request.description}"></p>
+    <p th:text="'Date: ' + ${request.requestDate}"></p>
+    <p th:text="'City: ' + ${request.city}"></p>
+    <a href="/api/request/add">Add another request</a>
+
+</body>
+</html>

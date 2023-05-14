@@ -8,11 +8,11 @@
 		<version>3.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>pl.isa.BackendBoys</groupId>
-	<artifactId>ZgubaApp</artifactId>
+	<groupId>pl.isa.backendBoys</groupId>
+	<artifactId>zgubaAppWeb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ZgubaApp</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Infoshare academy project</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -20,12 +20,26 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>3.0.6</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>3.0.6</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>3.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>pl.isa</groupId>
+			<artifactId>zguba</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
