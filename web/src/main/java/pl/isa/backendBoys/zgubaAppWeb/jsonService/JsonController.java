@@ -1,7 +1,7 @@
-package pl.isa.BackendBoys.jsonService;
+package pl.isa.backendBoys.zgubaAppWeb.jsonService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import pl.isa.BackendBoys.request.Request;
+import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 import pl.isa.BackendBoys.user.User;
 
 import java.io.File;
@@ -13,8 +13,8 @@ import java.util.List;
 
 
 public class JsonController {
-    private static final String USERS_JSONFILE_PATH = "console/src/main/resources/users.json";
-    private static final String REQUESTS_JSONFILE_PATH = "console/src/main/resources/requests.json";
+    private static final String USERS_JSONFILE_PATH = "web/src/main/resources/data/users.json";
+    private static final String REQUESTS_JSONFILE_PATH = "web/src/main/resources/data/requests.json";
 
     public static void updateUsersJsonFile(List<User> users) {
         ObjectMapper objectMapper = new ObjectMapper();

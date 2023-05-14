@@ -14,10 +14,6 @@ public class RequestController {
         requestDatabase.add(new Request(requesterLogin, lostOrFound, objectName, description, city));
     }
 
-    public void addRequest(Request request) {
-        requestDatabase.add(request);
-    }
-
     public List<Request> getAllRequests() {
         return requestDatabase.getAllRequests();
     }
