@@ -96,7 +96,7 @@ public class Request {
     }
 
     public String myToString() {
-        return this.requesterLogin + " " + this.objectName + " " + this.description + " " + this.lostOrFound.toString() + " " + this.requestDate + " " + this.city;
+        return this.requesterLogin + "\n" + this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }
 
     public void nicePrint() {
