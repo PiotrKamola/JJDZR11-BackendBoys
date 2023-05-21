@@ -95,12 +95,17 @@ public class Request {
         this.city = city;
     }
 
-    public void nicePrint(){
-        System.out.println("Login: "+this.requesterLogin);
-        System.out.println("Object name: "+this.objectName);
-        System.out.println("Description: "+this.description);
-        System.out.println("Lost or Found: "+this.lostOrFound);
-        System.out.println("Date: "+this.requestDate);
-        System.out.println("City: "+this.city);
+    @Override
+    public String toString() {
+        return this.requesterLogin + " " + this.objectName + " " + this.description + " " + this.lostOrFound.toString() + " " + this.requestDate + " " + this.city;
+    }
+
+    public void nicePrint() {
+        System.out.println("Login: " + this.requesterLogin);
+        System.out.println("Object name: " + this.objectName);
+        System.out.println("Description: " + this.description);
+        System.out.println("Lost or Found: " + this.lostOrFound);
+        System.out.println("Date: " + this.requestDate);
+        System.out.println("City: " + this.city);
     }
 }
