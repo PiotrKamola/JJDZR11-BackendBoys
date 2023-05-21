@@ -18,7 +18,7 @@ public class SearchController {
 
         List<Request> foundRequests;
         foundRequests = allRequests.stream()
-                .filter(request -> request.toString().toLowerCase().contains(word.toLowerCase()))
+                .filter(request -> request.myToString().toLowerCase().contains(word.toLowerCase()))
                 .toList();
 
         return foundRequests;

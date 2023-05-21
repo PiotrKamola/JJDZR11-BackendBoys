@@ -95,8 +95,7 @@ public class Request {
         this.city = city;
     }
 
-    @Override
-    public String toString() {
+    public String myToString() {
         return this.requesterLogin + " " + this.objectName + " " + this.description + " " + this.lostOrFound.toString() + " " + this.requestDate + " " + this.city;
     }
 
