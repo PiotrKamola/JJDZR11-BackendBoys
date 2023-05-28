@@ -13,7 +13,7 @@
     <form th:action="@{/api/request/submitted}" th:object="${requestToAdd}" method="post">
         <p> Login: <input type="text" th:field="*{requesterLogin}"></p>
 
-        <p> Object Name: <input type="text" th:field="*{objectName}"></p>
+        <p> Object Name: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{objectName}"></p>
 
         <p>Description: <input type="text" th:field="*{description}"></p>
 
@@ -26,7 +26,7 @@
 
         <p>Date: <input type="date" th:field="*{requestDate}"></p>
 
-        <p>City: <input type="text" th:field="*{city}"></p>
+        <p>City: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{city}"></p>
 
         <br>
         <div><input type="submit" th:value="Submit"></div>
