@@ -1,6 +1,6 @@
 package pl.isa.backendBoys.zgubaAppWeb.rest;
 
-public class searchHelp {
+public class SearchHelp {
     private String searchWord = new String();
     private String searchCity = new String();
     private String searchDescription = new String();

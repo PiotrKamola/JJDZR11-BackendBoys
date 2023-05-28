@@ -9,10 +9,10 @@
 <body>
     <div class="col-xs-1" align="center">
         <h1>Login</h1>
-        <form th:action="@{/}" th:object="${userToLogin}" method="post">
-            <p>Name: <input type="text" th:field="*{loginEmail}"></p>
-
-            <p>Login: <input type="text" th:field="*{password}"></p>
+        <form th:action="@{/api/user/loggedIn}" th:object="${userToLogin}" method="post">
+            <p>Login email: <input type="text" th:field="*{login}"></p>
+            <p>Password: <input type="password" th:field="*{password}"></p>
+            <div><input type="submit" th:value="Submit"></div>
         </form>
     </div>
 </body>

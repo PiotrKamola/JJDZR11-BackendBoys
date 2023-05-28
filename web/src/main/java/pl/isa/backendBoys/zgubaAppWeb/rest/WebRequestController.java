@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 import pl.isa.backendBoys.zgubaAppWeb.request.RequestController;
+import pl.isa.backendBoys.zgubaAppWeb.request.RequestMenu;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchController;
 
 import java.util.List;
@@ -26,8 +27,10 @@ public class WebRequestController {
 
     @PostMapping("/submitted")
     public String addNewRequest(Model model, @ModelAttribute Request requestToAdd) {
-        requestController.addRequest(requestToAdd);
+        RequestMenu requestMenu = new RequestMenu();
         model.addAttribute(requestToAdd);
+        requestToAdd.setRequesterLogin(requestMenu.loggedUserLogin);
+        requestController.addRequest(requestToAdd);
         requestToAdd.nicePrint();
         return "submittedRequest";
     }
@@ -46,7 +49,7 @@ public class WebRequestController {
     }
 
     @PostMapping("/search")
-    public String search(Model model, @ModelAttribute searchHelp searchWord) {
+    public String search(Model model, @ModelAttribute SearchHelp searchWord) {
         model.addAttribute(searchWord);
 
         List<Request> searchList = searchController.searchByWord(requestController.getAllRequests(), searchWord.getSearchWord());

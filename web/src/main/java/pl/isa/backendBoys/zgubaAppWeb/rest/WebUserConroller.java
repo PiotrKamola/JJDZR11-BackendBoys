@@ -34,8 +34,21 @@ public class WebUserConroller {
     }
 
     @GetMapping("/login")
-    public String loginUser(Model model, @ModelAttribute User userToLogin) {
-        userController.registerUser(userToLogin);
+    public String loginUser(Model model, @ModelAttribute UserToLogin userToLogin) {
+        model.addAttribute(userToLogin);
         return "login";
     }
+
+    @PostMapping("/loggedIn")
+    public String loggedIn(Model model, @ModelAttribute UserToLogin userToLogin) {
+        model.addAttribute(userToLogin);
+        if(userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())){
+            System.out.println(userToLogin.getLogin());
+            System.out.println(userToLogin.getPassword());
+            return "loggedIn";
+        }else{
+            return "NOTloggedIn";
+        }
+    }
+
 }

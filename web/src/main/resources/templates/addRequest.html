@@ -11,7 +11,7 @@
 <div class="col-xs-1" align="center">
     <h1>Add new request</h1>
     <form th:action="@{/api/request/submitted}" th:object="${requestToAdd}" method="post">
-        <p> Login: <input type="text" th:field="*{requesterLogin}"></p>
+<!--        <p> Login: <input type="text" th:field="*{requesterLogin}"></p>-->
 
         <p> Object Name: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{objectName}"></p>
 
