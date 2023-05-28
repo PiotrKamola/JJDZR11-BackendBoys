@@ -23,7 +23,7 @@
             </select>
         </p>
 
-        <p>Date: <input type="date" th:field="*{requestDate}"></p>
+        <p>Date: <input type="date" required th:field="*{requestDate}"></p>
 
         <p>City: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{city}"></p>
 

@@ -15,7 +15,7 @@
     <div class="d-flex justify-content-center">
         <a href="/api/user" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">User panel</a>
 
-        <span th:if="${requestMenu.loggedUserLogin!=null}">
+        <span th:if="${userController.getLoggedUserEmail() != null}">
             <a href="/api/request/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add request</a>
         </span>
 

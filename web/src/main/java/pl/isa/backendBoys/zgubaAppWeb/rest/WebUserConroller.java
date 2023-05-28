@@ -1,5 +1,6 @@
 package pl.isa.backendBoys.zgubaAppWeb.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,9 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserController;
 @Controller
 @RequestMapping("api/user")
 public class WebUserConroller {
-    final UserController userController = new UserController();
+
+    @Autowired
+    UserController userController;
 
     @GetMapping("")
     public String userMenu() {
@@ -42,11 +45,11 @@ public class WebUserConroller {
     @PostMapping("/loggedIn")
     public String loggedIn(Model model, @ModelAttribute UserToLogin userToLogin) {
         model.addAttribute(userToLogin);
-        if(userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())){
+        if (userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())) {
             System.out.println(userToLogin.getLogin());
             System.out.println(userToLogin.getPassword());
             return "loggedIn";
-        }else{
+        } else {
             return "NOTloggedIn";
         }
     }

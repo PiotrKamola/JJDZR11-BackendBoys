@@ -1,5 +1,6 @@
 package pl.isa.backendBoys.zgubaAppWeb.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 import pl.isa.backendBoys.zgubaAppWeb.request.RequestController;
-import pl.isa.backendBoys.zgubaAppWeb.request.RequestMenu;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchController;
+import pl.isa.backendBoys.zgubaAppWeb.user.UserController;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class WebRequestController {
     final RequestController requestController = new RequestController();
     final SearchController searchController = new SearchController();
 
+    @Autowired
+    UserController userController;
+
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {
         return "submittedRequest";
@@ -27,9 +31,8 @@ public class WebRequestController {
 
     @PostMapping("/submitted")
     public String addNewRequest(Model model, @ModelAttribute Request requestToAdd) {
-        RequestMenu requestMenu = new RequestMenu();
         model.addAttribute(requestToAdd);
-        requestToAdd.setRequesterLogin(requestMenu.loggedUserLogin);
+        requestToAdd.setRequesterLogin(userController.getLoggedUserEmail());
         requestController.addRequest(requestToAdd);
         requestToAdd.nicePrint();
         return "submittedRequest";

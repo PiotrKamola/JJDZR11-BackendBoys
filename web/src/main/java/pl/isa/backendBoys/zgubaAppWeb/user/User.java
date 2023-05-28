@@ -72,12 +72,12 @@ public class User {
         return contactNumber;
     }
 
-    public void nicePrint(){
-        System.out.println("Name: "+this.name);
-        System.out.println("City: "+this.city);
-        System.out.println("Contact number: "+this.contactNumber);
-        System.out.println("Login email: "+this.loginEmail);
-        System.out.println("Password: "+this.password);
+    public void nicePrint() {
+        System.out.println("Name: " + this.name);
+        System.out.println("City: " + this.city);
+        System.out.println("Contact number: " + this.contactNumber);
+        System.out.println("Login email: " + this.loginEmail);
+        System.out.println("Password: " + this.password);
     }
 
 }
