@@ -14,7 +14,11 @@
 
     <div class="d-flex justify-content-center">
         <a href="/api/user" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">User panel</a>
-        <a href="/api/request/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add request</a>
+
+        <span th:if="${requestMenu.loggedUserLogin!=null}">
+            <a href="/api/request/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add request</a>
+        </span>
+
         <a href="/api/request/all" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Show all requests</a>
     </div>
 
