@@ -2,7 +2,7 @@ package pl.isa.backendBoys.zgubaAppWeb.jsonService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
-import pl.isa.BackendBoys.user.User;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,10 +15,9 @@ import java.util.List;
 public class JsonController {
     private static final String USERS_JSONFILE_PATH = "web/src/main/resources/data/users.json";
     private static final String REQUESTS_JSONFILE_PATH = "web/src/main/resources/data/requests.json";
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static void updateUsersJsonFile(List<User> users) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         File jsonFileUsers = new File(USERS_JSONFILE_PATH);
 
         try {
@@ -29,8 +28,6 @@ public class JsonController {
     }
 
     public static void updateRequestsJsonFile(List<Request> requests) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         File jsonFileRequests = new File(REQUESTS_JSONFILE_PATH);
 
         try {
@@ -41,8 +38,6 @@ public class JsonController {
     }
 
     public static List<User> getUsersFromJsonFile() {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         try {
             return Arrays.asList(objectMapper.readValue(Paths.get(USERS_JSONFILE_PATH).toFile(), User[].class));
         } catch (IOException e) {
@@ -52,8 +47,6 @@ public class JsonController {
     }
 
     public static List<Request> getRequestsfromJsonFile() {
-        ObjectMapper objectMapper = new ObjectMapper();
-
         try {
             return Arrays.asList(objectMapper.readValue(Paths.get(REQUESTS_JSONFILE_PATH).toFile(), Request[].class));
         } catch (IOException e) {

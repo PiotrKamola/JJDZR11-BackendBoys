@@ -1,14 +1,14 @@
 package pl.isa.backendBoys.zgubaAppWeb.jsonService;
 
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
-import pl.isa.BackendBoys.user.User;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
- class ExampleData {
+class ExampleData {
 
-     List<User> createExampleUsers() {
+    List<User> createExampleUsers() {
         List<User> exampleUsers = new ArrayList<>();
         exampleUsers.add(new User("John", "111-111-111", "john@wp.pl", "john", "Gdynia"));
         exampleUsers.add(new User("Mark", "222-222-222", "mark@wp.pl", "mark", "Warszawa"));
@@ -18,7 +18,7 @@ import java.util.List;
         return exampleUsers;
     }
 
-     List<Request> createExampleRequests() {
+    List<Request> createExampleRequests() {
         List<Request> exampleRequests = new ArrayList<>();
 
         exampleRequests.add(new Request("john@wp.pl", Request.LostOrFound.LOST, "kluczyki", "zgugiono na parkingu przy biedronce na ulicy xxx", "Gdynia"));

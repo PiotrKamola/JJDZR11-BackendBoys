@@ -86,53 +86,5 @@
     "lostOrFound": "Lost",
     "requestDate": "14/05/2023",
     "city": "Gdansk"
-  },
-  {
-    "requesterLogin": "a",
-    "objectName": "a",
-    "description": "a",
-    "lostOrFound": "Lost",
-    "requestDate": "2014-07-02",
-    "city": "aaa"
-  },
-  {
-    "requesterLogin": "test",
-    "objectName": "test",
-    "description": "test",
-    "lostOrFound": "Found",
-    "requestDate": "2023-05-04",
-    "city": "test"
-  },
-  {
-    "requesterLogin": "q",
-    "objectName": "q",
-    "description": "q",
-    "lostOrFound": "Lost",
-    "requestDate": "2023-05-06",
-    "city": "q"
-  },
-  {
-    "requesterLogin": "test",
-    "objectName": "test",
-    "description": "test",
-    "lostOrFound": "Lost",
-    "requestDate": "2023-05-03",
-    "city": "test"
-  },
-  {
-    "requesterLogin": "q",
-    "objectName": "q",
-    "description": "q",
-    "lostOrFound": "Found",
-    "requestDate": "2023-05-03",
-    "city": "q"
-  },
-  {
-    "requesterLogin": "w",
-    "objectName": "w",
-    "description": "w",
-    "lostOrFound": "Lost",
-    "requestDate": "2023-05-03",
-    "city": "w"
   }
 ]

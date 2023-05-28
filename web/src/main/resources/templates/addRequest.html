@@ -8,27 +8,34 @@
 </head>
 <body>
 
-<form th:action="@{/api/request/submitted}" th:object="${requestToAdd}" method="post">
-    <p> Login: <input type="text" th:field="*{requesterLogin}"></p>
+<div class="col-xs-1" align="center">
+    <h1>Add new request</h1>
+    <form th:action="@{/api/request/submitted}" th:object="${requestToAdd}" method="post">
 
-    <p> Object Name: <input type="text" th:field="*{objectName}"></p>
+        <p> Object Name: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{objectName}"></p>
 
-    <p>Description: <input type="text" th:field="*{description}"></p>
+        <p>Description: <input type="text" th:field="*{description}"></p>
 
-    <p> You lost or found it?:
-        <select name="lostOrFound">
-            <option th:each="lostOrFound : ${T(__${enum}__).values()}"
-                    th:value="${lostOrFound}" th:text="${lostOrFound}"></option>
-        </select>
-    </p>
+        <p> You lost or found it?:
+            <select name="lostOrFound">
+                <option th:each="lostOrFound : ${T(__${enum}__).values()}"
+                        th:value="${lostOrFound}" th:text="${lostOrFound}"></option>
+            </select>
+        </p>
 
-    <p>Date: <input type="date" th:field="*{requestDate}"></p>
+        <p>Date: <input type="date" required th:field="*{requestDate}"></p>
 
-    <p>City: <input type="text" th:field="*{city}"></p>
+        <p>City: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{city}"></p>
 
-    <br>
-    <div><input type="submit" th:value="Submit"></div>
-</form>
+        <br>
+        <div><input type="submit" th:value="Submit"></div>
+    </form>
+</div>
+
+    <div class="col-xs-1" align="center">
+        <a href="/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Back to menu</a>
+    </div>
+
 
 </body>
 </html>
