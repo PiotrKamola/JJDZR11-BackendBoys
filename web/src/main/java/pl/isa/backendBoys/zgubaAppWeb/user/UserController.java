@@ -27,6 +27,10 @@ public class UserController {
         return false;
     }
 
+    public void logout(){
+        loggedUserEmail = null;
+    }
+
     public void registerUser(String name, String city, String contactNumber, String loginEmail, String password) {
         User newUser = new User(name, contactNumber, loginEmail, password, city);
         userDatabase.add(newUser);

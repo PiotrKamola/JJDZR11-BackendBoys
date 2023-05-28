@@ -18,7 +18,8 @@ public class WebUserConroller {
     UserController userController;
 
     @GetMapping("")
-    public String userMenu() {
+    public String userMenu(Model model) {
+        model.addAttribute(userController);
         return "userMenu";
     }
 
@@ -45,6 +46,7 @@ public class WebUserConroller {
     @PostMapping("/loggedIn")
     public String loggedIn(Model model, @ModelAttribute UserToLogin userToLogin) {
         model.addAttribute(userToLogin);
+        model.addAttribute(userController);
         if (userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())) {
             System.out.println(userToLogin.getLogin());
             System.out.println(userToLogin.getPassword());
@@ -52,6 +54,12 @@ public class WebUserConroller {
         } else {
             return "NOTloggedIn";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        userController.logout();
+        return "logout";
     }
 
 }

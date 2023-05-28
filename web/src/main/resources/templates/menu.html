@@ -13,6 +13,18 @@
     </div>
 
     <div class="d-flex justify-content-center">
+        <td>
+            <span th:if="${userController.getLoggedUserEmail() != null}">
+                <p th:text="'You are logged in as: ' + ${userController.getLoggedUserEmail()}"></p>
+            </span>
+
+            <span th:unless="${userController.getLoggedUserEmail() != null}">
+                <p th:text="'You are not logged in.'"></p>
+            </span>
+        </td>
+    </div>
+
+    <div class="d-flex justify-content-center">
         <a href="/api/user" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">User panel</a>
 
         <span th:if="${userController.getLoggedUserEmail() != null}">
