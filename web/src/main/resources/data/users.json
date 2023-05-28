@@ -33,12 +33,5 @@
     "name": "Andrzej",
     "city": "Radom",
     "contactNumber": "123123"
-  },
-  {
-    "loginEmail": "",
-    "password": "",
-    "name": "",
-    "city": "",
-    "contactNumber": ""
   }
 ]
