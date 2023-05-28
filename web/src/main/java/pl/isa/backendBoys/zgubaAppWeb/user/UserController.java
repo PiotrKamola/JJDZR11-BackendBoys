@@ -40,7 +40,7 @@ public class UserController {
         userDatabase.add(user);
     }
 
-    private boolean isLoginTaken(String login) {
+    public boolean isLoginTaken(String login) {
         return userDatabase.getUsers().stream().anyMatch(user -> user.getLoginEmail().equals(login));
     }
 

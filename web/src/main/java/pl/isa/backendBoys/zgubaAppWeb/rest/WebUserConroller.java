@@ -26,15 +26,21 @@ public class WebUserConroller {
     @GetMapping("/register")
     public String registerUser(Model model) {
         model.addAttribute("userToAdd", new User());
+        model.addAttribute("showError" ,false);
         return "register";
     }
 
-    @PostMapping("/addedNewUser")
-    public String addNewUser(Model model, @ModelAttribute User userToAdd) {
-        userController.registerUser(userToAdd);
-        model.addAttribute(userToAdd);
-        userToAdd.nicePrint();
-        return "addedNewUser";
+    @PostMapping("/register")
+    public String registerWrongUser(Model model, @ModelAttribute User userToAdd) {
+        model.addAttribute("userToAdd", new User());
+        if(userController.isLoginTaken(userToAdd.getLoginEmail())){
+            model.addAttribute("showError" ,true);
+            return "register";
+        }else{
+            model.addAttribute("showError" ,false);
+            userController.registerUser(userToAdd);
+            return "addedNewUser";
+        }
     }
 
     @GetMapping("/login")
@@ -49,23 +55,6 @@ public class WebUserConroller {
         model.addAttribute(userToLogin);
         model.addAttribute(userController);
         if (userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())) {
-            System.out.println(userToLogin.getLogin());
-            System.out.println(userToLogin.getPassword());
-            return "loggedIn";
-        } else {
-            model.addAttribute("showError" ,true);
-            return "login";
-        }
-    }
-
-    @PostMapping("/loggedIn")
-    public String loggedIn(Model model, @ModelAttribute UserToLogin userToLogin) {
-        model.addAttribute(userToLogin);
-        model.addAttribute(userController);
-        if (userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())) {
-            System.out.println(userToLogin.getLogin());
-            System.out.println(userToLogin.getPassword());
-            model.addAttribute("showError" ,false);
             return "loggedIn";
         } else {
             model.addAttribute("showError" ,true);
