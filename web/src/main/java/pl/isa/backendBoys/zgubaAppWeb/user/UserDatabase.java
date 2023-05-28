@@ -10,7 +10,7 @@ public class UserDatabase {
 
     public void add(User user) {
         users.add(user);
-        System.out.println("_______________________\nUser '" + user.getName() + "' (email: " + user.getLoginEmail() + ") added to database and logged.\n");
+//        System.out.println("_______________________\nUser '" + user.getName() + "' (email: " + user.getLoginEmail() + ") added to database and logged.\n");
         JsonController.updateUsersJsonFile(users);
     }
 

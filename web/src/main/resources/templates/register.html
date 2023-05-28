@@ -10,15 +10,15 @@
 <div class="col-xs-1" align="center">
     <h1>Register</h1>
     <form th:action="@{/api/user/register}" th:object="${userToAdd}" method="post">
-        <p>Name: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{name}"></p>
+        <p>Name: <input title="3-20 chars" type="text" pattern=".{3,20}" required onfocusout="this.value = this.value.trim()" th:field="*{name}"></p>
 
-        <p>Login: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{loginEmail}"></p>
+        <p>Login: <input title="3-30 chars" type="text" pattern=".{3,30}" required onfocusout="this.value = this.value.trim()" th:field="*{loginEmail}"></p>
 
         <p>Password: <input type="password" required onfocusout="this.value = this.value.trim()" th:field="*{password}"></p>
 
-        <p>City: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{city}"></p>
+        <p>City: <input type="text" title="3-20 chars" pattern=".{3,20}" required onfocusout="this.value = this.value.trim()" th:field="*{city}"></p>
 
-        <p>Contact number: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{contactNumber}"></p>
+        <p>Contact number: <input type="text" title="only 9 numbers" pattern="[0-9]{9}" required onfocusout="this.value = this.value.trim()" th:field="*{contactNumber}"></p>
 
         <br>
         <div><input type="submit" th:value="Submit"></div>
