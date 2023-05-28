@@ -40,7 +40,22 @@ public class WebUserConroller {
     @GetMapping("/login")
     public String loginUser(Model model, @ModelAttribute UserToLogin userToLogin) {
         model.addAttribute(userToLogin);
+        model.addAttribute("showError" ,false);
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String logegdUser(Model model, @ModelAttribute UserToLogin userToLogin) {
+        model.addAttribute(userToLogin);
+        model.addAttribute(userController);
+        if (userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())) {
+            System.out.println(userToLogin.getLogin());
+            System.out.println(userToLogin.getPassword());
+            return "loggedIn";
+        } else {
+            model.addAttribute("showError" ,true);
+            return "login";
+        }
     }
 
     @PostMapping("/loggedIn")
@@ -50,9 +65,11 @@ public class WebUserConroller {
         if (userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())) {
             System.out.println(userToLogin.getLogin());
             System.out.println(userToLogin.getPassword());
+            model.addAttribute("showError" ,false);
             return "loggedIn";
         } else {
-            return "NOTloggedIn";
+            model.addAttribute("showError" ,true);
+            return "login";
         }
     }
 

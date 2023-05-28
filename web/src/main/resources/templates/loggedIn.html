@@ -8,9 +8,8 @@
 </head>
 <body>
 <div class="col-xs-1" align="center">
-    <p th:text="'You have been logged in as: ' + ${userController.getLoggedUserEmail()}"></p>
+    <h1 th:text="'You have been logged in as: ' + ${userController.getLoggedUserEmail()}"></h1>
 
-    <a href="/api/user" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Back to user menu</a>
     <a href="/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Back to menu</a>
 </div>
 </body>
