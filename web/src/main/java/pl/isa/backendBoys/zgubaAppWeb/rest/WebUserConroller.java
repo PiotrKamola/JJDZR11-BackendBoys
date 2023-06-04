@@ -18,40 +18,54 @@ public class WebUserConroller {
     UserController userController;
 
     @GetMapping("")
-    public String userMenu() {
+    public String userMenu(Model model) {
+        model.addAttribute(userController);
         return "userMenu";
     }
 
     @GetMapping("/register")
     public String registerUser(Model model) {
         model.addAttribute("userToAdd", new User());
+        model.addAttribute("showError" ,false);
         return "register";
     }
 
-    @PostMapping("/addedNewUser")
-    public String addNewUser(Model model, @ModelAttribute User userToAdd) {
-        userController.registerUser(userToAdd);
-        model.addAttribute(userToAdd);
-        userToAdd.nicePrint();
-        return "addedNewUser";
+    @PostMapping("/register")
+    public String registerWrongUser(Model model, @ModelAttribute User userToAdd) {
+        model.addAttribute("userToAdd", new User());
+        if(userController.isLoginTaken(userToAdd.getLoginEmail())){
+            model.addAttribute("showError" ,true);
+            return "register";
+        }else{
+            model.addAttribute("showError" ,false);
+            userController.registerUser(userToAdd);
+            return "addedNewUser";
+        }
     }
 
     @GetMapping("/login")
     public String loginUser(Model model, @ModelAttribute UserToLogin userToLogin) {
         model.addAttribute(userToLogin);
+        model.addAttribute("showError" ,false);
         return "login";
     }
 
-    @PostMapping("/loggedIn")
-    public String loggedIn(Model model, @ModelAttribute UserToLogin userToLogin) {
+    @PostMapping("/login")
+    public String logegdUser(Model model, @ModelAttribute UserToLogin userToLogin) {
         model.addAttribute(userToLogin);
+        model.addAttribute(userController);
         if (userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())) {
-            System.out.println(userToLogin.getLogin());
-            System.out.println(userToLogin.getPassword());
             return "loggedIn";
         } else {
-            return "NOTloggedIn";
+            model.addAttribute("showError" ,true);
+            return "login";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        userController.logout();
+        return "logout";
     }
 
 }
