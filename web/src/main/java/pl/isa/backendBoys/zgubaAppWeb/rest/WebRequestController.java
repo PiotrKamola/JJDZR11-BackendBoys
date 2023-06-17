@@ -35,10 +35,10 @@ public class WebRequestController {
         return "main";
     }
 
-
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {
-        return "submittedRequest";
+        model.addAttribute("content", "submittedRequest");
+        return "main";
     }
 
     @PostMapping("/submitted")
@@ -47,14 +47,16 @@ public class WebRequestController {
         requestToAdd.setRequesterLogin(userController.getLoggedUserEmail());
         requestController.addRequest(requestToAdd);
         requestToAdd.nicePrint();
-        return "submittedRequest";
+        model.addAttribute("content", "submittedRequest");
+        return "main";
     }
 
     @GetMapping("/add")
     public String addRequest(Model model) {
         model.addAttribute("requestToAdd", new Request());
         model.addAttribute("enum", Request.LostOrFound.class.getName());
-        return "addRequest";
+        model.addAttribute("content", "addRequest");
+        return "main";
     }
 
 
@@ -70,7 +72,8 @@ public class WebRequestController {
         }
 
         model.addAttribute("allRequests", searchList);
+        model.addAttribute("content", "allRequests");
+        return "main";
 
-        return "allRequests";
     }
 }
