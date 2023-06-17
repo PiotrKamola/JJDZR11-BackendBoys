@@ -1,24 +1,53 @@
-<div th:fragment="content"  class="col-xs-1 py-2 mb-0 text-center">
-    <h1>Register</h1>
-    <form th:action="@{/api/user/register}" th:object="${userToAdd}" method="post">
-        <p>Name: <input title="3-20 chars" type="text" pattern=".{3,20}" required onfocusout="this.value = this.value.trim()" th:field="*{name}"></p>
+<div th:fragment="content"  class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center" style="color: #074dcf;">Rejestracja</h2>
+            <form th:action="@{/user/register}" th:object="${userToAdd}" method="post">
+                <div class="form-group mt-3">
+                    <label for="name">Imię:</label>
+                    <input type="text" title="Minimum 2 litery, maksymalnie 30" pattern=".{2,30}"
+                           class="form-control border-2" id="name" name="name" required
+                           onfocusout="this.value = this.value.trim()" th:field="*{name}">
+                </div>
 
-        <p>Email: <input title="email format is needed" type="text" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required onfocusout="this.value = this.value.trim()" th:field="*{loginEmail}"></p>
+                <div class="form-group mt-3">
+                    <label for="email">E-mail:</label>
+                    <input type="email" class="form-control border-2" id="email" name="email" required
+                           onfocusout="this.value = this.value.trim()" th:field="*{loginEmail}">
+                </div>
 
-        <p>Password: <input type="password" required onfocusout="this.value = this.value.trim()" th:field="*{password}"></p>
+                <div class="form-group mt-3">
+                    <label for="password">Hasło:</label>
+                    <input type="password" class="form-control border-2" id="password" name="password" required
+                           th:field="*{password}">
+                </div>
 
-        <p>City: <input type="text" title="3-20 chars" pattern=".{3,20}" required onfocusout="this.value = this.value.trim()" th:field="*{city}"></p>
+                <div class="form-group mt-3">
+                    <label for="city">Miasto:</label>
+                    <input type="text" title="Minimum 2 litery, maksymalnie 30" pattern=".{2,30}"
+                           class="form-control border-2" id="city" name="city" required
+                           onfocusout="this.value = this.value.trim()" th:field="*{city}">
+                </div>
 
-        <p>Contact number: <input type="text" title="only 9 numbers" pattern="[0-9]{9}" required onfocusout="this.value = this.value.trim()" th:field="*{contactNumber}"></p>
+                <div class="form-group mt-3">
+                    <label for="phone">Numer telefonu:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone"
+                           title="Proszę wpisać 9 cyfr bez oddzielania spacjami, ani myślnikami."
+                           pattern="[0-9]{9}" required onfocusout="this.value = this.value.trim()"
+                           th:field="*{contactNumber}">
+                </div>
 
-        <br>
-        <div><input type="submit" th:value="Submit"></div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-dark py-2 p-5">Zarejestruj</button>
+                </div>
+            </form>
 
-        <div class="d-flex justify-content-center">
-            <span th:if="${showError == true}">
-                <p> Something went wrong, try again. </p>
-            </span>
+            <div class="justify-content-center mt-4 p-2 bg-danger text-white text-center text-wrap"
+                 th:if="${showError == true}">
+                <p class="text-cemter mt-2">
+                    Wybrany użytkownik jest już zarejestrowany. Uzupełnij ponownie innymi danymi.</p>
+            </div>
+
         </div>
-
-    </form>
+    </div>
 </div>

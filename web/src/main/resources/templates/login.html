@@ -1,16 +1,16 @@
 <!--<div th:fragment="content" class="container mt-5 row justify-content-center">-->
-<div th:fragment="content" class="col-xs-1 py-2 mb-0 text-center d-flex justify-content-center">
+<div th:fragment="content" class="col-xs-1 py-2 mb-0 mt-5 text-center d-flex justify-content-center">
     <div class="col-md-3">
         <h2 class="text-center" style="color: #074dcf;">Logowanie</h2>
         <form th:action="@{/user/login}" th:object="${userToLogin}" method="post">
             <div class="form-group mt-3 ">
                 <label class="d-flex justify-content-start" for="email">Login (e-mail):</label>
-                <input type="email" class="form-control" id="email" name="email" required th:field="*{login}">
+                <input type="email" class="form-control border-2" id="email" name="email" required th:field="*{login}">
             </div>
 
             <div class="form-group mt-3">
                 <label class="d-flex justify-content-start" for="password">Hasło:</label>
-                <input type="password" class="form-control border border-2" id="password" name="password" required
+                <input type="password" class="form-control border-2" id="password" name="password" required
                        th:field="*{password}">
             </div>
             <div class="justify-content-center mt-3 text-center">

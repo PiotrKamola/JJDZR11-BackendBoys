@@ -16,37 +16,43 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h2 class="text-center">Rejestracja</h2>
-            <form action="/register" method="post">
+            <h2 class="text-center" style="color: #074dcf;">Rejestracja</h2>
+            <form th:action="@{/api/user/register}" th:object="${userToAdd}" method="post">
                 <div class="form-group">
                     <label for="name">Imię:</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" pattern=".{3,20}" class="form-control" id="name" name="name" required onfocusout="this.value = this.value.trim()" th:field="*{name}">
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail:</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" required th:field="*{loginEmail}">
                 </div>
 
                 <div class="form-group">
                     <label for="password">Hasło:</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password" required th:field="*{password}">
                 </div>
 
                 <div class="form-group">
                     <label for="city">Miasto:</label>
-                    <input type="text" class="form-control" id="city" name="city" required>
+                    <input type="text" class="form-control" id="city" name="city" required th:field="*{city}">
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Numer telefonu:</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                    <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{9}" required th:field="*{contactNumber}">
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Zarejestruj</button>
+                    <button type="submit" class="btn btn-dark py-2 p-5">Zarejestruj</button>
                 </div>
             </form>
+
+            <div class="justify-content-center mt-4 p-2 bg-danger text-white text-center text-wrap"
+                 th:if="${showError == true}">
+                <p class="text-cemter mt-2"> Wybrany użytkownik jest już zarejestrowany. Zmień dane i spróbuj ponownie.</p>
+            </div>
+
         </div>
     </div>
 </div>
