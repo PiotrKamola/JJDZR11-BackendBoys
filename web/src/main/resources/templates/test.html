@@ -1,60 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head th:fragment="head">
-    <meta charset="UTF-8">
-    <link rel="icon" th:href="@{/img/search_icon.png}" sizes="48x48"/>
-    <title>Zguba</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/6a57aae0fb.js" crossorigin="anonymous"></script>
-</head>
-<body>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h2 class="text-center" style="color: #074dcf;">Rejestracja</h2>
-            <form th:action="@{/api/user/register}" th:object="${userToAdd}" method="post">
+            <h2 class="text-center">Zgłaszanie zguby</h2>
+            <form action="/submit" method="post">
                 <div class="form-group">
-                    <label for="name">Imię:</label>
-                    <input type="text" pattern=".{3,20}" class="form-control" id="name" name="name" required onfocusout="this.value = this.value.trim()" th:field="*{name}">
+                    <label for="name">Nazwa:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">E-mail:</label>
-                    <input type="email" class="form-control" id="email" name="email" required th:field="*{loginEmail}">
+                    <label for="description">Opis:</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Hasło:</label>
-                    <input type="password" class="form-control" id="password" name="password" required th:field="*{password}">
+                    <label for="status">Status:</label>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="zgubiono">Zgubiono</option>
+                        <option value="znaleziono">Znaleziono</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Data zgubienia:</label>
+                    <input type="date" class="form-control" id="date" name="date" max="2023-06-17" required>
                 </div>
 
                 <div class="form-group">
                     <label for="city">Miasto:</label>
-                    <input type="text" class="form-control" id="city" name="city" required th:field="*{city}">
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Numer telefonu:</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{9}" required th:field="*{contactNumber}">
+                    <input type="text" class="form-control" id="city" name="city" required>
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-dark py-2 p-5">Zarejestruj</button>
+                    <button type="submit" class="btn btn-primary">Zgłoś</button>
                 </div>
             </form>
-
-            <div class="justify-content-center mt-4 p-2 bg-danger text-white text-center text-wrap"
-                 th:if="${showError == true}">
-                <p class="text-cemter mt-2"> Wybrany użytkownik jest już zarejestrowany. Zmień dane i spróbuj ponownie.</p>
-            </div>
-
         </div>
     </div>
 </div>
-</body>
-</html>
