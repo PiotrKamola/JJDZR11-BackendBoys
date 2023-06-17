@@ -11,6 +11,8 @@ import pl.isa.backendBoys.zgubaAppWeb.request.RequestController;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchController;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserController;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("request")
 public class WebRequestController {
@@ -61,19 +63,20 @@ public class WebRequestController {
     }
 
 
-//    @PostMapping("/search")
-//    public String search(Model model, @ModelAttribute SearchHelp searchWord) {
-//        model.addAttribute(searchWord);
-//
-//        List<Request> searchList = searchController.searchByWord(requestController.getAllRequests(), searchWord.getSearchWord());
-//        for (Request req : searchList) {
-//            req.nicePrint();
-//            System.out.println("---");
-//        }
-//
-//        model.addAttribute("allRequests", searchList);
-//        model.addAttribute("content", "allRequests");
-//        return "main";
-//
-//    }
+    @PostMapping("/search")
+    public String search(Model model, @ModelAttribute SearchHelp searchWord) {
+        model.addAttribute(searchWord);
+        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        List<Request> searchList = searchController.searchByWord(requestController.getAllRequests(), searchWord.getSearchWord());
+        for (Request req : searchList) {
+            req.nicePrint();
+            System.out.println("---");
+        }
+
+
+        model.addAttribute("allRequests", searchList);
+        model.addAttribute("content", "allRequests");
+        return "main";
+
+    }
 }

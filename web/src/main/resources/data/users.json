@@ -21,7 +21,7 @@
     "contactNumber": "333-333-333"
   },
   {
-    "loginEmail": "Peter@wp.pl",
+    "loginEmail": "peter@wp.pl",
     "password": "peter",
     "name": "Peter",
     "city": "Szczecin",
@@ -33,12 +33,5 @@
     "name": "Andrzej",
     "city": "Radom",
     "contactNumber": "123123"
-  },
-  {
-    "loginEmail": "aaa",
-    "password": "aaa",
-    "name": "aaa",
-    "city": "aaa",
-    "contactNumber": "111111111"
   }
 ]
