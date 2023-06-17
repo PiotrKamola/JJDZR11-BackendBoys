@@ -29,6 +29,7 @@ public class WebRequestController {
 
     @GetMapping("/all")
     public String allRequests(Model model) {
+        model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("allRequests", requestController.getAllRequests());
         model.addAttribute("loggedUser", userController.getLoggedUserEmail());
         model.addAttribute("content", "allRequests");
@@ -37,6 +38,7 @@ public class WebRequestController {
 
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {
+        model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("loggedUser", userController.getLoggedUserEmail());
         model.addAttribute("content", "submittedRequest");
         return "main";
@@ -44,6 +46,7 @@ public class WebRequestController {
 
     @PostMapping("/submitted")
     public String addNewRequest(Model model, @ModelAttribute Request requestToAdd) {
+        model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(requestToAdd);
         model.addAttribute("loggedUser", userController.getLoggedUserEmail());
         requestToAdd.setRequesterLogin(userController.getLoggedUserEmail());
@@ -55,6 +58,7 @@ public class WebRequestController {
 
     @GetMapping("/add")
     public String addRequest(Model model) {
+        model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("requestToAdd", new Request());
         model.addAttribute("loggedUser", userController.getLoggedUserEmail());
         model.addAttribute("enum", Request.LostOrFound.class.getName());
@@ -73,8 +77,10 @@ public class WebRequestController {
             System.out.println("---");
         }
 
-
         model.addAttribute("allRequests", searchList);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("String", searchWord.getSearchWord());
+        model.addAttribute("Integer", searchList.size());
         model.addAttribute("content", "allRequests");
         return "main";
 

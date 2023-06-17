@@ -1,6 +1,7 @@
 
 body {
     font-family: "San Francisco", Arial, sans-serif;
+    background-color: #f8f8ff;
 }
 
 
@@ -31,7 +32,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("../img/background.jpg") no-repeat center center;
+    /*background: url("../img/abc.jpg");*/
+    /*background: url("../img/background.jpg") no-repeat center center;*/
     background-size: cover;
 }
 
@@ -98,8 +100,8 @@ body {
 .tech-section {
     background-image: url("../img/Mock.png");
     background-size: 500px;
-    background-position: center;
-    background-position: -100px;
+    /*background-position: center;*/
+    /*background-position: -100px;*/
     background-repeat: no-repeat;
 }
 
@@ -111,9 +113,9 @@ body {
     color: blue;
 }
 
-.footer-section {
-    background-color: none;
-}
+/*.footer-section {*/
+/*    background-color: none;*/
+/*}*/
 
 .fixed-top {
     position: fixed;
@@ -162,7 +164,9 @@ img {
     font-weight: bold;
 }
 
-
+.placeholder-sm::placeholder {
+    font-size: 12px; /* dostosuj rozmiar czcionki według potrzeb */
+}
 
 /*body {*/
 /*    background-color: #dfeaf3;*/

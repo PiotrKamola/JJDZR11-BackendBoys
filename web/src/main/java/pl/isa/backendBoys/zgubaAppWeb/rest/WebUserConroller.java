@@ -23,6 +23,7 @@ public class WebUserConroller {
 
     @GetMapping("/login")
     public String loginUser(Model model, @ModelAttribute UserToLogin userToLogin) {
+        model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(userToLogin);
         model.addAttribute("showError" ,false);
         model.addAttribute("content", "login");
@@ -31,6 +32,7 @@ public class WebUserConroller {
 
     @PostMapping("/login")
     public String logegdUser(Model model, @ModelAttribute UserToLogin userToLogin) {
+        model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(userToLogin);
         model.addAttribute(userController);
         if (userController.loginUser(userToLogin.getLogin(), userToLogin.getPassword())) {
@@ -46,6 +48,7 @@ public class WebUserConroller {
 
     @GetMapping("/logout")
     public String logout(Model model){
+        model.addAttribute("searchWord", new SearchHelp());
         userController.logout();
         model.addAttribute("content", "logout");
         return "main";
@@ -53,6 +56,7 @@ public class WebUserConroller {
 
     @GetMapping("/register")
     public String registerUser(Model model) {
+        model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("userToAdd", new User());
         model.addAttribute("showError" ,false);
         model.addAttribute("content", "register");
@@ -61,6 +65,7 @@ public class WebUserConroller {
 
     @PostMapping("/register")
     public String registerWrongUser(Model model, @ModelAttribute User userToAdd) {
+        model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("userToAdd", new User());
         if(userController.isLoginTaken(userToAdd.getLoginEmail())){
             model.addAttribute("showError" ,true);
@@ -74,6 +79,4 @@ public class WebUserConroller {
             return "main";
         }
     }
-
-
 }

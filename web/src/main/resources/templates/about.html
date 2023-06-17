@@ -1,204 +1,147 @@
-<!DOCTYPE html>
-<html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Zguba - O Nas</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="page-wrapper">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="main.html">Zguba</a>
+<div th:fragment="content" class="page-wrapper" style="padding-top: 0;">
 
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#about">O Nas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#beginnings">Początki</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#benefits">Zalety aplikacji</a>
-              </li>
-            </ul>
-          </div>
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title text-center">O Nas</h2>
+            <div class="img-wrapper">
+                  <img th:src="@{/img/group.png}" class="icon"/>
+            </div>
+            <p class="section-content">
+                Zguba to platforma, która pomaga w odnajdywaniu zgubionych
+                przedmiotów. Nasza misja to ułatwienie procesu odzyskiwania
+                zgubionych rzeczy i zwracanie ich do prawowitych właścicieli. Dołącz
+                do naszej społeczności i pomóż nam w tworzeniu świata, gdzie żadne
+                zgubione przedmioty nie zostaną bez właściciela.
+            </p>
+
         </div>
-      </nav>
-
-      <section id="about" class="about-section">
+    </section>
+    <hr/>
+    <section id="beginnings" class="authors-section">
         <div class="container">
-          <h2 class="section-title text-center">O Nas</h2>
-          <div class="img-wrapper">
-            <img src="group.png" class="icon" />
-          </div>
-          <p class="section-content">
-            Zguba to platforma, która pomaga w odnajdywaniu zgubionych
-            przedmiotów. Nasza misja to ułatwienie procesu odzyskiwania
-            zgubionych rzeczy i zwracanie ich do prawowitych właścicieli. Dołącz
-            do naszej społeczności i pomóż nam w tworzeniu świata, gdzie żadne
-            zgubione przedmioty nie zostaną bez właściciela.
-          </p>
-         
+            <h2 class="section-title text-center">Początki</h2>
+            <div class="img-wrapper">
+                <img th:src="@{/img/begin.jpg}"/>
+            </div>
+            <p class="section-content">
+                Strona "Zguba" została stworzona w celu rozwiązania problemu
+                zgubionych przedmiotów i pomocy w ich odnalezieniu. Pomysł na tę
+                aplikację powstał w 2020 roku, gdy założyciele, Jan Kowalski i Anna
+                Nowak, sami doświadczyli frustracji związanej z utratą cennych
+                przedmiotów.
+            </p>
+
+            <p class="section-content">
+                Jan Kowalski, doświadczony programista, zauważył, że istnieje
+                potrzeba stworzenia łatwego w obsłudze systemu, który pozwoliłby
+                użytkownikom zgłaszać zgubione przedmioty, a także umożliwiłby
+                odnalezienie tych przedmiotów przez innych użytkowników. Anna Nowak,
+                która miała doświadczenie w zarządzaniu projektami IT, zobaczyła
+                potencjał tego pomysłu i dołączyła do zespołu jako menedżer
+                projektu.
+            </p>
+
+            <p class="section-content">
+                Razem postanowili stworzyć aplikację "Zguba", która
+                umożliwiałaby użytkownikom łatwe zgłaszanie zgubionych przedmiotów,
+                a także pomagała w ich odnajdywaniu przez społeczność. Zespół skupił
+                się na wykorzystaniu technologii webowych, takich jak Java, Spring
+                Boot, MySQL, Bootstrap, HTML5 i CSS3, aby zapewnić użytkownikom
+                przyjazne i intuicyjne doświadczenie.
+            </p>
+
+            <p class="section-content">
+                W trakcie procesu tworzenia aplikacji, zespół skupił się na
+                zapewnieniu funkcjonalności, takich jak rejestracja użytkowników,
+                zgłaszanie zgubionych przedmiotów, przeglądanie zgłoszeń,
+                kontaktowanie się z właścicielami odnalezionych przedmiotów i wiele
+                innych. Starali się również zapewnić bezpieczeństwo i prywatność
+                użytkowników, wprowadzając odpowiednie mechanizmy uwierzytelniania i
+                zabezpieczenia danych.
+            </p>
+
+            <p class="section-content">
+                Po wielu miesiącach ciężkiej pracy, aplikacja "Zguba" została
+                wreszcie uruchomiona i udostępniona dla użytkowników. Dzięki jej
+                funkcjonalności i użyteczności, użytkownicy zyskali łatwiejszy i
+                bardziej skuteczny sposób na odnalezienie zgubionych przedmiotów.
+            </p>
+
+            <p class="section-content">
+                Od momentu uruchomienia, aplikacja "Zguba" zdobyła
+                popularność i zyskała zaufanie użytkowników. Zespół nadal pracuje
+                nad rozwojem i ulepszaniem aplikacji, aby zapewnić jeszcze lepsze
+                doświadczenie użytkownikom i rozszerzyć funkcjonalność, aby pomagać
+                coraz większej liczbie osób w odnajdywaniu ich zgubionych
+                przedmiotów.
+            </p>
+
+            <p class="section-content">
+                Dzięki pasji i determinacji założycieli oraz wsparciu społeczności,
+                aplikacja "Zguba" kontynuuje swoją misję pomagania w
+                odzyskiwaniu zgubionych przedmiotów i zwracaniu ich do właścicieli.
+            </p>
         </div>
-      </section>
-      <hr />
-      <section id="beginnings" class="authors-section">
+    </section>
+    <hr/>
+    <section id="benefits" class="authors-section">
         <div class="container">
-          <h2 class="section-title text-center">Początki</h2>
-          <div class="img-wrapper">
-            <img src="begin.jpg" />
-          </div>
-          <p class="section-content">
-            Strona "Zguba" została stworzona w celu rozwiązania problemu
-            zgubionych przedmiotów i pomocy w ich odnalezieniu. Pomysł na tę
-            aplikację powstał w 2020 roku, gdy założyciele, Jan Kowalski i Anna
-            Nowak, sami doświadczyli frustracji związanej z utratą cennych
-            przedmiotów.
-          </p>
-
-          <p class="section-content">
-            Jan Kowalski, doświadczony programista, zauważył, że istnieje
-            potrzeba stworzenia łatwego w obsłudze systemu, który pozwoliłby
-            użytkownikom zgłaszać zgubione przedmioty, a także umożliwiłby
-            odnalezienie tych przedmiotów przez innych użytkowników. Anna Nowak,
-            która miała doświadczenie w zarządzaniu projektami IT, zobaczyła
-            potencjał tego pomysłu i dołączyła do zespołu jako menedżer
-            projektu.
-          </p>
-
-          <p class="section-content">
-            Razem postanowili stworzyć aplikację "Zguba", która
-            umożliwiałaby użytkownikom łatwe zgłaszanie zgubionych przedmiotów,
-            a także pomagała w ich odnajdywaniu przez społeczność. Zespół skupił
-            się na wykorzystaniu technologii webowych, takich jak Java, Spring
-            Boot, MySQL, Bootstrap, HTML5 i CSS3, aby zapewnić użytkownikom
-            przyjazne i intuicyjne doświadczenie.
-          </p>
-
-          <p class="section-content">
-            W trakcie procesu tworzenia aplikacji, zespół skupił się na
-            zapewnieniu funkcjonalności, takich jak rejestracja użytkowników,
-            zgłaszanie zgubionych przedmiotów, przeglądanie zgłoszeń,
-            kontaktowanie się z właścicielami odnalezionych przedmiotów i wiele
-            innych. Starali się również zapewnić bezpieczeństwo i prywatność
-            użytkowników, wprowadzając odpowiednie mechanizmy uwierzytelniania i
-            zabezpieczenia danych.
-          </p>
-
-          <p class="section-content">
-            Po wielu miesiącach ciężkiej pracy, aplikacja "Zguba" została
-            wreszcie uruchomiona i udostępniona dla użytkowników. Dzięki jej
-            funkcjonalności i użyteczności, użytkownicy zyskali łatwiejszy i
-            bardziej skuteczny sposób na odnalezienie zgubionych przedmiotów.
-          </p>
-
-          <p class="section-content">
-            Od momentu uruchomienia, aplikacja "Zguba" zdobyła
-            popularność i zyskała zaufanie użytkowników. Zespół nadal pracuje
-            nad rozwojem i ulepszaniem aplikacji, aby zapewnić jeszcze lepsze
-            doświadczenie użytkownikom i rozszerzyć funkcjonalność, aby pomagać
-            coraz większej liczbie osób w odnajdywaniu ich zgubionych
-            przedmiotów.
-          </p>
-
-          <p class="section-content">
-            Dzięki pasji i determinacji założycieli oraz wsparciu społeczności,
-            aplikacja "Zguba" kontynuuje swoją misję pomagania w
-            odzyskiwaniu zgubionych przedmiotów i zwracaniu ich do właścicieli.
-          </p>
-        </div>
-      </section>
-      <hr />
-      <section id="benefits" class="authors-section">
-        <div class="container">
-          <h2 class="section-title text-center">Zalety aplikacji</h2>
-          <div class="img-wrapper">
-            <img src="lost-and-found.png" class="icon" />
-          </div>
-          <p class="section-content">
-            <p class="text-strong">Odnajdywanie zgubionych przedmiotów przez społeczność:<br /></p>
+            <h2 class="section-title text-center">Zalety aplikacji</h2>
+            <div class="img-wrapper">
+                <img th:src="@{/img/lost-and-found.png}" class="icon"/>
+            </div>
+            <p class="section-content">
+            <p class="text-strong">Odnajdywanie zgubionych przedmiotów przez społeczność:<br/></p>
             Aplikacja angażuje społeczność, umożliwiając jej przeglądanie
             zgłoszeń i odnajdywanie zgubionych przedmiotów. Dzięki temu, szansa
             na odzyskanie zgubionego przedmiotu wzrasta, ponieważ większa liczba
             osób może pomóc w jego odnalezieniu.
-          </p>
+            </p>
 
-          <p class="section-content">
-            <p class="text-strong">Bezpieczne przechowywanie informacji:<br /></p>
+            <p class="section-content">
+            <p class="text-strong">Bezpieczne przechowywanie informacji:<br/></p>
             Aplikacja dba o bezpieczeństwo danych użytkowników. Zastosowane są
             odpowiednie mechanizmy uwierzytelniania i zabezpieczenia danych, aby
             zapewnić poufność i ochronę prywatności.
-          </p>
+            </p>
 
-          <p class="section-content">
-            <p class="text-strong">Możliwość przeglądania zgłoszeń:<br /></p>
+            <p class="section-content">
+            <p class="text-strong">Możliwość przeglądania zgłoszeń:<br/></p>
             Użytkownicy mają możliwość przeglądania zgłoszeń innych osób w celu
             sprawdzenia, czy znaleziono ich zgubione przedmioty. To zwiększa
             szanse na odzyskanie przedmiotów.
-          </p>
+            </p>
 
-          <p class="section-content">
-            <p class="text-strong">Wygodny dostęp za pomocą różnych urządzeń:<br /></p>
+            <p class="section-content">
+            <p class="text-strong">Wygodny dostęp za pomocą różnych urządzeń:<br/></p>
             Aplikacja jest dostępna na różnych urządzeniach, takich jak
             komputery, smartfony i tablety. Użytkownicy mogą korzystać z
             aplikacji w dowolnym miejscu i czasie, co sprawia, że jest ona
             wygodna i łatwa do użycia.
-          </p>
+            </p>
 
-          <p class="section-content">
-            <p class="text-strong">Łatwość zgłaszania zgubionych przedmiotów:<br /></p>
+            <p class="section-content">
+            <p class="text-strong">Łatwość zgłaszania zgubionych przedmiotów:<br/></p>
             Aplikacja umożliwia użytkownikom szybkie i proste zgłaszanie
             zgubionych przedmiotów. Dzięki intuicyjnemu interfejsowi
             użytkownika, proces zgłaszania jest wygodny i niezawodny.
-          </p>
+            </p>
 
-          <p class="section-content">
-            <p class="text-strong">Społeczność wsparcia:<br /></p>
+            <p class="section-content">
+            <p class="text-strong">Społeczność wsparcia:<br/></p>
             Aplikacja tworzy społeczność osób, które chcą pomagać w odnajdywaniu
             zgubionych przedmiotów. Można nawiązać kontakty i uzyskać wsparcie
             od innych użytkowników.
-          </p>
+            </p>
 
-          <p class="section-content">
-            <p class="text-strong">Możliwość rozwoju i rozszerzania funkcjonalności:<br /></p>
+            <p class="section-content">
+            <p class="text-strong">Możliwość rozwoju i rozszerzania funkcjonalności:<br/></p>
             Aplikacja "Zguba" nadal się rozwija i można wprowadzać nowe
             funkcje, aby jeszcze lepiej służyć użytkownikom. Istnieje możliwość
             wprowadzania ulepszeń i rozszerzania zakresu usług w odpowiedzi na
             potrzeby społeczności.
-          </p>
+            </p>
         </div>
-      </section>
+    </section>
 
-      <footer class="footer-section">
-        <div class="container text-center">
-          <p>&copy; 2023 Zguba. Wszelkie prawa zastrzeżone.</p>
-        </div>
-      </footer>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  </body>
-</html>
+</div>

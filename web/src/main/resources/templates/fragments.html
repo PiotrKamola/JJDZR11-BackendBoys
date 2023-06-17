@@ -30,11 +30,18 @@
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div>
+            <form class="form-inline"  th:action="@{/request/search}" th:object="${searchWord}" method="post">
+                <input type="search" placeholder="Co zgubiłeś / znalazłeś?" class="text-center placeholder-sm" aria-label="Search"  required th:field="*{searchWord}">
+                <button class="btn btn-outline-light btn-sm p-1" type="submit" th:value="Szukaj" >Szukaj</button>
+            </form>
+        </div>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
                 <a class="nav-link px-lg-2" th:classappend="${content == 'index'} ? 'active'" th:href="@{/}">Strona
                     główna</a>
-                <a class="nav-link px-lg-2" th:classappend="${content == 'allRequests'} ? 'active'"
+                <a class="nav-link px-lg-2" th:classappend="${content == 'about'} ? 'active'" th:href="@{/about}">Czym jest Zguba?</a>
+                 <a class="nav-link px-lg-2" th:classappend="${content == 'allRequests'} ? 'active'"
                    th:href="@{/request/all}">Przeglądaj zguby</a>
                 <span th:if="${loggedUser != null}">
                         <a class="nav-link px-lg-2"

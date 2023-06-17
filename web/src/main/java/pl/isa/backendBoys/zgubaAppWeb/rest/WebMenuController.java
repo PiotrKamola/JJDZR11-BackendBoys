@@ -25,4 +25,15 @@ public class WebMenuController {
         model.addAttribute("content", "index");
         return "main";
     }
+
+    @GetMapping("/about")
+    public String aboutZguba(Model model) {
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        model.addAttribute("content", "about");
+        return "main";
+    }
+
+
+
 }

@@ -1,10 +1,19 @@
 <div th:fragment="content" class="container mt-5 mb-5 ">
-<!--container-fluid row justify-content-center">-->
+
     <div>
         <h2 class="text-center" style="color: #074dcf;">Zgłoszenia</h2>
     </div>
 
-    <table class="table table-striped mt-5">
+    <div class="alert alert-info mb-3 p-1" role="alert" th:if="${String != null}">
+        <div>
+            <p class="ps-3 mb-0">Lista została pofiltrowana po słowie: ''<strong th:text="${String}"></strong>''</p>
+            <p class="ps-3 mb-0">Znalezionio pozycji:  <strong th:text="${Integer}"></strong>
+                <a th:href="@{/request/all}" class="btn btn-secondary btn-sm py-0 mx-2"> Pokaż wszystkie </a>
+            </p>
+        </div>
+    </div>
+
+    <table class="table table-striped mt-1">
         <thead class="table-dark text-center">
         <tr>
             <th class="text-center">Rodzaj zgłoszenia</th>
@@ -29,9 +38,4 @@
         </tbody>
     </table>
 
-
-    <!--    <div class="col-xs-1" align="center">-->
-    <!--        <a href="/request/add" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Add request</a>-->
-    <!--        <a href="/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Back to menu</a>-->
-    <!--    </div>-->
 </div>

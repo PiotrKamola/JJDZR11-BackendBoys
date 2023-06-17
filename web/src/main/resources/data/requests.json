@@ -70,13 +70,5 @@
     "lostOrFound": "Lost",
     "requestDate": "16/04/2023",
     "city": "Radom"
-  },
-    {
-    "requesterLogin": "john@wp.pl",
-    "objectName": "asdadas",
-    "description": "asdasdsadas",
-    "lostOrFound": "Lost",
-    "requestDate": "2023-06-15",
-    "city": "Bialystok"
   }
 ]
