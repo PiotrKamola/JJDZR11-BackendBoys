@@ -18,6 +18,6 @@ public class WebMenuController {
     public String menu(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(userController);
-        return "menu";
+        return "main";
     }
 }
