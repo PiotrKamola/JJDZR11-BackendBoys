@@ -9,7 +9,7 @@
 <body>
 <div class="col-xs-1" align="center">
     <h1>Register</h1>
-    <form th:action="@{/api/user/register}" th:object="${userToAdd}" method="post">
+    <form th:action="@{/user/register}" th:object="${userToAdd}" method="post">
         <p>Name: <input title="3-20 chars" type="text" pattern=".{3,20}" required onfocusout="this.value = this.value.trim()" th:field="*{name}"></p>
 
         <p>Email: <input title="email format is needed" type="text" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required onfocusout="this.value = this.value.trim()" th:field="*{loginEmail}"></p>

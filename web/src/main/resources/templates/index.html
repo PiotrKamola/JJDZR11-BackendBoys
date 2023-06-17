@@ -1,6 +1,6 @@
 <div th:fragment="content"  class="col-xs-1 py-2 mb-0 text-center">
     <h2 style="color: #074dcf;">Szukaj zguby</h2>
-    <form th:action="@{/api/request/search}" th:object="${searchWord}" method="post">
+    <form th:action="@{/request/search}" th:object="${searchWord}" method="post">
         <p style="display: inline;">Wpisz szukaną frazę: <input name="searchWord" type="text" th:field="*{searchWord}"></p>
         <input type="submit" th:value="Znajdź" style="background-color: black; color: white;">
     </form>

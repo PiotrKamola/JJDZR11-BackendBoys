@@ -15,7 +15,7 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserController;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/request")
+@RequestMapping("request")
 public class WebRequestController {
 
     final RequestController requestController = new RequestController();
@@ -27,6 +27,14 @@ public class WebRequestController {
     public WebRequestController(UserController userController) {
         this.userController = userController;
     }
+
+    @GetMapping("/all")
+    public String allRequests(Model model) {
+        model.addAttribute("allRequests", requestController.getAllRequests());
+        model.addAttribute("content", "allRequests");
+        return "main";
+    }
+
 
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {
@@ -49,11 +57,7 @@ public class WebRequestController {
         return "addRequest";
     }
 
-    @GetMapping("/all")
-    public String allRequests(Model model) {
-        model.addAttribute("allRequests", requestController.getAllRequests());
-        return "allRequests";
-    }
+
 
     @PostMapping("/search")
     public String search(Model model, @ModelAttribute SearchHelp searchWord) {
