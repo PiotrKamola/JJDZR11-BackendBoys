@@ -11,13 +11,18 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserController;
 @RequestMapping("")
 public class WebMenuController {
 
-    @Autowired
+    final
     UserController userController;
+
+    public WebMenuController(UserController userController) {
+        this.userController = userController;
+    }
 
     @GetMapping("")
     public String menu(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute(userController);
+        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        model.addAttribute("content", "index");
         return "main";
     }
 }

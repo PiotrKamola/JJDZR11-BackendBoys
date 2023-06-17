@@ -21,8 +21,12 @@ public class WebRequestController {
     final RequestController requestController = new RequestController();
     final SearchController searchController = new SearchController();
 
-    @Autowired
+    final
     UserController userController;
+
+    public WebRequestController(UserController userController) {
+        this.userController = userController;
+    }
 
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {

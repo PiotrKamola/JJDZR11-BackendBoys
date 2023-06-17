@@ -14,8 +14,12 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserController;
 @RequestMapping("api/user")
 public class WebUserConroller {
 
-    @Autowired
+    final
     UserController userController;
+
+    public WebUserConroller(UserController userController) {
+        this.userController = userController;
+    }
 
     @GetMapping("")
     public String userMenu(Model model) {
