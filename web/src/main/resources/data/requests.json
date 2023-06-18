@@ -9,8 +9,8 @@
   },
   {
     "requesterLogin": "john@wp.pl",
-    "objectName": "portfel",
-    "description": "znalazlem na parkingu przy lidlu na ulicy xxx",
+    "objectName": "portfel czarny skórzany ze złotym zamkiem, w środku pieniądze",
+    "description": "znalazlem na parkingu przy lidlu na ulicy Knyszyńskiej 12",
     "lostOrFound": "Found",
     "requestDate": "16/04/2023",
     "city": "Gdynia"
@@ -432,3 +432,4 @@
     "city": "Warszawa"
   }
 ]
+

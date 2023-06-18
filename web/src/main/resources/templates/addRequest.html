@@ -1,41 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>AddRequest</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-</head>
-<body>
+<div th:fragment="content" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center" style="color: #074dcf;">Zgłaszanie zguby</h2>
 
-<div class="col-xs-1" align="center">
-    <h1>Add new request</h1>
-    <form th:action="@{/api/request/submitted}" th:object="${requestToAdd}" method="post">
+            <form th:action="@{/request/submitted}" th:object="${requestToAdd}" method="post">
+                <div class="form-group mt-3">
+                    <label for="name">Nazwa:</label>
+                    <input type="text" class="form-control border-2" id="name" name="name" required
+                           onfocusout="this.value = this.value.trim()" th:field="*{objectName}">
+                </div>
 
-        <p> Object Name: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{objectName}"></p>
+                <div class="form-group mt-3">
+                    <label for="description">Opis:</label>
+                    <textarea class="form-control border-2" id="description" name="description" rows="3" required
+                              th:field="*{description}"
+                    ></textarea>
+                </div>
 
-        <p>Description: <input type="text" th:field="*{description}"></p>
+                <div class="form-group mt-3">
+                    <label for="lostOrFound">Status:</label>
 
-        <p> You lost or found it?:
-            <select name="lostOrFound">
-                <option th:each="lostOrFound : ${T(__${enum}__).values()}"
-                        th:value="${lostOrFound}" th:text="${lostOrFound}"></option>
-            </select>
-        </p>
+                    <select class="form-control border-2" name="lostOrFound" id="lostOrFound">
+                        <option th:each="lostOrFound : ${T(__${enum}__).values()}"
+                                th:value="${lostOrFound}" th:text="${lostOrFound}"></option>
+                    </select>
 
-        <p>Date: <input type="date" required th:field="*{requestDate}"></p>
+<!--                    </option>-->
+<!--                        <option value="zgubiono">Zgubiono</option>-->
+<!--                        <option value="znaleziono">Znaleziono</option>-->
+<!--                    </select>-->
+                </div>
 
-        <p>City: <input type="text" required onfocusout="this.value = this.value.trim()" th:field="*{city}"></p>
 
-        <br>
-        <div><input type="submit" th:value="Submit"></div>
-    </form>
+                <div class="form-group mt-3">
+                    <label for="date">Data:</label>
+                    <input type="date" class="form-control border-2" id="date" name="date" max="2023-06-18" required
+                           th:field="*{requestDate}">
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="city">Miasto:</label>
+                    <input type="text" title="Minimum 2 litery, maksymalnie 30" pattern=".{2,30}"
+                           class="form-control border-2" id="city" name="city" required
+                           onfocusout="this.value = this.value.trim()" th:field="*{city}">
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-dark py-2 p-5">Wyślij zgłoszenie</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
-    <div class="col-xs-1" align="center">
-        <a href="/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Back to menu</a>
-    </div>
 
 
-</body>
-</html>

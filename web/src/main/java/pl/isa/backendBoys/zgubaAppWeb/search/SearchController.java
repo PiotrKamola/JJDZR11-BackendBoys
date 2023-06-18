@@ -1,9 +1,12 @@
 package pl.isa.backendBoys.zgubaAppWeb.search;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 
 import java.util.List;
 
+@Component
 public class SearchController {
 
     public List<Request> searchByCity(List<Request> allRequests, String city) {
