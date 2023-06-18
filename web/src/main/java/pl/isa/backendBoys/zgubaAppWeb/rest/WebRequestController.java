@@ -52,7 +52,7 @@ public class WebRequestController {
         requestToAdd.setRequesterLogin(userController.getLoggedUserEmail());
         requestController.addRequest(requestToAdd);
         requestToAdd.nicePrint();
-        model.addAttribute("content", "SubmittedRequest");
+        model.addAttribute("content", "submittedRequest");
         return "main";
     }
 
