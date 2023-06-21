@@ -1,0 +1,16 @@
+<div th:fragment="content" class="d-flex justify-content-center">
+
+    <div class="d-flex justify-content-center">
+        <h1>User menu</h1>
+    </div>
+
+    <span th:if="${userController.getLoggedUserEmail() == null}">
+        <a href="/api/user/login" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login</a>
+        <a href="/api/user/register" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Register</a>
+    </span>
+
+    <span th:if="${userController.getLoggedUserEmail() != null}">
+        <a href="/api/user/logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Logout</a>
+    </span>
+
+</div>
