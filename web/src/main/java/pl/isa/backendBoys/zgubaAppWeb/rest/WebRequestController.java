@@ -36,6 +36,17 @@ public class WebRequestController {
         return "main";
     }
 
+    @GetMapping("/mineRequests")
+    public String mineRequests(Model model, @ModelAttribute SearchHelp searchWord) {
+        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        List<Request> searchList = searchController.searchByWord(requestController.getAllRequests(), userController.getLoggedUserEmail());
+
+        model.addAttribute("allRequests", searchList);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("content", "allRequests");
+        return "main";
+
+    }
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
