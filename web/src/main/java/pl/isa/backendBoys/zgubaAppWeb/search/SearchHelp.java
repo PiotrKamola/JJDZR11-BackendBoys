@@ -1,11 +1,11 @@
-package pl.isa.backendBoys.zgubaAppWeb.rest;
+package pl.isa.backendBoys.zgubaAppWeb.search;
 
 public class SearchHelp {
-    private String searchWord = new String();
-    private String searchCity = new String();
-    private String searchDescription = new String();
-    private String searchLostOrFound = new String();
-    private String searchName = new String();
+    private String searchWord = "";
+    private String searchCity = "";
+    private String searchDescription = "";
+    private String searchLostOrFound = "";
+    private String searchName = "";
 
     public String getSearchCity() {
         return searchCity;

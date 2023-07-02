@@ -1,12 +1,11 @@
 package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
 @Component
-public class RequestController {
+public class RequestService {
 
     private final RequestDatabase requestDatabase = new RequestDatabase();
 

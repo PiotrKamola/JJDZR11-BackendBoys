@@ -1,6 +1,6 @@
-package pl.isa.backendBoys.zgubaAppWeb.rest;
+package pl.isa.backendBoys.zgubaAppWeb.user;
 
-public class UserToLogin {
+public class UserDto {
     private String login;
     private String password;
 
