@@ -4,6 +4,21 @@ body {
     background-color: #f8f8ff;
 }
 
+.option_box {
+    /*padding: 15px;*/
+    /*margin: 15px;*/
+    /*padding: 35px;*/
+    background: rgb(35, 54, 93);
+    box-shadow: 1px 1px 20px 1px rgba(13, 110, 252, 0.22);
+    border-radius: 20px;
+    height: 120px;
+
+
+}
+.section-title {
+    text-align: center;
+    padding-bottom: 10px;
+}
 
 /*.navbar {*/
 /*    padding: 2rem 0;*/

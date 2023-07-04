@@ -32,7 +32,7 @@
         <div>
             <form class="form-inline" th:action="@{/request/search}" th:object="${searchWord}" method="post">
                 <input type="search" placeholder="Co zgubiłeś / znalazłeś?" class="text-center placeholder-sm"
-                       aria-label="Search" required th:field="${searchWord}">
+                       aria-label="Search" required th:field="*{searchWord}">
                 <button class="btn btn-outline-light btn-sm p-1" type="submit" th:value="Szukaj">Szukaj</button>
             </form>
         </div>
@@ -63,9 +63,8 @@
                             th:text="${loggedUser}"> </span>) <i class="fa-solid fa-user"></i></a></span>
 
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Moje zguby</a></li>
-                        <li><a class="dropdown-item" href="#">Moje konto</a></li>
-                        <li>
+                        <li><a class="dropdown-item" th:href="@{/user/panel}">Panel użytkownika</a></li>
+                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item text-strong" th:href="@{/user/logout}">Wyloguj</a></li>

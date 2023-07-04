@@ -31,7 +31,7 @@ public class UserConroller {
     }
 
     @PostMapping("/login")
-    public String logegdUser(Model model, @ModelAttribute UserDto userDto) {
+    public String loggedUser(Model model, @ModelAttribute UserDto userDto) {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(userDto);
         model.addAttribute(userService);
@@ -78,13 +78,39 @@ public class UserConroller {
         return "main";
     }
 
-//    @GetMapping("/userPanel")
-//    public String loginUser(Model model, @ModelAttribute UserDto userDto) {
-//        model.addAttribute("searchWord", new SearchHelp());
-//        model.addAttribute(userDto);
-//        model.addAttribute("showError", false);
-//        model.addAttribute("content", "login");
-//        return "main";
-//    }
+    @GetMapping("/panel")
+    public String userPanel(Model model) {
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("content", "userPanel");
+        return "main";
+    }
+
+    @GetMapping("/panel/userRequests")
+    public String userRequests(Model model) {
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("content", "userRequests");
+        return "main";
+    }
+
+    @GetMapping("/panel/changeUserData")
+    public String getChangeUserData(Model model, @ModelAttribute User userToModify) {
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("userToAdd", new User());
+        model.addAttribute("content", "changeUserData");
+        return "main";
+    }
+
+    @PostMapping("/panel/changeUserData")
+    public String postChangeUserData(Model model, @ModelAttribute User userToModify) {
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("userToAdd", new User());
+        model.addAttribute("content", "addedNewUser");
+
+        return "main";
+    }
+
 
 }
