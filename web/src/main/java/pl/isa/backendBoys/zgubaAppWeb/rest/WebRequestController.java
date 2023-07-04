@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
-import pl.isa.backendBoys.zgubaAppWeb.request.RequestController;
-import pl.isa.backendBoys.zgubaAppWeb.search.SearchController;
-import pl.isa.backendBoys.zgubaAppWeb.user.UserController;
+import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
+import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
+import pl.isa.backendBoys.zgubaAppWeb.search.SearchService;
+import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 
 import java.util.List;
 
@@ -17,29 +18,29 @@ import java.util.List;
 @RequestMapping("request")
 public class WebRequestController {
 
-    private final UserController userController;
-    private final RequestController requestController;
-    private final SearchController searchController;
+    private final UserService userService;
+    private final RequestService requestService;
+    private final SearchService searchService;
 
-    public WebRequestController(RequestController requestController, SearchController searchController, UserController userController) {
-        this.requestController = requestController;
-        this.searchController = searchController;
-        this.userController = userController;
+    public WebRequestController(RequestService requestService, SearchService searchService, UserService userService) {
+        this.requestService = requestService;
+        this.searchService = searchService;
+        this.userService = userService;
     }
 
     @GetMapping("/all")
     public String allRequests(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("allRequests", requestController.getAllRequests());
-        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        model.addAttribute("allRequests", requestService.getAllRequests());
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
         model.addAttribute("content", "allRequests");
         return "main";
     }
 
     @GetMapping("/mineRequests")
     public String mineRequests(Model model, @ModelAttribute SearchHelp searchWord) {
-        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
-        List<Request> searchList = searchController.searchByWord(requestController.getAllRequests(), userController.getLoggedUserEmail());
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        List<Request> searchList = searchService.searchByWord(requestService.getAllRequests(), userService.getLoggedUserEmail());
 
         model.addAttribute("allRequests", searchList);
         model.addAttribute("searchWord", new SearchHelp());
@@ -50,7 +51,7 @@ public class WebRequestController {
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
         model.addAttribute("content", "submittedRequest");
         return "main";
     }
@@ -59,10 +60,9 @@ public class WebRequestController {
     public String addNewRequest(Model model, @ModelAttribute Request requestToAdd) {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(requestToAdd);
-        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
-        requestToAdd.setRequesterLogin(userController.getLoggedUserEmail());
-        requestController.addRequest(requestToAdd);
-        requestToAdd.nicePrint();
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        requestToAdd.setRequesterLogin(userService.getLoggedUserEmail());
+        requestService.addRequest(requestToAdd);
         model.addAttribute("content", "submittedRequest");
         return "main";
     }
@@ -71,7 +71,7 @@ public class WebRequestController {
     public String addRequest(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("requestToAdd", new Request());
-        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
         model.addAttribute("enum", Request.LostOrFound.class.getName());
         model.addAttribute("content", "addRequest");
         return "main";
@@ -81,12 +81,8 @@ public class WebRequestController {
     @PostMapping("/search")
     public String search(Model model, @ModelAttribute SearchHelp searchWord) {
         model.addAttribute(searchWord);
-        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
-        List<Request> searchList = searchController.searchByWord(requestController.getAllRequests(), searchWord.getSearchWord());
-        for (Request req : searchList) {
-            req.nicePrint();
-            System.out.println("---");
-        }
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        List<Request> searchList = searchService.searchByWord(requestService.getAllRequests(), searchWord.getSearchWord());
 
         model.addAttribute("allRequests", searchList);
         model.addAttribute("searchWord", new SearchHelp());

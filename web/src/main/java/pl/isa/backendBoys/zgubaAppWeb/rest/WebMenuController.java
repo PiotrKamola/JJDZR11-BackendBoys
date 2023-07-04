@@ -1,27 +1,27 @@
 package pl.isa.backendBoys.zgubaAppWeb.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.isa.backendBoys.zgubaAppWeb.user.UserController;
+import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
+import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 
 @Controller
 @RequestMapping("")
 public class WebMenuController {
 
     final
-    UserController userController;
+    UserService userService;
 
-    public WebMenuController(UserController userController) {
-        this.userController = userController;
+    public WebMenuController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("")
     public String menu(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
         model.addAttribute("content", "index");
         return "main";
     }
@@ -29,7 +29,7 @@ public class WebMenuController {
     @GetMapping("/about")
     public String aboutZguba(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("loggedUser", userController.getLoggedUserEmail());
+        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
         model.addAttribute("content", "about");
         return "main";
     }

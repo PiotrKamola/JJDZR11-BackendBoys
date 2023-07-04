@@ -1,17 +1,16 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
-import pl.isa.backendBoys.zgubaAppWeb.jsonService.JsonController;
+import pl.isa.backendBoys.zgubaAppWeb.database.JsonService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDatabase {
-    private final List<User> users = new ArrayList<>(JsonController.getUsersFromJsonFile());
+    private final List<User> users = new ArrayList<>(JsonService.getUsersFromJsonFile());
 
     public void add(User user) {
         users.add(user);
-//        System.out.println("_______________________\nUser '" + user.getName() + "' (email: " + user.getLoginEmail() + ") added to database and logged.\n");
-        JsonController.updateUsersJsonFile(users);
+        JsonService.updateUsersJsonFile(users);
     }
 
     public List<User> getUsers() {

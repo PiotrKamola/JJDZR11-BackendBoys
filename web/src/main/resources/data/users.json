@@ -6,7 +6,6 @@
     "city": "Gdynia",
     "contactNumber": "111-111-111"
   },
-
   {
     "loginEmail": "janek81@wp.pl",
     "password": "Bc3e",
@@ -321,5 +320,12 @@
     "name": "Karolina",
     "city": "Gdynia",
     "contactNumber": "543210987"
+  },
+  {
+    "loginEmail": "jan01@wp.pl",
+    "password": "jan",
+    "name": "Jan",
+    "city": "Janowo",
+    "contactNumber": "123123123"
   }
 ]
