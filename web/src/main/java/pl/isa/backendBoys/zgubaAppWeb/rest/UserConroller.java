@@ -6,19 +6,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
+import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 
 @Controller
 @RequestMapping("user")
-public class WebUserConroller {
+public class UserConroller {
 
-    final
-    UserService userService;
+    final UserService userService;
 
-    public WebUserConroller(UserService userService) {
+    public UserConroller(UserService userService) {
         this.userService = userService;
     }
 
@@ -78,4 +77,14 @@ public class WebUserConroller {
         }
         return "main";
     }
+
+//    @GetMapping("/userPanel")
+//    public String loginUser(Model model, @ModelAttribute UserDto userDto) {
+//        model.addAttribute("searchWord", new SearchHelp());
+//        model.addAttribute(userDto);
+//        model.addAttribute("showError", false);
+//        model.addAttribute("content", "login");
+//        return "main";
+//    }
+
 }

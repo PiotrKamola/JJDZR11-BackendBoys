@@ -9,12 +9,12 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 
 @Controller
 @RequestMapping("")
-public class WebMenuController {
+public class MainController {
 
     final
     UserService userService;
 
-    public WebMenuController(UserService userService) {
+    public MainController(UserService userService) {
         this.userService = userService;
     }
 

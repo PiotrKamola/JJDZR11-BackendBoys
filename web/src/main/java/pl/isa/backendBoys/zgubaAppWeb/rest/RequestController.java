@@ -16,13 +16,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("request")
-public class WebRequestController {
+public class RequestController {
 
     private final UserService userService;
     private final RequestService requestService;
     private final SearchService searchService;
 
-    public WebRequestController(RequestService requestService, SearchService searchService, UserService userService) {
+    public RequestController(RequestService requestService, SearchService searchService, UserService userService) {
         this.requestService = requestService;
         this.searchService = searchService;
         this.userService = userService;
