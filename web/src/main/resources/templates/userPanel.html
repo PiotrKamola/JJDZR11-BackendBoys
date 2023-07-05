@@ -1,30 +1,72 @@
-<div th:fragment="content" class="container pb-5 mb-5">
-    <div class="section-title">
-        <h2 style="color: #074dcf;">Panel użytkownika</h2>
-    </div>
-    <div class="row pb-5">
-        <div class="col-lg-4 col-md-12 mb-2 pb-4 ">
-            <button type="button" class="btn btn-secondary option_box ">
-                <h4>Moje zguby</h4>
-                <p>Przeglądaj swoje zgłoszenia odnośnie zagubionych oraz znalezionych przedmiotów.</p>
+<div th:fragment="content" class="container">
+    <h2 class="text-center text-strong p-4" style="color: #074dcf;">PANEL UŻYTKOWNIKA</h2>
+
+    <div class="row text-center grid gap-3">
+        <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
+            <button type="button" class="user-option-box btn btn-outline-info border text-dark p-5, m-auto">
+                <h3 class="p-5, m-auto">Lista moich zgłoszeń</h3>
+                <i class="bi bi-list-task user-option-icon"></i>
+                <p>Wejdź, aby przeglądać, modyfikować lub usuwać swoje zgłoszenia.</p>
+            </button>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
+            <button type="button" class="user-option-box btn btn-outline-warning border text-dark p-5, m-auto">
+                <h3>Moje dane osobowe</h3>
+                <i class="bi bi-person-vcard user-option-icon"></i>
+                <p>Wejdź, aby zaktualizować swoje dane osobwe.</p>
+            </button>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
+            <button type="button" class="user-option-box btn btn-outline-warning border text-dark p-5, m-auto">
+                <h3>Dane do logowania</h3>
+                <i class="bi bi-person-lock user-option-icon"></i>
+                <p>Wejdź, aby zaktualizować swój e-mail lub zmienić hasło.</p>
             </button>
 
         </div>
-        <div class="col-lg-4 col-md-12 mb-4 pb-4 ">
-
-            <button type="button" class="btn btn-secondary option_box">
-                <h4>Moje</h4>
-                <p>Przeglądaj swoje zgłoszenia odtów.</p>
+        <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
+            <button type="button" class="user-option-box btn btn-outline-danger border text-dark p-5, m-auto">
+                <h3>Usuń konto</h3>
+                <i class="bi bi-person-x user-option-icon"></i>
+                <p>Wejdź, aby usunąć swoje konto i opcjonalnie wszystkie powiązane z nim zgłoszenia.</p>
             </button>
 
         </div>
-        <div class="col-lg-4 col-md-12 mb-0 pb-4 ">
-            <button type="button" class="btn btn-secondary option_box">
-                <h4 style="color: #ab3d3d"> Usuń konto</h4>
-                <p>Jeżeli na prawdę tego chcesz.</p>
-            </button>
-
-        </div>
-
     </div>
 </div>
+
+
+<!--<div th:fragment="content"  class="container py-5 aboutus-boxes">-->
+<!--    <div class="row text-center">-->
+
+<!--        <div class="col-12 col-md-6 col-lg-3 mx-0 px-1 ">-->
+<!--            <button type="button" class="aboutus-box m-3 p-4 p-lg-5 border text-dark">-->
+<!--                <h3>Jakość</h3>-->
+<!--                <i class="bi bi-check aboutus-icon"></i>-->
+<!--                <p>Lorem ipsum asasd as das das das, dolor s!</p>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--        <div class="col-12 col-md-6 col-lg-3 mx-0 px-1 ">-->
+<!--            <button type="button" class="aboutus-box m-3 p-4 p-lg-5 border text-light bg-dark">-->
+<!--                <h3>Klienci</h3>-->
+<!--                <i class="bi bi-people-fill aboutus-icon"></i>-->
+<!--                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. !</p>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--        <div class="col-12 col-md-6 col-lg-3 mx-0 px-1">-->
+<!--            <button type="button" class="aboutus-box m-3 p-4 p-lg-5 border text-dark">-->
+<!--                <h3>Sprzęt</h3>-->
+<!--                <i class="bi bi-hdd-stack-fill aboutus-icon"></i>-->
+<!--                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, dignissimos!</p>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--        <div class="col-12 col-md-6 col-lg-3 mx-0 px-1">-->
+<!--            <button type="button" class="aboutus-box m-3 p-4 p-lg-5 border text-light bg-dark">-->
+<!--                <h3>Ceny</h3>-->
+<!--                <i class="bi bi-currency-dollar aboutus-icon"></i>-->
+<!--                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. VoluptasVoluptas Voluptas Voluptas Voluptas Voluptas, dignissimos!</p>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
