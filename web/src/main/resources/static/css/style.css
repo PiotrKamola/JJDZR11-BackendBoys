@@ -5,50 +5,40 @@ body {
 }
 
 .option_box {
-    /*padding: 15px;*/
-    /*margin: 15px;*/
-    /*padding: 35px;*/
     background: rgb(35, 54, 93);
     box-shadow: 1px 1px 20px 1px rgba(13, 110, 252, 0.22);
     border-radius: 20px;
-    height: 120px;
-
-
+    height: 130px;
 }
+
 .section-title {
     text-align: center;
     padding-bottom: 10px;
 }
 
-/*.navbar {*/
-/*    padding: 2rem 0;*/
-/*    background-color: white;*/
-/*    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);*/
-/*}*/
+/* sekcja user-panel options */
+.user-option-box {
+    background-color: rgb(149, 186, 245);
+    bor
+}
 
-/*.navbar-brand {*/
-/*    font-size: 1.5em;*/
-/*    font-weight: bold;*/
-/*    color: black;*/
-/*}*/
+.user-option-box h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 
-/*.nav-link {*/
-/*    color: black;*/
-/*    font-size: 1em;*/
-/*    font-weight: 500;*/
-/*}*/
 
-/*.nav-link:hover {*/
-/*    color: gray;*/
-/*}*/
+.user-option-icon {
+    font-size: 2rem;
+}
+
 
 .hero {
     height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    /*background: url("../img/abc.jpg");*/
-    /*background: url("../img/background.jpg") no-repeat center center;*/
     background-size: cover;
 }
 
@@ -77,6 +67,7 @@ body {
     margin-top: 2em;
     margin-bottom: 1em;
 }
+
 
 .author-name,
 .technologies-list li {
@@ -107,16 +98,16 @@ body {
 .mg-top {
     margin-top: 100px;
 }
+
 .header-section {
     background-image: url("../img/background_puzzle.jpg");
     background-size: cover;
     background-position: center;
 }
+
 .tech-section {
     background-image: url("../img/Mock.png");
     background-size: 500px;
-    /*background-position: center;*/
-    /*background-position: -100px;*/
     background-repeat: no-repeat;
 }
 
@@ -128,9 +119,6 @@ body {
     color: blue;
 }
 
-/*.footer-section {*/
-/*    background-color: none;*/
-/*}*/
 
 .fixed-top {
     position: fixed;
@@ -182,21 +170,3 @@ img {
 .placeholder-sm::placeholder {
     font-size: 12px; /* dostosuj rozmiar czcionki według potrzeb */
 }
-
-/*body {*/
-/*    background-color: #dfeaf3;*/
-/*    font-family: Arial, Helvetica, sans-serif;*/
-/*}*/
-
-
-/*.navbar {*/
-/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
-/*}*/
-
-
-/*.footer {*/
-/*    padding-top: 50px;*/
-/*    padding-bottom: 30px;*/
-/*    box-shadow: 0 0 20px rgba(0, 0, 0, 1);*/
-/*    border-top: 2px solid black;*/
-/*}*/
