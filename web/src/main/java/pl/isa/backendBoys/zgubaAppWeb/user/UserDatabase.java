@@ -12,14 +12,6 @@ public class UserDatabase {
         users.add(user);
     }
 
-//    public void update(User currentUser, User newUser) {
-//        int currentUserIndex = users.indexOf(currentUser);
-//        users.get(currentUserIndex).setName(newUser.getName());
-//        users.get(currentUserIndex).setCity(newUser.getCity());
-//        users.get(currentUserIndex).setContactNumber(newUser.getContactNumber());
-//        update();
-//    }
-
     public void update() {
         JsonService.updateUsersJsonFile(users);
     }

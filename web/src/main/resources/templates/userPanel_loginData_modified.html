@@ -1,0 +1,5 @@
+<div th:fragment="content"  class="col-xs-1 py-2 mb-0 text-center">
+    <a th:href="@{/user/panel}" style="color:inherit">
+    <h3 class="btn btn-success mt-3">
+        Dane do logowania użytkownika <span class="text-strong" th:text="${userToModify.loginEmail}"></span> zostały pomyślnie zaktualizowane. <span class="text-strong">Powrót do panelu.</span></h3></a>
+</div>

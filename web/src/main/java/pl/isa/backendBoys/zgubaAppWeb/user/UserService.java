@@ -1,6 +1,7 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
 import org.springframework.stereotype.Controller;
+import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 
 @Controller
 public class UserService {
@@ -67,6 +68,26 @@ public class UserService {
     public void changeUserContactNumber(User user, String newContactNumber) {
         user.setContactNumber(newContactNumber);
         userDatabase.update();
+    }
+
+    public void changeUserPassword(User loggedUser, String newPassword) {
+        loggedUser.setPassword(newPassword);
+        userDatabase.update();
+
+//        RequestService requestService = new RequestService();
+//        requestService.getAllRequests().stream().filter(request -> request.getRequesterLogin().equals(user.getLoginEmail())).forEach(request -> request.setRequesterPassword(newPassword));
+//
+    }
+
+    public void changeUserLogin(User loggedUser, String newLogin) {
+        loggedUser.setLoginEmail(newLogin);
+        userDatabase.update();
+
+//        RequestService requestService = new RequestService();
+//        requestService.getAllRequests().stream()
+//                .filter(request -> request.getRequesterLogin()
+//                        .equals(user.getLoginEmail()))
+//                .forEach(request -> request.setRequesterLogin(newLogin));
     }
 
 }

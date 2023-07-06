@@ -88,7 +88,7 @@ public class UserConroller {
 
 
     @GetMapping("/panel/showUserData")
-    public String showUserData(Model model, @ModelAttribute User userToModify ) {
+    public String showUserData(Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
         User loggedUser = userService.getUserByLogin(loggedUserEmail);
         model.addAttribute("loggedUserEmail", loggedUserEmail);
@@ -134,6 +134,61 @@ public class UserConroller {
         return "main";
     }
 
+
+    @GetMapping("/panel/logindata")
+    public String showLoginData(Model model) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("userToModify", loggedUser);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("modify", false);
+        model.addAttribute("content", "userPanel_loginData");
+        return "main";
+    }
+
+    @GetMapping("/panel/logindata/change")
+    public String ChangeloginDataGet(Model model) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("userToModify", loggedUser);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("modify", true);
+        model.addAttribute("content", "userPanel_loginData");
+        return "main";
+    }
+
+    @PostMapping("/panel/logindata/change")
+    public String ChangeloginDataPost(Model model, @ModelAttribute User userToModify) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("modify", true);
+
+        if (userService.isLoginTaken(userToModify.getLoginEmail())) {
+            model.addAttribute("userToModify", userToModify);
+            model.addAttribute("showErrorLogin", true);
+            model.addAttribute("content", "userPanel_loginData");
+            return "main";
+        }
+
+        if (loggedUser.getPassword().equals(userToModify.getPassword())) {
+            userService.changeUserLogin(loggedUser, userToModify.getLoginEmail());
+            userService.changeUserPassword(loggedUser, userToModify.getPassword());
+
+            model.addAttribute("userToModify", loggedUser);
+            model.addAttribute("content", "userPanel_loginData_modified");
+        } else {
+            model.addAttribute("userToModify", userToModify);
+            model.addAttribute("showErrorPassword", true);
+            model.addAttribute("content", "userPanel_loginData");
+        }
+
+        return "main";
+    }
+
 //    @PostMapping("/register")
 //    public String registerWrongUser(Model model, @ModelAttribute User userToAdd) {
 //        model.addAttribute("searchWord", new SearchHelp());
@@ -144,7 +199,7 @@ public class UserConroller {
 //        } else {
 //            model.addAttribute("showError", false);
 //            userService.registerUser(userToAdd);
-//            model.addAttribute("content", "userPanel_userData_modified");
+//            model.addAttribute("content", "addedNewUser");
 //        }
 //        return "main";
 //    }
