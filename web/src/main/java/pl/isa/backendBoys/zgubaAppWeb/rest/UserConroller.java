@@ -36,7 +36,7 @@ public class UserConroller {
         model.addAttribute(userDto);
         model.addAttribute(userService);
         if (userService.loginUser(userDto.getLogin(), userDto.getPassword())) {
-            model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+            model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
             model.addAttribute("content", "loggedIn");
         } else {
             model.addAttribute("showError", true);
@@ -80,37 +80,74 @@ public class UserConroller {
 
     @GetMapping("/panel")
     public String userPanel(Model model) {
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("content", "userPanel");
         return "main";
     }
 
-    @GetMapping("/panel/userRequests")
-    public String userRequests(Model model) {
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+
+    @GetMapping("/panel/showUserData")
+    public String showUserData(Model model, @ModelAttribute User userToModify ) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("userToModify", loggedUser);
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("content", "userRequests");
+        model.addAttribute("modify", false);
+        model.addAttribute("content", "userPanel_userData");
         return "main";
     }
 
     @GetMapping("/panel/changeUserData")
     public String getChangeUserData(Model model, @ModelAttribute User userToModify) {
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("userToModify", loggedUser);
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("userToAdd", new User());
-        model.addAttribute("content", "changeUserData");
+        model.addAttribute("modify", true);
+        model.addAttribute("content", "userPanel_userData");
         return "main";
     }
-
     @PostMapping("/panel/changeUserData")
     public String postChangeUserData(Model model, @ModelAttribute User userToModify) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("userToAdd", new User());
-        model.addAttribute("content", "addedNewUser");
+        model.addAttribute("modify", true);
+
+        if (loggedUser.getPassword().equals(userToModify.getPassword())) {
+            userService.changeUserName(loggedUser, userToModify.getName());
+            userService.changeUserCity(loggedUser, userToModify.getCity());
+            userService.changeUserContactNumber(loggedUser, userToModify.getContactNumber());
+
+            model.addAttribute("userToModify", loggedUser);
+            model.addAttribute("content", "userPanel_userData_modified");
+        } else {
+            model.addAttribute("userToModify", userToModify);
+            model.addAttribute("showError", true);
+            model.addAttribute("content", "userPanel_userData");
+        }
 
         return "main";
     }
+
+//    @PostMapping("/register")
+//    public String registerWrongUser(Model model, @ModelAttribute User userToAdd) {
+//        model.addAttribute("searchWord", new SearchHelp());
+//        model.addAttribute("userToAdd", new User());
+//        if (userService.isLoginTaken(userToAdd.getLoginEmail())) {
+//            model.addAttribute("showError", true);
+//            model.addAttribute("content", "register");
+//        } else {
+//            model.addAttribute("showError", false);
+//            userService.registerUser(userToAdd);
+//            model.addAttribute("content", "userPanel_userData_modified");
+//        }
+//        return "main";
+//    }
 
 
 }

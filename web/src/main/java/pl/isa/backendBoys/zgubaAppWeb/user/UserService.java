@@ -38,6 +38,7 @@ public class UserService {
 
     public void registerUser(User user) {
         userDatabase.add(user);
+        userDatabase.update();
     }
 
     public boolean isLoginTaken(String login) {
@@ -51,6 +52,21 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    public void changeUserName(User user, String newName) {
+        user.setName(newName);
+        userDatabase.update();
+    }
+
+    public void changeUserCity(User user, String newCity) {
+        user.setCity(newCity);
+        userDatabase.update();
+    }
+
+    public void changeUserContactNumber(User user, String newContactNumber) {
+        user.setContactNumber(newContactNumber);
+        userDatabase.update();
     }
 
 }

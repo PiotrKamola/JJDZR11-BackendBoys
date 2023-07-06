@@ -48,13 +48,13 @@
                         jest Zguba?</a>
                     <a class="nav-link px-lg-2" th:classappend="${content == 'allRequests'} ? 'active'"
                        th:href="@{/request/all}">Przeglądaj zguby</a>
-                    <span th:if="${loggedUser}">
+                    <span th:if="${loggedUserEmail}">
                         <a class="nav-link px-lg-2"
                            th:classappend="${content == 'addRequest' or content == 'SubmittedRequest'} ? 'active'"
                            th:href="@{/request/add}">Dodaj zgubę</a>
                     </span>
 
-                    <div th:unless="${loggedUser}">
+                    <div th:unless="${loggedUserEmail}">
                         <a class="nav-link px-lg-2"
                            th:classappend="${content == 'login' or content == 'register'} ? 'active'"
                            th:href="@{/user/login}">
@@ -62,9 +62,9 @@
                             <i class="fa-regular fa-user fa-sm"></i></a>
                     </div>
 
-                    <div th:if="${loggedUser}" class="dropdown">
+                    <div th:if="${loggedUserEmail}" class="dropdown">
                         <a class="nav-link px-lg-2" data-toggle="dropdown"> (<span
-                                th:text="${loggedUser}"> </span>) <i class="fa-solid fa-user"></i></a></span>
+                                th:text="${loggedUserEmail}"> </span>) <i class="fa-solid fa-user"></i></a></span>
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" th:href="@{/user/panel}">Panel użytkownika</a></li>

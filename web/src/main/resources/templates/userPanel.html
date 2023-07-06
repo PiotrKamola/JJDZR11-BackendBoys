@@ -1,4 +1,4 @@
-<div th:fragment="content" class="container">
+<div th:fragment="content" class="container" xmlns="http://www.w3.org/1999/html">
     <h2 class="text-center text-strong p-4" style="color: #074dcf;">PANEL UŻYTKOWNIKA</h2>
 
     <div class="row text-center grid gap-3">
@@ -10,11 +10,13 @@
             </button>
         </div>
         <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
-            <button type="button" class="user-option-box btn btn-outline-warning border text-dark p-5, m-auto">
-                <h3>Moje dane osobowe</h3>
-                <i class="bi bi-person-vcard user-option-icon"></i>
-                <p>Wejdź, aby zaktualizować swoje dane osobwe.</p>
-            </button>
+            <a th:href="@{/user/panel/showUserData}" style="color:inherit">
+                <button type="button" class="user-option-box btn btn-outline-warning border text-dark p-5, m-auto">
+                    <h3>Moje dane osobowe</h3>
+                    <i class="bi bi-person-vcard user-option-icon"></i>
+                    <p>Wejdź, aby zaktualizować swoje dane osobowe.</p>
+                </button>
+            </a>
         </div>
         <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
             <button type="button" class="user-option-box btn btn-outline-warning border text-dark p-5, m-auto">
@@ -34,39 +36,3 @@
         </div>
     </div>
 </div>
-
-
-<!--<div th:fragment="content"  class="container py-5 aboutus-boxes">-->
-<!--    <div class="row text-center">-->
-
-<!--        <div class="col-12 col-md-6 col-lg-3 mx-0 px-1 ">-->
-<!--            <button type="button" class="aboutus-box m-3 p-4 p-lg-5 border text-dark">-->
-<!--                <h3>Jakość</h3>-->
-<!--                <i class="bi bi-check aboutus-icon"></i>-->
-<!--                <p>Lorem ipsum asasd as das das das, dolor s!</p>-->
-<!--            </button>-->
-<!--        </div>-->
-<!--        <div class="col-12 col-md-6 col-lg-3 mx-0 px-1 ">-->
-<!--            <button type="button" class="aboutus-box m-3 p-4 p-lg-5 border text-light bg-dark">-->
-<!--                <h3>Klienci</h3>-->
-<!--                <i class="bi bi-people-fill aboutus-icon"></i>-->
-<!--                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. !</p>-->
-<!--            </button>-->
-<!--        </div>-->
-<!--        <div class="col-12 col-md-6 col-lg-3 mx-0 px-1">-->
-<!--            <button type="button" class="aboutus-box m-3 p-4 p-lg-5 border text-dark">-->
-<!--                <h3>Sprzęt</h3>-->
-<!--                <i class="bi bi-hdd-stack-fill aboutus-icon"></i>-->
-<!--                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, dignissimos!</p>-->
-<!--            </button>-->
-<!--        </div>-->
-<!--        <div class="col-12 col-md-6 col-lg-3 mx-0 px-1">-->
-<!--            <button type="button" class="aboutus-box m-3 p-4 p-lg-5 border text-light bg-dark">-->
-<!--                <h3>Ceny</h3>-->
-<!--                <i class="bi bi-currency-dollar aboutus-icon"></i>-->
-<!--                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. VoluptasVoluptas Voluptas Voluptas Voluptas Voluptas, dignissimos!</p>-->
-<!--            </button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
