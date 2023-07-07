@@ -1,15 +1,35 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
 public class UserDto {
-    private String login;
+    private String loginEmail;
     private String password;
 
-    public String getLogin() {
-        return login;
+    private String currentLoginEmail;
+
+    private String currentPassword;
+
+    public String getLoginEmail() {
+        return loginEmail;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getCurrentLoginEmail() {
+        return currentLoginEmail;
+    }
+
+    public void setCurrentLoginEmail(String currentLoginEmail) {
+        this.currentLoginEmail = currentLoginEmail;
+    }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
+    }
+
+    public void setLoginEmail(String loginEmail) {
+        this.loginEmail = loginEmail;
     }
 
     public String getPassword() {

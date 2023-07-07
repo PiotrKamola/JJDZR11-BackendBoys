@@ -13,11 +13,11 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 
 @Controller
 @RequestMapping("user")
-public class UserConroller {
+public class UserController {
 
     final UserService userService;
 
-    public UserConroller(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -35,7 +35,7 @@ public class UserConroller {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(userDto);
         model.addAttribute(userService);
-        if (userService.loginUser(userDto.getLogin(), userDto.getPassword())) {
+        if (userService.loginUser(userDto.getLoginEmail(), userDto.getPassword())) {
             model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
             model.addAttribute("content", "loggedIn");
         } else {
@@ -110,6 +110,7 @@ public class UserConroller {
         model.addAttribute("content", "userPanel_userData");
         return "main";
     }
+
     @PostMapping("/panel/changeUserData")
     public String postChangeUserData(Model model, @ModelAttribute User userToModify) {
         String loggedUserEmail = userService.getLoggedUserEmail();
@@ -151,8 +152,11 @@ public class UserConroller {
     public String ChangeloginDataGet(Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
         User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        UserDto userToModify = new UserDto();
+        userToModify.setLoginEmail(loggedUserEmail);
+        userToModify.setPassword(loggedUser.getPassword());
         model.addAttribute("loggedUserEmail", loggedUserEmail);
-        model.addAttribute("userToModify", loggedUser);
+        model.addAttribute("userToModify", userToModify);
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("modify", true);
         model.addAttribute("content", "userPanel_loginData");
@@ -160,35 +164,78 @@ public class UserConroller {
     }
 
     @PostMapping("/panel/logindata/change")
-    public String ChangeloginDataPost(Model model, @ModelAttribute User userToModify) {
+    public String ChangeloginDataPost(Model model, @ModelAttribute UserDto userToModify) {
         String loggedUserEmail = userService.getLoggedUserEmail();
         User loggedUser = userService.getUserByLogin(loggedUserEmail);
-        model.addAttribute("loggedUserEmail", loggedUserEmail);
+
+
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("modify", true);
+        model.addAttribute("userToModify", userToModify);
 
-        if (userService.isLoginTaken(userToModify.getLoginEmail())) {
-            model.addAttribute("userToModify", userToModify);
-            model.addAttribute("showErrorLogin", true);
+        if (!loggedUser.getPassword().equals(userToModify.getCurrentPassword())) {
+            model.addAttribute("loggedUserEmail", loggedUserEmail);
+            model.addAttribute("showErrorPassword", true);
             model.addAttribute("content", "userPanel_loginData");
             return "main";
         }
 
-        if (loggedUser.getPassword().equals(userToModify.getPassword())) {
-            userService.changeUserLogin(loggedUser, userToModify.getLoginEmail());
-            userService.changeUserPassword(loggedUser, userToModify.getPassword());
+        if (userToModify.getLoginEmail() != null && !userToModify.getLoginEmail().isBlank()) {
+            if (userService.isLoginTaken(userToModify.getLoginEmail())) {
+                model.addAttribute("loggedUserEmail", loggedUserEmail);
+                model.addAttribute("showErrorLogin", true);
+                model.addAttribute("content", "userPanel_loginData");
+                return "main";
+            } else {
+                userService.changeUserLogin(loggedUser, userToModify.getLoginEmail());
+                //change login in all requests
 
-            model.addAttribute("userToModify", loggedUser);
-            model.addAttribute("content", "userPanel_loginData_modified");
-        } else {
-            model.addAttribute("userToModify", userToModify);
-            model.addAttribute("showErrorPassword", true);
-            model.addAttribute("content", "userPanel_loginData");
+                userService.setLoggedUserEmail(userToModify.getLoginEmail());
+            }
         }
+
+        if (userToModify.getCurrentPassword()!= null && !userToModify.getCurrentPassword().isBlank()) {
+            userService.changeUserPassword(loggedUser, userToModify.getCurrentPassword());
+        }
+
+        userService.logout();
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("content", "userPanel_loginData_modified");
 
         return "main";
     }
+//
+//
+//
+//            model.addAttribute("userToModify", loggedUser);
+//            model.addAttribute("content", "userPanel_loginData_modified");
+//        }
+//
+//        if (userService.isLoginTaken(userToModify.getNewLogin())) {
+//            model.addAttribute("userToModify", userToModify);
+//            model.addAttribute("showErrorLogin", true);
+//            model.addAttribute("content", "userPanel_loginData");
+//            return "main";
+//        }
+//
+//
+//        return "main";
 
+
+//    @PostMapping("/login")
+//    public String loggedUser(Model model, @ModelAttribute UserDto userDto) {
+//        model.addAttribute("searchWord", new SearchHelp());
+//        model.addAttribute(userDto);
+//        model.addAttribute(userService);
+//        if (userService.loginUser(userDto.getLogin(), userDto.getPassword())) {
+//            model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
+//            model.addAttribute("content", "loggedIn");
+//        } else {
+//            model.addAttribute("showError", true);
+//            model.addAttribute("content", "login");
+//        }
+//        return "main";
+//
 //    @PostMapping("/register")
 //    public String registerWrongUser(Model model, @ModelAttribute User userToAdd) {
 //        model.addAttribute("searchWord", new SearchHelp());

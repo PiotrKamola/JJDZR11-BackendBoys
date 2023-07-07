@@ -1,7 +1,6 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
 import org.springframework.stereotype.Controller;
-import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 
 @Controller
 public class UserService {
@@ -28,7 +27,7 @@ public class UserService {
         return false;
     }
 
-    public void logout(){
+    public void logout() {
         loggedUserEmail = null;
     }
 

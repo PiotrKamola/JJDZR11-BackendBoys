@@ -4,7 +4,7 @@
         <form th:action="@{/user/login}" th:object="${userDto}" method="post">
             <div class="form-group mt-3 ">
                 <label class="d-flex justify-content-start" for="email">Login (e-mail):</label>
-                <input type="email" class="form-control border-2" id="email" name="email" required th:field="*{login}">
+                <input type="email" class="form-control border-2" id="email" name="email" required th:field="*{loginEmail}">
             </div>
 
             <div class="form-group mt-3">

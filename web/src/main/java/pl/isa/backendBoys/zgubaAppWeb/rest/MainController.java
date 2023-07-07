@@ -1,5 +1,6 @@
 package pl.isa.backendBoys.zgubaAppWeb.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,7 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 @RequestMapping("")
 public class MainController {
 
-    final
-    UserService userService;
+    final UserService userService;
 
     public MainController(UserService userService) {
         this.userService = userService;
