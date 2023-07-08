@@ -13,6 +13,8 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 public class MainController {
 
     final UserService userService;
+    //wywalic userservice aw rzucic jedynie zmiennaa loggedUserEmail i tam sie odniesc dotego
+    // sprobowac zrobic klase gdzie bede tylko  przekazywal model i go wzbogacał
 
     public MainController(UserService userService) {
         this.userService = userService;
@@ -21,7 +23,7 @@ public class MainController {
     @GetMapping("")
     public String menu(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         model.addAttribute("content", "index");
         return "main";
     }
@@ -29,7 +31,7 @@ public class MainController {
     @GetMapping("/about")
     public String aboutZguba(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         model.addAttribute("content", "about");
         return "main";
     }

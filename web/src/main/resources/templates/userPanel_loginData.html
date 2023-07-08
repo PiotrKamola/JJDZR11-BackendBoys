@@ -11,11 +11,11 @@
             <form th:action="@{/user/panel/logindata/change}" th:object="${userToModify}" method="post">
                 <div class="form-group mt-3">
                     <label for="email">
-                        <span th:if="${modify}"><span class="text-strong">Nowy login / email</span> (pozostaw puste, jeżeli nie modyfikujesz)</span>
+                        <span th:if="${modify}"><span class="text-strong">Nowy login / email</span> (pozostaw bez zmian, jeżeli nie modyfikujesz)</span>
                         <span th:unless="${modify}">Obecny login (e-mail):</span>
                     </label>
 
-                    <input type="email" class="form-control border-2" id="email" name="email"
+                    <input type="email" class="form-control border-2" id="email" name="email" required
                            th:field="*{loginEmail}" th:attr="disabled=${!modify}">
                 </div>
 

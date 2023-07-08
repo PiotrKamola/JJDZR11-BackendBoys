@@ -149,7 +149,7 @@ public class UserController {
     }
 
     @GetMapping("/panel/logindata/change")
-    public String ChangeloginDataGet(Model model) {
+    public String changeloginDataGet(Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
         User loggedUser = userService.getUserByLogin(loggedUserEmail);
         UserDto userToModify = new UserDto();
@@ -164,24 +164,31 @@ public class UserController {
     }
 
     @PostMapping("/panel/logindata/change")
-    public String ChangeloginDataPost(Model model, @ModelAttribute UserDto userToModify) {
+    public String changeloginDataPost(Model model, @ModelAttribute UserDto userToModify) {
         String loggedUserEmail = userService.getLoggedUserEmail();
         User loggedUser = userService.getUserByLogin(loggedUserEmail);
-
 
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("modify", true);
         model.addAttribute("userToModify", userToModify);
+        System.out.println(userToModify.getCurrentPassword() + " " + userToModify.getCurrentLoginEmail());
 
-        if (!loggedUser.getPassword().equals(userToModify.getCurrentPassword())) {
+        boolean isConfirmPasswordCorrect = userToModify.getCurrentPassword().equals(loggedUser.getPassword());
+        if (!isConfirmPasswordCorrect) {
             model.addAttribute("loggedUserEmail", loggedUserEmail);
             model.addAttribute("showErrorPassword", true);
             model.addAttribute("content", "userPanel_loginData");
             return "main";
         }
 
-        if (userToModify.getLoginEmail() != null && !userToModify.getLoginEmail().isBlank()) {
-            if (userService.isLoginTaken(userToModify.getLoginEmail())) {
+        boolean isLoginChanged = !userToModify.getLoginEmail().equals(userService.getLoggedUserEmail()) && userToModify.getCurrentPassword()!= null;
+//        if (userToModify.getCurrentPassword()!= null && !userToModify.getCurrentPassword().isBlank()) {
+
+        boolean isPasswordChanged = userToModify.getPassword().equals(loggedUser.getPassword());
+
+        if (isLoginChanged) {
+            boolean isLoginTaken = userService.isLoginTaken(userToModify.getLoginEmail());
+            if (isLoginTaken) {
                 model.addAttribute("loggedUserEmail", loggedUserEmail);
                 model.addAttribute("showErrorLogin", true);
                 model.addAttribute("content", "userPanel_loginData");
@@ -189,67 +196,23 @@ public class UserController {
             } else {
                 userService.changeUserLogin(loggedUser, userToModify.getLoginEmail());
                 //change login in all requests
-
                 userService.setLoggedUserEmail(userToModify.getLoginEmail());
+                model.addAttribute("loggedUserEmail", userService.getUserByLogin(loggedUserEmail));
+                model.addAttribute("content", "userPanel_loginData_modified");
             }
+        } else if (isPasswordChanged) {
+            System.out.println("zmieniam hasło");
+//            userService.changeUserPassword(loggedUser, userToModify.getPassword());
+            userService.logout();
+            model.addAttribute("loggedUserEmail", userService.getUserByLogin(loggedUserEmail));
+            model.addAttribute("content", "userPanel_loginData_modified");
         }
 
-        if (userToModify.getCurrentPassword()!= null && !userToModify.getCurrentPassword().isBlank()) {
-            userService.changeUserPassword(loggedUser, userToModify.getCurrentPassword());
+        if (!isLoginChanged && !isPasswordChanged) {
+            model.addAttribute("loggedUserEmail", loggedUserEmail);
+            model.addAttribute("content", "userPanel_loginData_modified");
         }
-
-        userService.logout();
-        model.addAttribute("loggedUserEmail", loggedUserEmail);
-        model.addAttribute("content", "userPanel_loginData_modified");
 
         return "main";
     }
-//
-//
-//
-//            model.addAttribute("userToModify", loggedUser);
-//            model.addAttribute("content", "userPanel_loginData_modified");
-//        }
-//
-//        if (userService.isLoginTaken(userToModify.getNewLogin())) {
-//            model.addAttribute("userToModify", userToModify);
-//            model.addAttribute("showErrorLogin", true);
-//            model.addAttribute("content", "userPanel_loginData");
-//            return "main";
-//        }
-//
-//
-//        return "main";
-
-
-//    @PostMapping("/login")
-//    public String loggedUser(Model model, @ModelAttribute UserDto userDto) {
-//        model.addAttribute("searchWord", new SearchHelp());
-//        model.addAttribute(userDto);
-//        model.addAttribute(userService);
-//        if (userService.loginUser(userDto.getLogin(), userDto.getPassword())) {
-//            model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
-//            model.addAttribute("content", "loggedIn");
-//        } else {
-//            model.addAttribute("showError", true);
-//            model.addAttribute("content", "login");
-//        }
-//        return "main";
-//
-//    @PostMapping("/register")
-//    public String registerWrongUser(Model model, @ModelAttribute User userToAdd) {
-//        model.addAttribute("searchWord", new SearchHelp());
-//        model.addAttribute("userToAdd", new User());
-//        if (userService.isLoginTaken(userToAdd.getLoginEmail())) {
-//            model.addAttribute("showError", true);
-//            model.addAttribute("content", "register");
-//        } else {
-//            model.addAttribute("showError", false);
-//            userService.registerUser(userToAdd);
-//            model.addAttribute("content", "addedNewUser");
-//        }
-//        return "main";
-//    }
-
-
 }

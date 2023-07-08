@@ -32,14 +32,14 @@ public class RequestController {
     public String allRequests(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("allRequests", requestService.getAllRequests());
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         model.addAttribute("content", "allRequests");
         return "main";
     }
 
     @GetMapping("/mineRequests")
     public String mineRequests(Model model, @ModelAttribute SearchHelp searchWord) {
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         List<Request> searchList = searchService.searchByWord(requestService.getAllRequests(), userService.getLoggedUserEmail());
 
         model.addAttribute("allRequests", searchList);
@@ -51,7 +51,7 @@ public class RequestController {
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         model.addAttribute("content", "submittedRequest");
         return "main";
     }
@@ -60,7 +60,7 @@ public class RequestController {
     public String addNewRequest(Model model, @ModelAttribute Request requestToAdd) {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(requestToAdd);
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         requestToAdd.setRequesterLogin(userService.getLoggedUserEmail());
         requestService.addRequest(requestToAdd);
         model.addAttribute("content", "submittedRequest");
@@ -71,7 +71,7 @@ public class RequestController {
     public String addRequest(Model model) {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("requestToAdd", new Request());
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         model.addAttribute("enum", Request.LostOrFound.class.getName());
         model.addAttribute("content", "addRequest");
         return "main";
@@ -81,7 +81,7 @@ public class RequestController {
     @PostMapping("/search")
     public String search(Model model, @ModelAttribute SearchHelp searchWord) {
         model.addAttribute(searchWord);
-        model.addAttribute("loggedUser", userService.getLoggedUserEmail());
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         List<Request> searchList = searchService.searchByWord(requestService.getAllRequests(), searchWord.getSearchWord());
 
         model.addAttribute("allRequests", searchList);
