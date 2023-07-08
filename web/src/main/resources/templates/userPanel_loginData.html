@@ -21,7 +21,7 @@
 
                 <div class="justify-content-center mt-2 px-2 bg-danger text-white text-center text-wrap"
                      th:if="${showErrorLogin}">
-                    <p class="text-cemter py-2"> Wpisany login (w-mail) jest już zajęty, proszę wpisz inny lub wyczyść to pole, jeżeli login (e-mail) nie wymaga zmiany.</p>
+                    <p class="text-cemter py-2"> Wpisany login (w-mail) jest już zajęty, proszę wpisz inny.</p>
                 </div>
 
                 <div th:if="${modify}" class="form-group mt-3">
@@ -45,7 +45,7 @@
                            th:field="*{currentPassword}">
                     <div class="justify-content-center mt-2 px-2 bg-danger text-white text-center text-wrap"
                          th:if="${showErrorPassword}">
-                        <p class="text-cemter py-2"> Wpise hasło jest nieprawidłowe. Spróbuj ponownie.</p>
+                        <p class="text-cemter py-2"> Wpisane hasło jest nieprawidłowe. Spróbuj ponownie.</p>
                     </div>
                 </div>
 
@@ -77,13 +77,17 @@
                         </a>
                     </span>
                 </div>
+                <div class="justify-content-center mt-2 px-2 bg-warning text-white text-center text-wrap"
+                     th:if="${showErrorNothingChange}">
+                    <p class="text-cemter py-2"> Wpisane dane nie różnią się od obecnych.</p>
+                </div>
             </form>
 
         </div>
     </div>
 
 
-    <!-- Small Modal -->
+    <!-- Small Modal - password -->
     <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-sm">

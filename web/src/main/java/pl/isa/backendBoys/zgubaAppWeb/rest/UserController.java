@@ -2,10 +2,7 @@ package pl.isa.backendBoys.zgubaAppWeb.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
@@ -169,50 +166,47 @@ public class UserController {
         User loggedUser = userService.getUserByLogin(loggedUserEmail);
 
         model.addAttribute("searchWord", new SearchHelp());
-        model.addAttribute("modify", true);
         model.addAttribute("userToModify", userToModify);
-        System.out.println(userToModify.getCurrentPassword() + " " + userToModify.getCurrentLoginEmail());
+        model.addAttribute("modify", true);
 
         boolean isConfirmPasswordCorrect = userToModify.getCurrentPassword().equals(loggedUser.getPassword());
         if (!isConfirmPasswordCorrect) {
-            model.addAttribute("loggedUserEmail", loggedUserEmail);
             model.addAttribute("showErrorPassword", true);
+            model.addAttribute("loggedUserEmail", loggedUserEmail);
             model.addAttribute("content", "userPanel_loginData");
             return "main";
         }
 
-        boolean isLoginChanged = !userToModify.getLoginEmail().equals(userService.getLoggedUserEmail()) && userToModify.getCurrentPassword()!= null;
-//        if (userToModify.getCurrentPassword()!= null && !userToModify.getCurrentPassword().isBlank()) {
-
-        boolean isPasswordChanged = userToModify.getPassword().equals(loggedUser.getPassword());
+        boolean isLoginChanged = !userToModify.getLoginEmail().equals(userService.getLoggedUserEmail())
+                && userToModify.getLoginEmail() != null;
+        boolean isPasswordChanged = !userToModify.getPassword().equals(loggedUser.getPassword())
+                && !userToModify.getPassword().equals("");
 
         if (isLoginChanged) {
             boolean isLoginTaken = userService.isLoginTaken(userToModify.getLoginEmail());
             if (isLoginTaken) {
-                model.addAttribute("loggedUserEmail", loggedUserEmail);
                 model.addAttribute("showErrorLogin", true);
+                model.addAttribute("loggedUserEmail", loggedUserEmail);
                 model.addAttribute("content", "userPanel_loginData");
                 return "main";
             } else {
                 userService.changeUserLogin(loggedUser, userToModify.getLoginEmail());
-                //change login in all requests
-                userService.setLoggedUserEmail(userToModify.getLoginEmail());
-                model.addAttribute("loggedUserEmail", userService.getUserByLogin(loggedUserEmail));
-                model.addAttribute("content", "userPanel_loginData_modified");
             }
         } else if (isPasswordChanged) {
-            System.out.println("zmieniam hasło");
-//            userService.changeUserPassword(loggedUser, userToModify.getPassword());
-            userService.logout();
-            model.addAttribute("loggedUserEmail", userService.getUserByLogin(loggedUserEmail));
-            model.addAttribute("content", "userPanel_loginData_modified");
+            userService.changeUserPassword(loggedUser, userToModify.getPassword());
         }
 
-        if (!isLoginChanged && !isPasswordChanged) {
+        if (!(isLoginChanged || isPasswordChanged)) {
+            model.addAttribute("showErrorNothingChange", true);
             model.addAttribute("loggedUserEmail", loggedUserEmail);
+            model.addAttribute("content", "userPanel_loginData");
+            return "main";
+        } else {
+            userService.logout();
             model.addAttribute("content", "userPanel_loginData_modified");
+            return "main";
         }
 
-        return "main";
+
     }
 }
