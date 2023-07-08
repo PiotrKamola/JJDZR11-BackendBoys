@@ -36,24 +36,52 @@ public class Request {
         return requesterLogin;
     }
 
+    public void setRequesterLogin(String requesterLogin) {
+        this.requesterLogin = requesterLogin;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getObjectName() {
         return objectName;
     }
 
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
+
     public String getLostOrFound() {
         return lostOrFound.getText();
+    }
+
+    public void setLostOrFound(LostOrFound lostOrFound) {
+        this.lostOrFound = lostOrFound;
     }
 
     public String getRequestDate() {
         return requestDate;
     }
 
+    public void setRequestDate(String requestDate) {
+        this.requestDate = requestDate;
+    }
+
     public String getCity() {
         return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String myToString() {
+        return this.requesterLogin + "\n" + this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }
 
     public enum LostOrFound {
@@ -69,34 +97,6 @@ public class Request {
         public String getText() {
             return text;
         }
-    }
-
-    public void setRequesterLogin(String requesterLogin) {
-        this.requesterLogin = requesterLogin;
-    }
-
-    public void setObjectName(String objectName) {
-        this.objectName = objectName;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setLostOrFound(LostOrFound lostOrFound) {
-        this.lostOrFound = lostOrFound;
-    }
-
-    public void setRequestDate(String requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String myToString() {
-        return this.requesterLogin + "\n" + this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }
 
 }

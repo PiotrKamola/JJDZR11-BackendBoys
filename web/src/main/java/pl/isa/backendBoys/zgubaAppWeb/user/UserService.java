@@ -1,13 +1,20 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 
 @Controller
 public class UserService {
 
-    private final UserDatabase userDatabase = new UserDatabase();
-
+    private final UserDatabase userDatabase;
+    private final RequestService requestService;
     private String loggedUserEmail;
+
+    public UserService(UserDatabase userDatabase, RequestService requestService) {
+        this.userDatabase = userDatabase;
+        this.requestService = requestService;
+    }
 
     public String getLoggedUserEmail() {
         return loggedUserEmail;
@@ -70,23 +77,18 @@ public class UserService {
     }
 
     public void changeUserPassword(User loggedUser, String newPassword) {
+        System.out.println(1);
         loggedUser.setPassword(newPassword);
+        System.out.println(2);
         userDatabase.update();
-
-//        RequestService requestService = new RequestService();
-//        requestService.getAllRequests().stream().filter(request -> request.getRequesterLogin().equals(user.getLoginEmail())).forEach(request -> request.setRequesterPassword(newPassword));
-//
+        System.out.println(3);
     }
 
     public void changeUserLogin(User loggedUser, String newLogin) {
+        String currentLogin = loggedUser.getLoginEmail();
         loggedUser.setLoginEmail(newLogin);
         userDatabase.update();
-
-//        RequestService requestService = new RequestService();
-//        requestService.getAllRequests().stream()
-//                .filter(request -> request.getRequesterLogin()
-//                        .equals(user.getLoginEmail()))
-//                .forEach(request -> request.setRequesterLogin(newLogin));
+        requestService.changeRequesterLogin(currentLogin, newLogin);
     }
 
 }

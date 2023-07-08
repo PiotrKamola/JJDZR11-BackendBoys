@@ -2,7 +2,10 @@ package pl.isa.backendBoys.zgubaAppWeb.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
@@ -40,7 +43,6 @@ public class UserController {
             model.addAttribute("content", "login");
         }
         return "main";
-
     }
 
     @GetMapping("/logout")
@@ -128,7 +130,6 @@ public class UserController {
             model.addAttribute("showError", true);
             model.addAttribute("content", "userPanel_userData");
         }
-
         return "main";
     }
 
@@ -181,6 +182,8 @@ public class UserController {
                 && userToModify.getLoginEmail() != null;
         boolean isPasswordChanged = !userToModify.getPassword().equals(loggedUser.getPassword())
                 && !userToModify.getPassword().equals("");
+        System.out.println("isPasswordChange - " + isPasswordChanged);
+
 
         if (isLoginChanged) {
             boolean isLoginTaken = userService.isLoginTaken(userToModify.getLoginEmail());
@@ -191,22 +194,22 @@ public class UserController {
                 return "main";
             } else {
                 userService.changeUserLogin(loggedUser, userToModify.getLoginEmail());
+                loggedUser.setLoginEmail(userToModify.getLoginEmail());
             }
-        } else if (isPasswordChanged) {
+        }
+        if (isPasswordChanged) {
             userService.changeUserPassword(loggedUser, userToModify.getPassword());
         }
 
-        if (!(isLoginChanged || isPasswordChanged)) {
+        if ((!isLoginChanged & !isPasswordChanged)) {
             model.addAttribute("showErrorNothingChange", true);
             model.addAttribute("loggedUserEmail", loggedUserEmail);
             model.addAttribute("content", "userPanel_loginData");
-            return "main";
         } else {
             userService.logout();
             model.addAttribute("content", "userPanel_loginData_modified");
-            return "main";
         }
 
-
+        return "main";
     }
 }
