@@ -14,13 +14,9 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/6a57aae0fb.js" crossorigin="anonymous"></script>
-<!--    <script>-->
-<!--        $('#myModal').on('shown.bs.modal', function () {-->
-<!--            $('#myInput').trigger('focus')-->
-<!--        })</script>-->
 </head>
 
-<section th:fragment="navbar">
+<section th:fragment="navbar" class="sticky-top">
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark py-2 sticky-top">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}">

@@ -1,6 +1,5 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 
@@ -77,18 +76,21 @@ public class UserService {
     }
 
     public void changeUserPassword(User loggedUser, String newPassword) {
-        System.out.println(1);
         loggedUser.setPassword(newPassword);
-        System.out.println(2);
         userDatabase.update();
-        System.out.println(3);
     }
 
-    public void changeUserLogin(User loggedUser, String newLogin) {
+    public void changeUserLoginAndRequests(User loggedUser, String newLogin) {
         String currentLogin = loggedUser.getLoginEmail();
         loggedUser.setLoginEmail(newLogin);
         userDatabase.update();
         requestService.changeRequesterLogin(currentLogin, newLogin);
     }
 
+    public void deleteUserAndRequests(User loggedUser) {
+        String deletedLogin = loggedUser.getLoginEmail();
+        userDatabase.deleteUser(loggedUser);
+        userDatabase.update();
+        requestService.deleteRequestsByLogin(deletedLogin);
+    }
 }

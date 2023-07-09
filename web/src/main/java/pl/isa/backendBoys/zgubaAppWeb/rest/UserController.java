@@ -182,9 +182,6 @@ public class UserController {
                 && userToModify.getLoginEmail() != null;
         boolean isPasswordChanged = !userToModify.getPassword().equals(loggedUser.getPassword())
                 && !userToModify.getPassword().equals("");
-        System.out.println("isPasswordChange - " + isPasswordChanged);
-
-
         if (isLoginChanged) {
             boolean isLoginTaken = userService.isLoginTaken(userToModify.getLoginEmail());
             if (isLoginTaken) {
@@ -193,7 +190,7 @@ public class UserController {
                 model.addAttribute("content", "userPanel_loginData");
                 return "main";
             } else {
-                userService.changeUserLogin(loggedUser, userToModify.getLoginEmail());
+                userService.changeUserLoginAndRequests(loggedUser, userToModify.getLoginEmail());
                 loggedUser.setLoginEmail(userToModify.getLoginEmail());
             }
         }
@@ -209,7 +206,40 @@ public class UserController {
             userService.logout();
             model.addAttribute("content", "userPanel_loginData_modified");
         }
+        return "main";
+    }
 
+
+    @GetMapping("/panel/deleteAccount")
+    public String deleteAccountConfirmation(Model model, @ModelAttribute UserDto userToModify) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        model.addAttribute("userToModify", loggedUser);
+        model.addAttribute("searchWord", new SearchHelp());
+
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("content", "userPanel_deleteAccount");
+
+        return "main";
+    }
+
+    @PostMapping("/panel/deleteAccount")
+    public String deleteAccount(Model model, @ModelAttribute UserDto userToModify) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        model.addAttribute("userToModify", loggedUser);
+        model.addAttribute("searchWord", new SearchHelp());
+
+        boolean isConfirmPasswordCorrect = userToModify.getPassword().equals(loggedUser.getPassword());
+        if (!isConfirmPasswordCorrect) {
+            model.addAttribute("showErrorPassword", true);
+            model.addAttribute("loggedUserEmail", loggedUserEmail);
+            model.addAttribute("content", "userPanel_deleteAccount");
+        } else {
+            userService.deleteUserAndRequests(loggedUser);
+            userService.logout();
+            model.addAttribute("content", "userPanel_deleteAccount_notification");
+        }
         return "main";
     }
 }
