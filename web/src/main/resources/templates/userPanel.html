@@ -1,0 +1,40 @@
+<div th:fragment="content" class="container" xmlns="http://www.w3.org/1999/html">
+    <h2 class="text-center text-strong p-4" style="color: #074dcf;">PANEL UŻYTKOWNIKA</h2>
+
+    <div class="row text-center grid gap-3">
+        <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
+            <button type="button" class="user-option-box btn btn-outline-info border text-dark p-5, m-auto">
+                <h3 class="p-5, m-auto">Lista moich zgłoszeń</h3>
+                <i class="bi bi-list-task user-option-icon"></i>
+                <p>Wejdź, aby przeglądać, modyfikować lub usuwać swoje zgłoszenia.</p>
+            </button>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
+            <a th:href="@{/user/panel/showUserData}" style="color:inherit">
+                <button type="button" class="user-option-box btn btn-outline-warning border text-dark p-5, m-auto">
+                    <h3>Moje dane osobowe</h3>
+                    <i class="bi bi-person-vcard user-option-icon"></i>
+                    <p>Wejdź, aby zaktualizować swoje dane osobowe.</p>
+                </button>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
+            <a th:href="@{/user/panel/logindata}" style="color:inherit">
+            <button type="button" class="user-option-box btn btn-outline-warning border text-dark p-5, m-auto">
+                <h3>Dane do logowania</h3>
+                <i class="bi bi-person-lock user-option-icon"></i>
+                <p>Wejdź, aby zaktualizować swój e-mail lub zmienić hasło.</p>
+            </button>
+            </a>
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
+            <button type="button" class="user-option-box btn btn-outline-danger border text-dark p-5, m-auto">
+                <h3>Usuń konto</h3>
+                <i class="bi bi-person-x user-option-icon"></i>
+                <p>Wejdź, aby usunąć swoje konto i opcjonalnie wszystkie powiązane z nim zgłoszenia.</p>
+            </button>
+
+        </div>
+    </div>
+</div>

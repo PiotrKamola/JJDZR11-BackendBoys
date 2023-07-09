@@ -2,7 +2,7 @@
 
     <div class="text-center">
         <h2 style="color: #074dcf;">Zgłoszenia</h2>
-        <span th:if="${loggedUser != null}">
+        <span th:if="${loggedUserEmail != null}">
             <a th:href="@{/request/mineRequests}" class="btn btn-primary btn-sm py-0 mx-2"> Pokaż moje zguby </a>
             <a th:href="@{/request/all}" class="btn btn-primary btn-sm py-0 mx-2"> Pokaż wszystkie </a>
         </span>
