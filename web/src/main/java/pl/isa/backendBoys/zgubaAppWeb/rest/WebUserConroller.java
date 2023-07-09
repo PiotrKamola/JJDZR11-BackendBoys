@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
@@ -15,11 +16,13 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 @RequestMapping("user")
 public class WebUserConroller {
 
-    final
-    UserService userService;
+    private final UserService userService;
+    private final MySqlService mySqlService;
 
-    public WebUserConroller(UserService userService) {
+    public WebUserConroller(UserService userService,
+                            MySqlService mySqlService) {
         this.userService = userService;
+        this.mySqlService = mySqlService;
     }
 
     @GetMapping("/login")
@@ -74,6 +77,7 @@ public class WebUserConroller {
         } else {
             model.addAttribute("showError", false);
             userService.registerUser(userToAdd);
+            mySqlService.addNewUser(userToAdd);
             model.addAttribute("content", "addedNewUser");
         }
         return "main";

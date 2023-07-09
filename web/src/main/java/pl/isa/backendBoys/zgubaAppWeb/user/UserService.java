@@ -1,6 +1,7 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
 import org.springframework.stereotype.Controller;
+import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
 
 @Controller
 public class UserService {

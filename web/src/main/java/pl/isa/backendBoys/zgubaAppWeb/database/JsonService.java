@@ -61,12 +61,6 @@ public class JsonService {
     }
 
     public static void importToSql() throws ClassNotFoundException, SQLException {
-//        try {
-//            System.out.println(Arrays.asList(objectMapper.readValue(Paths.get(USERS_JSONFILE_PATH).toFile(), User[].class)));
-//        }catch (IOException e) {
-//            e.printStackTrace();
-//            System.out.println("error");
-//        }
         List<User> userList = null;
         try {
             userList = Arrays.asList(objectMapper.readValue(Paths.get(USERS_JSONFILE_PATH).toFile(), User[].class));

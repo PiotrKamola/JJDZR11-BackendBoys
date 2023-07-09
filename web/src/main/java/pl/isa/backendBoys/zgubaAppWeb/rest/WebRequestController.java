@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
@@ -21,11 +22,16 @@ public class WebRequestController {
     private final UserService userService;
     private final RequestService requestService;
     private final SearchService searchService;
+    private final MySqlService mySqlService;
 
-    public WebRequestController(RequestService requestService, SearchService searchService, UserService userService) {
+    public WebRequestController(RequestService requestService,
+                                SearchService searchService,
+                                UserService userService,
+                                MySqlService mySqlService) {
         this.requestService = requestService;
         this.searchService = searchService;
         this.userService = userService;
+        this.mySqlService = mySqlService;
     }
 
     @GetMapping("/all")
@@ -63,6 +69,7 @@ public class WebRequestController {
         model.addAttribute("loggedUser", userService.getLoggedUserEmail());
         requestToAdd.setRequesterLogin(userService.getLoggedUserEmail());
         requestService.addRequest(requestToAdd);
+        mySqlService.addNewRequest(requestToAdd);
         model.addAttribute("content", "submittedRequest");
         return "main";
     }
