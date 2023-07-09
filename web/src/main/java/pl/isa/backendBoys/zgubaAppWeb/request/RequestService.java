@@ -2,7 +2,9 @@ package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class RequestService {
@@ -19,7 +21,7 @@ public class RequestService {
 
     public void addRequest(Request request) {
         requestDatabase.add(request);
-        requestDatabase.update();
+        requestDatabase.exportToJson();
     }
 
     public List<Request> getAllRequests() {
@@ -30,6 +32,30 @@ public class RequestService {
         requestDatabase.getAllRequests().stream()
                 .filter(request -> request.getRequesterLogin().equals(currentLoginEmail))
                 .forEach(request -> request.setRequesterLogin(newLoginEmail));
-        requestDatabase.update();
+        requestDatabase.exportToJson();
+    }
+
+    public void deleteRequestsByLogin(String loginEmail) {
+
+        boolean isRequestFound = false;
+
+        Iterator<Request> iterator = requestDatabase.getAllRequests().iterator();
+        while (iterator.hasNext()) {
+            Request request = iterator.next();
+            if (request.getRequesterLogin().equals(loginEmail)) {
+                iterator.remove();
+                isRequestFound = true;
+            }
+        }
+
+        if (isRequestFound) {
+            requestDatabase.exportToJson();
+        }
+    }
+
+    public List<Request> getRequestByloginEmail(String loginEmail) {
+        return requestDatabase.getAllRequests().stream()
+                .filter(request -> request.getRequesterLogin().equals(loginEmail))
+                .collect(Collectors.toList());
     }
 }

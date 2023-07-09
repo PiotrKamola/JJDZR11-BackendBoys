@@ -21,4 +21,8 @@ public class UserDatabase {
     public List<User> getUsers() {
         return users;
     }
+
+    public void deleteUser(User loggedUser) {
+        users.remove(loggedUser);
+    }
 }

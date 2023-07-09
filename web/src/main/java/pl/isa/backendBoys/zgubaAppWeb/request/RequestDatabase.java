@@ -10,15 +10,19 @@ import java.util.List;
 public class RequestDatabase {
     private final List<Request> allRequests = new ArrayList<>(JsonService.getRequestsfromJsonFile());
 
+    public List<Request> getAllRequests() {
+        return allRequests;
+    }
+
     public void add(Request request) {
         allRequests.add(request);
     }
 
-    public void update() {
-        JsonService.updateRequestsJsonFile(allRequests);
+    public void delete(Request request) {
+        allRequests.remove(request);
     }
 
-    public List<Request> getAllRequests() {
-        return allRequests;
+    public void exportToJson() {
+        JsonService.updateRequestsJsonFile(allRequests);
     }
 }
