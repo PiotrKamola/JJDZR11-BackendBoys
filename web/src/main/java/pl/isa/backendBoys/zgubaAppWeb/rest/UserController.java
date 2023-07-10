@@ -242,4 +242,14 @@ public class UserController {
         }
         return "main";
     }
+
+    @GetMapping("/adminpanel")
+    public String adminPanel(Model model) {
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("content", "adminPanel");
+        return "main";
+    }
+
+
 }
