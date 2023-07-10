@@ -17,7 +17,7 @@
 </head>
 
 <section th:fragment="navbar">
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark py-2 sticky-top">
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark py-2 sticky-top navbar-fixed-top">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}">
                 <i class="bi bi-search" style="font-size: 1.4rem; color: DodgerBlue ;"></i>
@@ -57,7 +57,7 @@
                     </div>
 
                     <div th:if="${loggedUserEmail}" class="dropdown">
-                        <a class="nav-link px-lg-2" th:classappend="${content.contains('userPanel')} ? 'active'"
+                        <a class="nav-link px-lg-2" th:classappend="${content.contains('Panel')} ? 'active'"
                            data-toggle="dropdown">
                             <div th:if="${loggedUserEmail == 'ADMIN@ADMIN'}">
                                 <span>ADMIN</span>

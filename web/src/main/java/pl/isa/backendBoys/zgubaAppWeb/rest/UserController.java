@@ -2,10 +2,7 @@ package pl.isa.backendBoys.zgubaAppWeb.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
@@ -250,6 +247,56 @@ public class UserController {
         model.addAttribute("content", "adminPanel");
         return "main";
     }
+
+    @GetMapping("/adminpanel/accounts")
+    public String manageAccounts(Model model, @ModelAttribute User user) {
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("searchWordUser", new SearchHelp());
+        model.addAttribute("users", userService.getNotAdminUsers());
+        model.addAttribute("content", "adminPanel_users");
+        return "main";
+    }
+
+    @GetMapping("/adminpanel/accounts/delete/{userLoginEmail}")
+    public String deleteAccount(Model model, @PathVariable String userLoginEmail) {
+        userService.deleteUserAndRequests(userLoginEmail);
+
+        model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("searchWordUser", new SearchHelp());
+        model.addAttribute("users", userService.getNotAdminUsers());
+        model.addAttribute("deletedUser", userLoginEmail);
+
+        model.addAttribute("content", "adminPanel_users");
+        return "main";
+    }
+//
+//    @GetMapping("/adminpanel/accounts/modify/{userLoginEmail}")
+//    public String modifyAccountGet(Model model, @PathVariable String userLoginEmail) {
+//        User userToModify = userService.getUserByLogin(userLoginEmail);
+//        model.addAttribute("userToModify", userToModify);
+//        model.addAttribute("searchWord", new SearchHelp());
+//        model.addAttribute("modify", true);
+//        model.addAttribute("content", "adminPanel");
+//        return "main";
+//    }
+//
+//    @PostMapping("/adminpanel/accounts/modify/{userLoginEmail}")
+//    public String modifyAccountPost(Model model, @ModelAttribute User userToModify) {
+//        User user = userService.getUserByLogin(userToModify.getLoginEmail());
+//        model.addAttribute("userToModify", userToModify);
+//        model.addAttribute("searchWord", new SearchHelp());
+//        model.addAttribute("modify", true);
+//        model.addAttribute("content", "adminPanel");
+//        if (user != null) {
+//            model.addAttribute("showErrorLogin", true);
+//            return "main";
+//        }
+//        userService.changeUserLoginAndRequests(userToModify, userToModify.getLoginEmail());
+//        return "redirect:/adminpanel/accounts";
+//    }
+
 
 
 }
