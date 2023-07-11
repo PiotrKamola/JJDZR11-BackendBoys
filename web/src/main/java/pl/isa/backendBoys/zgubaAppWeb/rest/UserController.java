@@ -3,19 +3,25 @@ package pl.isa.backendBoys.zgubaAppWeb.rest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.isa.backendBoys.zgubaAppWeb.request.Request;
+import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("user")
 public class UserController {
 
     final UserService userService;
+    final RequestService requestService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RequestService requestService) {
         this.userService = userService;
+        this.requestService = requestService;
     }
 
     @GetMapping("/login")
@@ -205,6 +211,23 @@ public class UserController {
         }
         return "main";
     }
+
+
+////////////////////
+    @GetMapping("/panel/myrequests")
+    public String showMyRequests (Model model) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+
+        List<Request> loggedUserRequests = requestService.getRequestsByUser(loggedUser);
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("searchWordUser", new SearchHelp());
+        model.addAttribute("myRequests", loggedUserRequests);
+        model.addAttribute("content", "userPanel_myRequests");
+        return "main";
+    }
+
 
 
     @GetMapping("/panel/deleteAccount")

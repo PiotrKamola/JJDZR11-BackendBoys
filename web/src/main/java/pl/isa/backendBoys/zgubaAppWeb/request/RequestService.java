@@ -1,6 +1,7 @@
 package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import org.springframework.stereotype.Component;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 import java.util.Iterator;
 import java.util.List;
@@ -61,5 +62,11 @@ public class RequestService {
 
     public void exportRequestDatabaseToJson() {
         requestDatabase.exportToJson();
+    }
+
+    public List<Request> getRequestsByUser(User loggedUser) {
+        return requestDatabase.getRequests().stream()
+                .filter(request -> request.getRequesterLogin().equals(loggedUser.getLoginEmail()))
+                .toList();
     }
 }
