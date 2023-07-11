@@ -25,7 +25,7 @@ public class UserService {
     public List<User> getNotAdminUsers() {
         return userDatabase.getUsers().stream()
                 .filter(user -> !user.getLoginEmail().equals("ADMIN@ADMIN"))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public String getLoggedUserEmail() {
@@ -96,7 +96,12 @@ public class UserService {
 
     public void changeUserLoginAndRequests(User loggedUser, String newLogin) {
         String currentLogin = loggedUser.getLoginEmail();
-        loggedUser.setLoginEmail(newLogin);
+        changeUserLoginAndRequests(currentLogin, newLogin);
+    }
+
+    public void changeUserLoginAndRequests(String currentLogin, String newLogin) {
+        User currentUser = getUserByLogin(currentLogin);
+        currentUser.setLoginEmail(newLogin);
         userDatabase.exortToJson();
         requestService.changeRequesterLogin(currentLogin, newLogin);
     }
