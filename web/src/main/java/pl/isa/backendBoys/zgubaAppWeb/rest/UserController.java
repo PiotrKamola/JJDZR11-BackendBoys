@@ -271,16 +271,16 @@ public class UserController {
         model.addAttribute("content", "adminPanel_users");
         return "main";
     }
-//
-//    @GetMapping("/adminpanel/accounts/modify/{userLoginEmail}")
-//    public String modifyAccountGet(Model model, @PathVariable String userLoginEmail) {
-//        User userToModify = userService.getUserByLogin(userLoginEmail);
-//        model.addAttribute("userToModify", userToModify);
-//        model.addAttribute("searchWord", new SearchHelp());
-//        model.addAttribute("modify", true);
-//        model.addAttribute("content", "adminPanel");
-//        return "main";
-//    }
+
+    @GetMapping("/adminpanel/accounts/modify/{userLoginEmail}")
+    public String modifyAccountGet(Model model, @PathVariable String userLoginEmail) {
+        User userToModify = userService.getUserByLogin(userLoginEmail);
+        model.addAttribute("userToModify", userToModify);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("modify", true);
+        model.addAttribute("content", "adminPanel");
+        return "main";
+    }
 //
 //    @PostMapping("/adminpanel/accounts/modify/{userLoginEmail}")
 //    public String modifyAccountPost(Model model, @ModelAttribute User userToModify) {
