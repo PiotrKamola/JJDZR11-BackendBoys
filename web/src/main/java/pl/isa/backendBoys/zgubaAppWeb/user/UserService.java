@@ -98,15 +98,15 @@ public class UserService {
     public void changeUserLoginAndRequests(String currentLogin, String newLogin) {
         User currentUser = getUserByLogin(currentLogin);
         currentUser.setLoginEmail(newLogin);
-        requestService.changeRequesterLogin(currentLogin, newLogin);
+        mySqlService.updateUserLogin(currentUser, newLogin);
     }
 
     public void deleteUserAndRequests(User userToDelete) {
         String deletedLogin = userToDelete.getLoginEmail();
         mySqlService.deleteUser(userToDelete);
-        if (requestService.deleteRequestsByLogin(deletedLogin)) {
-            requestService.exportRequestDatabaseToJson();
-        }
+//        if (requestService.deleteRequestsByLogin(deletedLogin)) {
+//            requestService.exportRequestDatabaseToJson();
+//        }
     }
 
     public void deleteUserAndRequests(String userLoginEmailToDelete) {

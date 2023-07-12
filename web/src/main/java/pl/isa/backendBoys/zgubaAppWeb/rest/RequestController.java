@@ -67,7 +67,8 @@ public class RequestController {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(requestToAdd);
         model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
-        requestToAdd.setRequesterLogin(userService.getLoggedUserEmail());
+//        requestToAdd.setRequesterLogin(userService.getLoggedUserEmail());
+        requestToAdd.setUser(userService.getUserByLogin(userService.getLoggedUserEmail()));
         requestService.addRequest(requestToAdd);
         mySqlService.addNewRequest(requestToAdd);
         model.addAttribute("content", "submittedRequest");

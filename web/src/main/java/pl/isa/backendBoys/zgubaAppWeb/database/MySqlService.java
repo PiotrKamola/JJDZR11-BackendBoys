@@ -37,6 +37,11 @@ public class MySqlService {
         userRepository.save(user);
     }
 
+    public void updateUserEmail(User user, String newEmail){
+        user.setLoginEmail(newEmail);
+        userRepository.save(user);
+    }
+
     public void updateUserName(User user, String newName){
         user.setName(newName);
         userRepository.save(user);
@@ -69,6 +74,9 @@ public class MySqlService {
 
         try{
             userRepository.saveAll(userList);
+        }catch (Exception e){}
+
+        try{
             requestRepository.saveAll(requestList);
         }catch (Exception e){}
     }
@@ -76,5 +84,10 @@ public class MySqlService {
     public List<User> getUsers(){
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
                         .toList();
+    }
+
+    public List<Request> getRequests(){
+        return StreamSupport.stream(requestRepository.findAll().spliterator(), false)
+                .toList();
     }
 }
