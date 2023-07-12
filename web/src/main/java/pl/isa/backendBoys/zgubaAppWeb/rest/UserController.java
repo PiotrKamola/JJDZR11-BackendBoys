@@ -3,6 +3,7 @@ package pl.isa.backendBoys.zgubaAppWeb.rest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
@@ -12,10 +13,13 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 @RequestMapping("user")
 public class UserController {
 
-    final UserService userService;
+    private final UserService userService;
+    private final MySqlService mySqlService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,
+                                MySqlService mySqlService) {
         this.userService = userService;
+        this.mySqlService = mySqlService;
     }
 
     @GetMapping("/login")
@@ -69,6 +73,7 @@ public class UserController {
         } else {
             model.addAttribute("showError", false);
             userService.registerUser(userToAdd);
+            mySqlService.addNewUser(userToAdd);
             model.addAttribute("content", "addedNewUser");
         }
         return "main";
@@ -348,5 +353,17 @@ public class UserController {
         return "main";
     }
 
+    @GetMapping("/fill")
+    public String fillDtabase(Model model) {
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("content", "filled");
+        try {
+            mySqlService.fillDatabase();
+        }catch (Exception e){
+
+        }
+
+        return "main";
+    }
 
 }

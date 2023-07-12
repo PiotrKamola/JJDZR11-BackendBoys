@@ -8,6 +8,10 @@ import pl.isa.backendBoys.zgubaAppWeb.Repository.UserRepository;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 
+import pl.isa.backendBoys.zgubaAppWeb.database.JsonService;
+
+import java.util.List;
+
 @Service
 @Transactional
 public class MySqlService {
@@ -28,5 +32,18 @@ public class MySqlService {
 
     public void addNewRequest(Request request){
         requestRepository.save(request);
+    }
+
+    public void fillDatabase(){
+        List<User> userList = JsonService.getUsersFromJsonFile();
+        List<Request> requestList = JsonService.getRequestsfromJsonFile();
+
+        try{
+            userRepository.saveAll(userList);
+            requestRepository.saveAll(requestList);
+        }catch (Exception e){
+        }
+
+
     }
 }
