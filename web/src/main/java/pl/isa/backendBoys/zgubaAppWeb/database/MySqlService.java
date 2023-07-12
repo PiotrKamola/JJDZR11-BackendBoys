@@ -11,6 +11,8 @@ import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 import pl.isa.backendBoys.zgubaAppWeb.database.JsonService;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
@@ -30,6 +32,8 @@ public class MySqlService {
         userRepository.save(user);
     }
 
+    public void deleteUser(User user) { userRepository.delete(user);}
+
     public void addNewRequest(Request request){
         requestRepository.save(request);
     }
@@ -41,9 +45,11 @@ public class MySqlService {
         try{
             userRepository.saveAll(userList);
             requestRepository.saveAll(requestList);
-        }catch (Exception e){
-        }
+        }catch (Exception e){}
+    }
 
-
+    public List<User> getUsers(){
+        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
+                        .toList();
     }
 }
