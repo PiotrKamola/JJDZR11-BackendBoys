@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,13 +27,17 @@ public class Request {
     @Column(name = "requesterLogin")
     private String requesterLogin;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Column(name = "objectName")
     private String objectName;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "lostOrFound")
+    @Enumerated(EnumType.STRING)
     private LostOrFound lostOrFound;
 
     @Column(name = "requestDate")

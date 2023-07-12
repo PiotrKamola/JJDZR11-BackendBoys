@@ -32,6 +32,31 @@ public class MySqlService {
         userRepository.save(user);
     }
 
+    public void updateUserPassword(User user, String newPassword){
+        user.setPassword(newPassword);
+        userRepository.save(user);
+    }
+
+    public void updateUserName(User user, String newName){
+        user.setName(newName);
+        userRepository.save(user);
+    }
+
+    public void updateUserCity(User user, String newCity){
+        user.setCity(newCity);
+        userRepository.save(user);
+    }
+
+    public void updateUserContactNumber(User user, String newContactNumber){
+        user.setContactNumber(newContactNumber);
+        userRepository.save(user);
+    }
+
+    public void updateUserLogin(User user, String newEmailLogin){
+        user.setLoginEmail(newEmailLogin);
+        userRepository.save(user);
+    }
+
     public void deleteUser(User user) { userRepository.delete(user);}
 
     public void addNewRequest(Request request){

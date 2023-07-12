@@ -75,19 +75,19 @@ public class UserService {
     }
 
     public void changeUserName(User user, String newName) {
-        user.setName(newName);
+        mySqlService.updateUserName(user, newName);
     }
 
     public void changeUserCity(User user, String newCity) {
-        user.setCity(newCity);
+        mySqlService.updateUserCity(user, newCity);
     }
 
     public void changeUserContactNumber(User user, String newContactNumber) {
-        user.setContactNumber(newContactNumber);
+        mySqlService.updateUserContactNumber(user, newContactNumber);
     }
 
     public void changeUserPassword(User loggedUser, String newPassword) {
-        loggedUser.setPassword(newPassword);
+        mySqlService.updateUserPassword(loggedUser, newPassword);
     }
 
     public void changeUserLoginAndRequests(User loggedUser, String newLogin) {
