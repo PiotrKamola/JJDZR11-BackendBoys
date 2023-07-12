@@ -29,6 +29,13 @@ public class RequestService {
         return requestDatabase.getRequests();
     }
 
+    public Request getRequestById(Long requestId) {
+        return requestDatabase.getRequests().stream()
+                .filter(request -> request.getRequestId().equals(requestId))
+                .findFirst()
+                .orElse(null);
+    }
+
     public void changeRequesterLogin(String currentLoginEmail, String newLoginEmail) {
         requestDatabase.getRequests().stream()
                 .filter(request -> request.getRequesterLogin()
@@ -68,5 +75,14 @@ public class RequestService {
         return requestDatabase.getRequests().stream()
                 .filter(request -> request.getRequesterLogin().equals(loggedUser.getLoginEmail()))
                 .toList();
+    }
+
+    public void deleteRequestById(Long requestId) {
+        deleteRequestById(getRequestById(requestId));
+    }
+
+    public void deleteRequestById(Request request) {
+        requestDatabase.getRequests().remove(request);
+        exportRequestDatabaseToJson();
     }
 }

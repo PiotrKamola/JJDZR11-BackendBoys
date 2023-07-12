@@ -228,6 +228,24 @@ public class UserController {
         return "main";
     }
 
+    @GetMapping("/panel/myrequests/delete/{requestId}")
+    public String deleteRequest (Model model, @PathVariable Long requestId) {
+        Request requestToDelete = requestService.getRequestById(requestId);
+        requestService.deleteRequestById(requestToDelete);
+
+
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+
+        List<Request> loggedUserRequests = requestService.getRequestsByUser(loggedUser);
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("searchWordUser", new SearchHelp());
+        model.addAttribute("myRequests", loggedUserRequests);
+        model.addAttribute("content", "userPanel_myRequests");
+        model.addAttribute("deletedRequest", requestToDelete.getObjectName());
+        return "main";
+    }
 
 
     @GetMapping("/panel/deleteAccount")
@@ -296,8 +314,10 @@ public class UserController {
     }
 
     @GetMapping("/adminpanel/accounts/show/{userLoginEmail}")
-    public String adminShowLoginData(Model model, @PathVariable String userLoginEmail) {
-        User userToModify = userService.getUserByLogin(userLoginEmail);
+    public String adminShowLoginData(Model model, @PathVariable String userLoginEmail,
+                    @ModelAttribute UserDto userToModify) {
+        User currentUser = userService.getUserByLogin(userLoginEmail);
+        userToModify.setCurrentLoginEmail(currentUser.getLoginEmail());
 
         model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         model.addAttribute("userToModify", userToModify);
@@ -313,8 +333,10 @@ public class UserController {
         String loggedUserEmail = userService.getLoggedUserEmail();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
 
-        userToModify.setLoginEmail(userLoginEmail);
-        userToModify.setPassword(userService.getUserByLogin(loggedUserEmail).getPassword());
+        System.out.println(userToModify.getCurrentPassword());
+        userToModify.setCurrentLoginEmail(userLoginEmail);
+//        userToModify.setLoginEmail(userLoginEmail);
+//        userToModify.setPassword(userService.getUserByLogin(userLoginEmail).getPassword());
         //zmienilem z current
 
         model.addAttribute("userToModify", userToModify);
@@ -339,14 +361,22 @@ public class UserController {
         userToModify.setCurrentPassword(userService.getUserByLogin(userLoginEmail).getPassword());
 
         boolean isLoginChanged = !userToModify.getLoginEmail().equals(userToModify.getCurrentLoginEmail())
-                && userToModify.getLoginEmail() != null;
+                && !userToModify.getLoginEmail().equals("");
         boolean isPasswordChanged = !userToModify.getPassword().equals(userToModify.getCurrentPassword())
                 && !userToModify.getPassword().equals("");
+        boolean isAnyFieldChanged = isLoginChanged || isPasswordChanged;
+
+        if (!isAnyFieldChanged) {
+            model.addAttribute("showErrorEmptyFields", true);
+            model.addAttribute("content", "adminPanel_modifyLoginData");
+            return "main";
+        }
+
         if (isLoginChanged) {
             boolean isLoginTaken = userService.isLoginTaken(userToModify.getLoginEmail());
             if (isLoginTaken) {
                 model.addAttribute("showErrorLogin", true);
-                model.addAttribute("content", "userPanel_loginData_modified");
+                model.addAttribute("content", "adminPanel_modifyLoginData");
                 return "main";
             } else {
                 userService.changeUserLoginAndRequests(userLoginEmail, userToModify.getLoginEmail());

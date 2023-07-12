@@ -7,7 +7,13 @@ import java.time.format.DateTimeFormatter;
 
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
+    private Long requestId;
     private String requesterLogin;
+
+    public Long getRequestId() {
+        return requestId;
+    }
+
     private String objectName;
     private String description;
     private LostOrFound lostOrFound;

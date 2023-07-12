@@ -1,7 +1,7 @@
 [
   {
     "loginEmail": "ADMIN@ADMIN",
-    "password": "admin",
+    "password": "123",
     "name": "",
     "city": "",
     "contactNumber": ""
@@ -14,21 +14,21 @@
     "contactNumber": "109876543"
   },
   {
-    "loginEmail": "ewa2002@onet.pl",
-    "password": "M5#u",
+    "loginEmail": "john@wp.pl",
+    "password": "123",
     "name": "Ewa",
     "city": "Gdynia",
     "contactNumber": "210987654"
   },
   {
-    "loginEmail": "natalia@gmail.com",
+    "loginEmail": "ewa@wp.pl",
     "password": "W4*8",
     "name": "Natalia",
     "city": "Poznań",
     "contactNumber": "098765432"
   },
   {
-    "loginEmail": "piotr1999@gmail.coma",
+    "loginEmail": "ewa@wp.pl2",
     "password": "F#n6",
     "name": "Piotr",
     "city": "Gdynia",
