@@ -37,11 +37,6 @@ public class MySqlService {
         userRepository.save(user);
     }
 
-    public void updateUserEmail(User user, String newEmail){
-        user.setLoginEmail(newEmail);
-        userRepository.save(user);
-    }
-
     public void updateUserName(User user, String newName){
         user.setName(newName);
         userRepository.save(user);
@@ -57,7 +52,7 @@ public class MySqlService {
         userRepository.save(user);
     }
 
-    public void updateUserLogin(User user, String newEmailLogin){
+    public void updateUserEmailLogin(User user, String newEmailLogin){
         user.setLoginEmail(newEmailLogin);
         userRepository.save(user);
     }

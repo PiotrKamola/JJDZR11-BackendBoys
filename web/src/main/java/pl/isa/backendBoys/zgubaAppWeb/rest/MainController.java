@@ -13,8 +13,6 @@ import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
 public class MainController {
 
     final UserService userService;
-    //wywalic userservice aw rzucic jedynie zmiennaa loggedUserEmail i tam sie odniesc dotego
-    // sprobowac zrobic klase gdzie bede tylko  przekazywal model i go wzbogacał
 
     public MainController(UserService userService) {
         this.userService = userService;

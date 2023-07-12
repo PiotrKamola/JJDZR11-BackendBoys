@@ -297,7 +297,6 @@ public class UserController {
 
         userToModify.setLoginEmail(userLoginEmail);
         userToModify.setPassword(userService.getUserByLogin(loggedUserEmail).getPassword());
-        //zmienilem z current
 
         model.addAttribute("userToModify", userToModify);
         model.addAttribute("searchWord", new SearchHelp());
@@ -362,7 +361,6 @@ public class UserController {
         }catch (Exception e){
 
         }
-
         return "main";
     }
 

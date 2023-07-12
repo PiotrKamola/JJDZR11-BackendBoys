@@ -5,22 +5,14 @@ import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class UserService {
-    private final RequestService requestService;
     private final MySqlService mySqlService;
     private String loggedUserEmail;
 
-    public UserService(RequestService requestService,
-                       MySqlService mySqlService) {
-        this.requestService = requestService;
+    public UserService(MySqlService mySqlService) {
         this.mySqlService = mySqlService;
-    }
-
-    public List<User> getAllUsers() {
-        return mySqlService.getUsers();
     }
 
     public List<User> getNotAdminUsers() {
@@ -31,10 +23,6 @@ public class UserService {
 
     public String getLoggedUserEmail() {
         return loggedUserEmail;
-    }
-
-    public void setLoggedUserEmail(String loggedUserEmail) {
-        this.loggedUserEmail = loggedUserEmail;
     }
 
     public boolean loginUser(String loginEmail, String password) {
@@ -49,11 +37,6 @@ public class UserService {
 
     public void logout(){
         loggedUserEmail = null;
-    }
-
-    public void registerUser(String name, String city, String contactNumber, String loginEmail, String password) {
-        User newUser = new User(name, contactNumber, loginEmail, password, city);
-        mySqlService.addNewUser(newUser);
     }
 
     public void registerUser(User user) {
@@ -98,15 +81,11 @@ public class UserService {
     public void changeUserLoginAndRequests(String currentLogin, String newLogin) {
         User currentUser = getUserByLogin(currentLogin);
         currentUser.setLoginEmail(newLogin);
-        mySqlService.updateUserLogin(currentUser, newLogin);
+        mySqlService.updateUserEmailLogin(currentUser, newLogin);
     }
 
     public void deleteUserAndRequests(User userToDelete) {
-        String deletedLogin = userToDelete.getLoginEmail();
         mySqlService.deleteUser(userToDelete);
-//        if (requestService.deleteRequestsByLogin(deletedLogin)) {
-//            requestService.exportRequestDatabaseToJson();
-//        }
     }
 
     public void deleteUserAndRequests(String userLoginEmailToDelete) {
