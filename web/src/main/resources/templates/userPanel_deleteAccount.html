@@ -1,0 +1,65 @@
+<div th:fragment="content" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div>
+                <h2 class="text-center" style="color: #800000;">USUWANIE KONTA UŻYTKOWNIKA</h2>
+            </div>
+
+            <form th:action="@{/user/panel/deleteAccount}" th:object="${userToModify}" method="post">
+                <div>
+                    <h5>W celu usunięcie swojego konta oraz wszystkich powiązanych z nim zgłoszeń,
+                        proszę o zatwierdzenie swojej decyzji poprzez ponowne wpisanie hasła</h5>
+                </div>
+
+                <div class="form-group my-3">
+                    <label for="currentPassword">Hasło:</label>
+                    <input type="password" class="form-control border-2" id="currentPassword" name="currentPassword"
+                           required th:field="*{password}">
+                    <div class="justify-content-center mt-2 px-2 bg-danger text-white text-center text-wrap"
+                         th:if="${showErrorPassword}">
+                        <p class="text-cemter py-2"> Wpisane hasło jest nieprawidłowe. Spróbuj ponownie.</p>
+                    </div>
+                </div>
+
+                <div class="text-end m-auto mt-4">
+                    <a th:href="@{/user/panel}" style="color:inherit; text-decoration:none;">
+                        <button type="button" class="btn btn-outline-secondary mb-1">
+                            <i class="bi bi-unindent" style="font-size: 1.2rem;"></i>
+                            <span> Wróć do panelu użytkownika</span>
+                        </button>
+                    </a>
+                        <button type="button" class="btn btn-danger mb-1 py-2 p-5 ms-1"><i
+                                class="bi bi-x-square" data-bs-toggle="modal"
+                                data-bs-target="#deleteconfirmation"> Usuń konto</i>
+                        </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteconfirmation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 text-strong" id="staticBackdropLabel" style="color: #a81616;">Usuwanie konta użytkownika</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Czy na pewno chcesz usunać swoje konto i wszystkie powiązane z nim zgłoszenia?
+                                Ta operacja jest nieodwracalna!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Anuluj</button>
+                                <button type="submit" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                    Tak, usuń moje konto </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+
+</div>

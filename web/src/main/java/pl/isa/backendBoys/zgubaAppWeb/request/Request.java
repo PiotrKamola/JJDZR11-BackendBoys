@@ -106,6 +106,14 @@ public class Request {
 //        this.city = city;
 //    }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String myToString() {
+        return this.requesterLogin + "\n" + this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
+    }
+
     public enum LostOrFound {
         LOST("Lost"), FOUND("Found");
 
@@ -120,9 +128,4 @@ public class Request {
             return text;
         }
     }
-
-    public String myToString() {
-        return this.requesterLogin + "\n" + this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
-    }
-
 }

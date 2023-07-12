@@ -22,7 +22,6 @@ public class User {
     private String name;
     @Column(name = "city")
     private String city;
-    @Column(name = "contactNumber")
     private String contactNumber;
 
 //    public void setLoginEmail(String loginEmail) {
