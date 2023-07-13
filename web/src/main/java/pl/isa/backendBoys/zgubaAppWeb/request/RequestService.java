@@ -85,4 +85,13 @@ public class RequestService {
         requestDatabase.getRequests().remove(request);
         exportRequestDatabaseToJson();
     }
+
+    public void modifyRequest(Request currentRequest, Request requestToModify) {
+        currentRequest.setCity(requestToModify.getCity());
+        currentRequest.setDescription(requestToModify.getDescription());
+        currentRequest.setLostOrFound(Request.LostOrFound.getFromText(requestToModify.getLostOrFound()));
+        currentRequest.setObjectName(requestToModify.getObjectName());
+        currentRequest.setRequestDate(requestToModify.getRequestDate());
+        exportRequestDatabaseToJson();
+    }
 }

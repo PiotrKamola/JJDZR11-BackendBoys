@@ -1,6 +1,7 @@
 package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,16 +11,14 @@ public class Request {
     private Long requestId;
     private String requesterLogin;
 
-    public Long getRequestId() {
-        return requestId;
-    }
-
     private String objectName;
+
     private String description;
     private LostOrFound lostOrFound;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private String requestDate;
     private String city;
-
     public Request() {
         this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.city = null;
@@ -36,6 +35,10 @@ public class Request {
         this.lostOrFound = lostOrFound;
         this.objectName = objectName;
         this.description = description;
+    }
+
+    public Long getRequestId() {
+        return requestId;
     }
 
     public String getRequesterLogin() {
@@ -89,9 +92,13 @@ public class Request {
     public String myToString() {
         return this.requesterLogin + "\n" + this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }
+    public String stringToCompareRequestswhileModify() {
+        return this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
+    }
+
 
     public enum LostOrFound {
-        LOST("Lost"), FOUND("Found");
+        LOST("Zgubione"), FOUND("Znalezione");
 
         public final String text;
 
@@ -99,10 +106,22 @@ public class Request {
             this.text = lostOrFoundString;
         }
 
+        public static LostOrFound getFromText(String text) {
+            for (LostOrFound foundEnum : LostOrFound.values()) {
+                if (foundEnum.text.equalsIgnoreCase(text)) {
+                    return foundEnum;
+                }
+            }
+            return null;
+        }
+
+
         @JsonValue
         public String getText() {
             return text;
         }
+
+
     }
 
 }

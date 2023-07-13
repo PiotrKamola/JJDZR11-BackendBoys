@@ -25,16 +25,16 @@
 
                 </div>
 
-                <!--                <div th:if="${showModifyUserInformation}" class="alert alert-warning alert-dismissible fade show m-auto my-2"-->
-                <!--                     role="alert" style="width:900px;">-->
-                <!--                    <span>Dane użytkownika '<span class="text-strong" th:text="${showModifyUserInformation}"></span>'-->
-                <!--                        dotyczące logowania (login/e-mail lub hasło) zostały zmienione.</span>-->
-                <!--                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"-->
-                <!--                            style="background: none; border: none; outline: none; text-decoration: underline;">-->
-                <!--                        <i class="bi bi-x-square-fill"></i>-->
-                <!--                    </button>-->
+                <div th:if="${showModifyRequestInformation}" class="alert alert-warning alert-dismissible fade show m-auto my-2"
+                     role="alert" style="width:900px;">
+                    <span>Zgłoszenie dotyczące '<span class="text-strong" th:text="${showModifyRequestInformation}"></span>'
+                        zostało zmodyfikowane.</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                            style="background: none; border: none; outline: none; text-decoration: underline;">
+                        <i class="bi bi-x-square-fill"></i>
+                    </button>
 
-                <!--                </div>-->
+                </div>
 
                 <div class="fixed-header-table-container m-auto">
                     <table class="table table-striped table-bordered mt-1">
@@ -56,19 +56,22 @@
                             <td class="text-center" style="width: 40%"th:text="${request.description}"></td>
 <!--                            style="width: 70px">-->
                             <td class="text-center py-2" style="width: 80px">
-                                <div th:if="${request.lostOrFound =='Found'}" >
-                                    <i class="bi bi-puzzle-fill" style="font-size: 1.5rem; color: #00864a ;"></i>
+                                <div th:if="${request.lostOrFound =='Znalezione'}" >
+                                    <i class="bi bi-puzzle-fill" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
                                     <p class="text-strong mb-0" style="font-size: 12px">ZNALAZŁEM</p>
                                 </div>
-                                <div th:if="${request.lostOrFound =='Lost'}">
-                                    <i class="bi bi-puzzle" style="font-size: 1.5rem; color: #b70000 ;"></i>
+                                <div th:if="${request.lostOrFound =='Zgubione'}">
+                                    <i class="bi bi-puzzle" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
                                     <p class="text-strong mb-0" style="font-size: 12px">ZGUBIŁEM</p>
                                 </div>
                             </td>
 
 
                             <td class="text-center py-4"  style="width: 160px">
-                                <a href="" class="btn btn-outline-warning btn-sm my-0">EDYTUJ </a>
+                                <a th:href="@{/user/panel/myrequests/modify/{requestId}(requestId=*{request.requestId})}"
+                                   class="btn btn-outline-warning btn-sm my-0">
+                                    EDYTUJ
+                                </a>
 
                                 <a th:href="@{/user/panel/myrequests/delete/{requestId}(requestId=*{request.requestId})}"
                                    class="btn btn-outline-danger btn-sm mb-0"

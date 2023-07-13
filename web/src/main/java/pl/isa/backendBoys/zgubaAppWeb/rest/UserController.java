@@ -213,7 +213,6 @@ public class UserController {
     }
 
 
-////////////////////
     @GetMapping("/panel/myrequests")
     public String showMyRequests (Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
@@ -247,6 +246,48 @@ public class UserController {
         return "main";
     }
 
+    @GetMapping("/panel/myrequests/modify/{requestId}")
+    public String modifyMyRequestGet (Model model, @PathVariable Long requestId,
+                                   @ModelAttribute Request requestToModify) {
+
+        Request currentRequest = requestService.getRequestById(requestId);
+
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("currentRequest", currentRequest);
+
+        model.addAttribute("content", "userPanel_modifyRequest");
+        return "main";
+    }
+
+
+    @PostMapping("/panel/myrequests/modify/{requestId}")
+    public String modifyMyRequestPost (Model model, @PathVariable Long requestId,
+                                   @ModelAttribute Request requestToModify) {
+        model.addAttribute("searchWord", new SearchHelp());
+
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+
+        Request currentRequest = requestService.getRequestById(requestId);
+        model.addAttribute("currentRequest", currentRequest);
+
+        if (currentRequest.stringToCompareRequestswhileModify().equals(requestToModify.stringToCompareRequestswhileModify())) {
+            model.addAttribute("nothingHasChanged", true);
+            model.addAttribute("content", "userPanel_modifyRequest");
+            return "main";
+        }
+
+        User loggedUser = userService.getUserByLogin(loggedUserEmail);
+        List<Request> loggedUserRequests = requestService.getRequestsByUser(loggedUser);
+        requestService.modifyRequest(currentRequest, requestToModify);
+        model.addAttribute("myRequests", loggedUserRequests);
+        model.addAttribute("showModifyRequestInformation", currentRequest.getObjectName());
+
+        model.addAttribute("content", "userPanel_myRequests");
+        return "main";
+    }
 
     @GetMapping("/panel/deleteAccount")
     public String deleteAccountConfirmation(Model model, @ModelAttribute UserDto userToModify) {
@@ -333,11 +374,7 @@ public class UserController {
         String loggedUserEmail = userService.getLoggedUserEmail();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
 
-        System.out.println(userToModify.getCurrentPassword());
         userToModify.setCurrentLoginEmail(userLoginEmail);
-//        userToModify.setLoginEmail(userLoginEmail);
-//        userToModify.setPassword(userService.getUserByLogin(userLoginEmail).getPassword());
-        //zmienilem z current
 
         model.addAttribute("userToModify", userToModify);
         model.addAttribute("searchWord", new SearchHelp());
@@ -367,7 +404,7 @@ public class UserController {
         boolean isAnyFieldChanged = isLoginChanged || isPasswordChanged;
 
         if (!isAnyFieldChanged) {
-            model.addAttribute("showErrorEmptyFields", true);
+            model.addAttribute("showErrorNothingChange", true);
             model.addAttribute("content", "adminPanel_modifyLoginData");
             return "main";
         }
@@ -390,14 +427,10 @@ public class UserController {
             }
         }
 
-        if ((!isLoginChanged && !isPasswordChanged)) {
-            model.addAttribute("showErrorNothingChange", true);
-            model.addAttribute("content", "adminPanel_modifyLoginData");
-        } else {
-            model.addAttribute("showModifyUserInformation", userToModify.getLoginEmail());
-            model.addAttribute("users", userService.getNotAdminUsers());
-            model.addAttribute("content", "adminPanel_users");
-        }
+        model.addAttribute("showModifyUserInformation", userToModify.getLoginEmail());
+        model.addAttribute("users", userService.getNotAdminUsers());
+        model.addAttribute("content", "adminPanel_users");
+
         return "main";
     }
 
