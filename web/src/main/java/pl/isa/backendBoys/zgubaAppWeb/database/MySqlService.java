@@ -63,17 +63,23 @@ public class MySqlService {
         requestRepository.save(request);
     }
 
-    public void fillDatabase(){
+    public void fillUsers(){
         List<User> userList = JsonService.getUsersFromJsonFile();
-        List<Request> requestList = JsonService.getRequestsfromJsonFile();
 
         try{
             userRepository.saveAll(userList);
-        }catch (Exception e){}
+        }catch (Exception e){
+        }
 
+    }
+
+    public void fillRequests(){
+        List<Request> requestList = JsonService.getRequestsfromJsonFile();
         try{
             requestRepository.saveAll(requestList);
-        }catch (Exception e){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public List<User> getUsers(){

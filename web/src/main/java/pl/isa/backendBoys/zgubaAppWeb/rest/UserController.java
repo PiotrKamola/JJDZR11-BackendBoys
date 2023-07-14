@@ -73,7 +73,6 @@ public class UserController {
         } else {
             model.addAttribute("showError", false);
             userService.registerUser(userToAdd);
-            mySqlService.addNewUser(userToAdd);
             model.addAttribute("content", "addedNewUser");
         }
         return "main";
@@ -357,9 +356,15 @@ public class UserController {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("content", "filled");
         try {
-            mySqlService.fillDatabase();
+            mySqlService.fillUsers();
         }catch (Exception e){
+            e.printStackTrace();
+        }
 
+        try {
+            mySqlService.fillRequests();
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return "main";
     }
