@@ -46,7 +46,6 @@ public class RequestController {
     @GetMapping("/mineRequests")
     public String mineRequests(Model model, @ModelAttribute SearchHelp searchWord) {
         model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
-//        List<Request> searchList = searchService.searchByWord(requestService.getAllRequests(), userService.getLoggedUserEmail());
 
         model.addAttribute("allRequests", userService.getUserByLogin(userService.getLoggedUserEmail()).getRequest());
         model.addAttribute("searchWord", new SearchHelp());

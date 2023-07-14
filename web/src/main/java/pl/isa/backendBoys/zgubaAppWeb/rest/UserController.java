@@ -361,11 +361,12 @@ public class UserController {
             e.printStackTrace();
         }
 
-        try {
-            mySqlService.fillRequests();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        TEMPORARY DISABLED
+//        try {
+//            mySqlService.fillRequests();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
         return "main";
     }
 
