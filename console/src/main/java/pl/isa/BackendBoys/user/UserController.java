@@ -2,7 +2,7 @@ package pl.isa.BackendBoys.user;
 
 import pl.isa.BackendBoys.request.RequestMenu;
 
-public class UserService {
+public class UserController {
 
     private final UserDatabase userDatabase = new UserDatabase();
     private final UserMenu userMenu = new UserMenu();

@@ -9,7 +9,7 @@ public class UserMenu extends AppMenu {
     private static final int REGISTER = 2;
     private static final int BACK_TO_MENU = 3;
 
-    public void runMenu(userService userService) {
+    public void runMenu(UserController userController) {
         System.out.println("\nOnly registered users could send requests.");
 
         boolean isRunning = true;
@@ -26,9 +26,9 @@ public class UserMenu extends AppMenu {
 
             //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
-                case LOG_IN_OR_OUT -> isRunning = !logIn(userService);
+                case LOG_IN_OR_OUT -> isRunning = !logIn(userController);
                 case REGISTER -> {
-                    userService.registerUser();
+                    userController.registerUser();
                     isRunning = false;
                 }
                 case BACK_TO_MENU -> isRunning = false;
@@ -45,9 +45,9 @@ public class UserMenu extends AppMenu {
         return getStringFromUser("Please enter your login (e-mail):");
     }
 
-    private boolean logIn(UserService userService) {
+    private boolean logIn(UserController userController) {
         if (RequestMenu.loggedUserLogin == null) {
-            if (userService.loginUser(getUserLoginEmail(), getUserPassword())) {
+            if (userController.loginUser(getUserLoginEmail(), getUserPassword())) {
                 System.out.println("You log in successfully.");
                 return true;
             } else {
