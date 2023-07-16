@@ -55,12 +55,12 @@
                             <td class="text-center" style="width: 15%" th:text="${request.objectName}"></td>
                             <td class="text-center" style="width: 40%"th:text="${request.description}"></td>
 <!--                            style="width: 70px">-->
-                            <td class="text-center py-2" style="width: 80px">
-                                <div th:if="${request.lostOrFound =='Znalezione'}" >
+                            <td class="text-center py-2" style="width: 60px">
+                                <div th:if="${request.lostOrFound.text =='Zgubione'}">
                                     <i class="bi bi-puzzle-fill" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
                                     <p class="text-strong mb-0" style="font-size: 12px">ZNALAZŁEM</p>
                                 </div>
-                                <div th:if="${request.lostOrFound =='Zgubione'}">
+                                <div th:if="${request.lostOrFound.text =='Znalezione'}">
                                     <i class="bi bi-puzzle" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
                                     <p class="text-strong mb-0" style="font-size: 12px">ZGUBIŁEM</p>
                                 </div>

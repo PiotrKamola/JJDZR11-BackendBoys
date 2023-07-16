@@ -51,6 +51,15 @@ public class Request {
             this.text = lostOrFoundString;
         }
 
+        public static LostOrFound getFromText(String text) {
+            for (LostOrFound foundEnum : LostOrFound.values()) {
+                if (foundEnum.text.equalsIgnoreCase(text)) {
+                    return foundEnum;
+                }
+            }
+            return null;
+        }
+
         @JsonValue
         public String getText() {
             return text;

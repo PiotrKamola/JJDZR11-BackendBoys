@@ -6,4 +6,5 @@ import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    User findUserByLoginEmail(String login);
 }

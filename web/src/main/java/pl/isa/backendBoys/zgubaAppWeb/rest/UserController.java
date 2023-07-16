@@ -239,7 +239,8 @@ public class UserController {
 
         String loggedUserEmail = userService.getLoggedUserEmail();
 
-        List<Request> loggedUserRequests = userService.getUserByLogin(loggedUserEmail).getRequest();
+        List<Request> loggedUserRequests = requestService.getRequestsByUser(loggedUserEmail);
+
         model.addAttribute("loggedUserEmail", loggedUserEmail);
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("searchWordUser", new SearchHelp());
@@ -453,11 +454,11 @@ public class UserController {
         }
 
 //        TEMPORARY DISABLED
-//        try {
-//            mySqlService.fillRequests();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        try {
+            mySqlService.fillRequests();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "main";
     }
 
@@ -478,12 +479,14 @@ public class UserController {
     @GetMapping("/adminpanel/requests/delete/{requestId}")
     public String deleteUserRequest (Model model, @PathVariable Long requestId) {
         Request requestToDelete = requestService.getRequestById(requestId);
-        requestService.deleteRequestById(requestToDelete);
+        mySqlService.deleteRequest(requestToDelete);
 
         String loggedUserEmail = userService.getLoggedUserEmail();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
 
         List<Request> allRequests = requestService.getAllRequests();
+
+
         model.addAttribute("requests", allRequests);
 
         model.addAttribute("searchWord", new SearchHelp());

@@ -3,32 +3,22 @@
     "requestId": null,
     "objectName": "Zegarek",
     "description": "Czarny zegarek z paskiem skórzanym",
-    "lostOrFound": "Lost",
+    "lostOrFound": "Zgubione",
     "requestDate": "2023-07-05",
     "city": "Warszawa",
     "user": {
-      "userId": 96,
-      "city": "Warszawa",
-      "contactNumber": "109876543",
-      "loginEmail": "pawel01@wp.pl",
-      "name": "Paweł",
-      "password": "pawel01"
+      "loginEmail": "pawel01@wp.pl"
     }
   },
   {
     "requestId": null,
     "objectName": "Portfel",
     "description": "Brązowy portfel z dokumentami",
-    "lostOrFound": "Found",
+    "lostOrFound": "Znalezione",
     "requestDate": "2023-07-01",
     "city": "Kraków",
     "user": {
-      "userId": 97,
-      "city": "Gdynia",
-      "contactNumber": "210987654",
-      "loginEmail": "ewa2002@onet.pl",
-      "name": "Ewa",
-      "password": "M5#u"
+      "loginEmail": "pawel01@wp.pl"
     }
   }
 ]

@@ -30,27 +30,22 @@ public class MySqlService {
 
     public void updateUserPassword(User user, String newPassword){
         user.setPassword(newPassword);
-        userRepository.save(user);
     }
 
     public void updateUserName(User user, String newName){
         user.setName(newName);
-        userRepository.save(user);
     }
 
     public void updateUserCity(User user, String newCity){
         user.setCity(newCity);
-        userRepository.save(user);
     }
 
     public void updateUserContactNumber(User user, String newContactNumber){
         user.setContactNumber(newContactNumber);
-        userRepository.save(user);
     }
 
     public void updateUserEmailLogin(User user, String newEmailLogin){
         user.setLoginEmail(newEmailLogin);
-        userRepository.save(user);
     }
 
     public void deleteUser(User user) { userRepository.delete(user);}
@@ -71,6 +66,11 @@ public class MySqlService {
 
     public void fillRequests(){
         List<Request> requestList = JsonService.getRequestsfromJsonFile();
+
+        for(Request request : requestList){
+            request.setUser(userRepository.findUserByLoginEmail(request.getUser().getLoginEmail()));
+        }
+
         try{
             requestRepository.saveAll(requestList);
         }catch (Exception e){

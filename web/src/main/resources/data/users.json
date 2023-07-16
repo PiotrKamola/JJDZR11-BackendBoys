@@ -1,6 +1,6 @@
 [
   {
-    "userId": 1,
+    "userId": null,
     "loginEmail": "ADMIN@ADMIN",
     "password": "admin",
     "name": "",
@@ -8,7 +8,7 @@
     "contactNumber": ""
   },
   {
-    "userId": 2,
+    "userId": null,
     "loginEmail": "pawel01@wp.pl",
     "password": "pawel01",
     "name": "Paweł",
@@ -16,7 +16,7 @@
     "contactNumber": "109876543"
   },
   {
-    "userId": 3,
+    "userId": null,
     "loginEmail": "ewa2002@onet.pl",
     "password": "M5#u",
     "name": "Ewa",
@@ -24,7 +24,7 @@
     "contactNumber": "210987654"
   },
   {
-    "userId": 4,
+    "userId": null,
     "loginEmail": "natalia@gmail.com",
     "password": "W4*8",
     "name": "Natalia",
@@ -32,7 +32,7 @@
     "contactNumber": "098765432"
   },
   {
-    "userId": 5,
+    "userId": null,
     "loginEmail": "piotr1999@gmail.coma",
     "password": "F#n6",
     "name": "Piotr",
@@ -40,7 +40,7 @@
     "contactNumber": "654321098"
   },
   {
-    "userId": 6,
+    "userId": null,
     "loginEmail": "marcin88@yahoo.com",
     "password": "asd",
     "name": "Marcin",
@@ -48,7 +48,7 @@
     "contactNumber": "432109876"
   },
   {
-    "userId": 7,
+    "userId": null,
     "loginEmail": "iza1992@gmail.com",
     "password": "d!3G",
     "name": "Iza",
@@ -56,7 +56,7 @@
     "contactNumber": "321098765"
   },
   {
-    "userId": 8,
+    "userId": null,
     "loginEmail": "adam90@onet.pl",
     "password": "J5*7e",
     "name": "Adam",
@@ -64,7 +64,7 @@
     "contactNumber": "210987654"
   },
   {
-    "userId": 9,
+    "userId": null,
     "loginEmail": "tom@gmail.com",
     "password": "tom",
     "name": "Tomek",
@@ -72,27 +72,11 @@
     "contactNumber": "098765432"
   },
   {
-    "userId": 88,
+    "userId": null,
     "loginEmail": "aga@aaa.com",
     "password": "aaa",
     "name": "Agnieszka",
     "city": "Poznań",
     "contactNumber": "765432109"
-  },
-  {
-    "userId": 12,
-    "loginEmail": "test1@wp.pl",
-    "password": "test1",
-    "name": "test1@wp.pl",
-    "city": "test",
-    "contactNumber": "111111111"
-  },
-  {
-    "userId": 32,
-    "loginEmail": "qqq@wp.pl",
-    "password": "qqq",
-    "name": "qqq@wp.pl",
-    "city": "qqq",
-    "contactNumber": "111111111"
   }
 ]
