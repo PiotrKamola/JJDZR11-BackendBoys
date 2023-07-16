@@ -1,6 +1,7 @@
 package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import org.springframework.stereotype.Component;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 import java.util.Iterator;
 import java.util.List;
@@ -21,25 +22,35 @@ public class RequestService {
 
     public void addRequest(Request request) {
         requestDatabase.add(request);
-        requestDatabase.exportToJson();
+        exportRequestDatabaseToJson();
     }
 
     public List<Request> getAllRequests() {
-        return requestDatabase.getAllRequests();
+        return requestDatabase.getRequests();
+    }
+
+    public Request getRequestById(Long requestId) {
+        return requestDatabase.getRequests().stream()
+                .filter(request -> request.getRequestId().equals(requestId))
+                .findFirst()
+                .orElse(null);
     }
 
     public void changeRequesterLogin(String currentLoginEmail, String newLoginEmail) {
-        requestDatabase.getAllRequests().stream()
-                .filter(request -> request.getRequesterLogin().equals(currentLoginEmail))
+        requestDatabase.getRequests().stream()
+                .filter(request -> request.getRequesterLogin()
+                        .equals(currentLoginEmail))
                 .forEach(request -> request.setRequesterLogin(newLoginEmail));
-        requestDatabase.exportToJson();
+
+        exportRequestDatabaseToJson();
+
     }
 
-    public void deleteRequestsByLogin(String loginEmail) {
+    public boolean deleteRequestsByLogin(String loginEmail) {
 
         boolean isRequestFound = false;
 
-        Iterator<Request> iterator = requestDatabase.getAllRequests().iterator();
+        Iterator<Request> iterator = requestDatabase.getRequests().iterator();
         while (iterator.hasNext()) {
             Request request = iterator.next();
             if (request.getRequesterLogin().equals(loginEmail)) {
@@ -47,15 +58,40 @@ public class RequestService {
                 isRequestFound = true;
             }
         }
-
-        if (isRequestFound) {
-            requestDatabase.exportToJson();
-        }
+        return isRequestFound;
     }
 
     public List<Request> getRequestByloginEmail(String loginEmail) {
-        return requestDatabase.getAllRequests().stream()
-                .filter(request -> request.getRequesterLogin().equals(loginEmail))
-                .collect(Collectors.toList());
+        return requestDatabase.getRequests().stream()
+                .filter(request -> request.getRequesterLogin()
+                        .equals(loginEmail)).collect(Collectors.toList());
+    }
+
+    public void exportRequestDatabaseToJson() {
+        requestDatabase.exportToJson();
+    }
+
+    public List<Request> getRequestsByUser(User loggedUser) {
+        return requestDatabase.getRequests().stream()
+                .filter(request -> request.getRequesterLogin().equals(loggedUser.getLoginEmail()))
+                .toList();
+    }
+
+    public void deleteRequestById(Long requestId) {
+        deleteRequestById(getRequestById(requestId));
+    }
+
+    public void deleteRequestById(Request request) {
+        requestDatabase.getRequests().remove(request);
+        exportRequestDatabaseToJson();
+    }
+
+    public void modifyRequest(Request currentRequest, Request requestToModify) {
+        currentRequest.setCity(requestToModify.getCity());
+        currentRequest.setDescription(requestToModify.getDescription());
+        currentRequest.setLostOrFound(Request.LostOrFound.getFromText(requestToModify.getLostOrFound()));
+        currentRequest.setObjectName(requestToModify.getObjectName());
+        currentRequest.setRequestDate(requestToModify.getRequestDate());
+        exportRequestDatabaseToJson();
     }
 }
