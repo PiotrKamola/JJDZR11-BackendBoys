@@ -24,10 +24,7 @@ public class RequestController {
     private final SearchService searchService;
     private final MySqlService mySqlService;
 
-    public RequestController(RequestService requestService,
-                                SearchService searchService,
-                                UserService userService,
-                                MySqlService mySqlService) {
+    public RequestController(RequestService requestService, SearchService searchService, UserService userService, MySqlService mySqlService) {
         this.requestService = requestService;
         this.searchService = searchService;
         this.userService = userService;
@@ -53,6 +50,7 @@ public class RequestController {
         return "main";
 
     }
+
     @GetMapping("/submitted")
     public String submittedRequest(Model model) {
         model.addAttribute("searchWord", new SearchHelp());

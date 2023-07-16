@@ -15,7 +15,8 @@ public class JsonService {
     private static final String REQUESTS_JSONFILE_PATH = "web/src/main/resources/data/requests.json";
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    private JsonService(){}
+    private JsonService() {
+    }
 
     public static List<User> getUsersFromJsonFile() {
         try {

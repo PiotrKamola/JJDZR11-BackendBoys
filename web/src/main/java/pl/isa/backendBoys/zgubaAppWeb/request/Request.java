@@ -2,9 +2,12 @@ package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.*;
-import lombok.*;
-import pl.isa.backendBoys.zgubaAppWeb.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 @Entity
 @Table(name = "REQUESTS", schema = "zgubaDatabase")
@@ -26,7 +29,7 @@ public class Request {
     private LostOrFound lostOrFound;
 
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String requestDate;
 
     private String city;
@@ -37,6 +40,7 @@ public class Request {
     public String myToString() {
         return this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }
+
     public String stringToCompareRequestswhileModify() {
         return this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }

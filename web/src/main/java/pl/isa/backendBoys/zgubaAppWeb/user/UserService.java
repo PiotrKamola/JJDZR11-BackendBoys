@@ -15,9 +15,7 @@ public class UserService {
     }
 
     public List<User> getNotAdminUsers() {
-        return mySqlService.getUsers().stream()
-                .filter(user -> !user.getLoginEmail().equals("ADMIN@ADMIN"))
-                .toList();
+        return mySqlService.getUsers().stream().filter(user -> !user.getLoginEmail().equals("ADMIN@ADMIN")).toList();
     }
 
     public String getLoggedUserEmail() {
@@ -34,7 +32,7 @@ public class UserService {
         return false;
     }
 
-    public void logout(){
+    public void logout() {
         loggedUserEmail = null;
     }
 
@@ -43,8 +41,7 @@ public class UserService {
     }
 
     public boolean isLoginTaken(String login) {
-        return mySqlService.getUsers().stream()
-                .anyMatch(user -> user.getLoginEmail().equals(login));
+        return mySqlService.getUsers().stream().anyMatch(user -> user.getLoginEmail().equals(login));
     }
 
     public User getUserByLogin(String login) {

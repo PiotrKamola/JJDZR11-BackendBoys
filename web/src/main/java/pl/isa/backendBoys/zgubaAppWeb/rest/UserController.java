@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
+import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserDto;
 import pl.isa.backendBoys.zgubaAppWeb.user.UserService;
-import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 
 import java.util.List;
 
@@ -219,7 +219,7 @@ public class UserController {
 
 
     @GetMapping("/panel/myrequests")
-    public String showMyRequests (Model model) {
+    public String showMyRequests(Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
 
         List<Request> loggedUserRequests = userService.getUserByLogin(loggedUserEmail).getRequest();
@@ -232,7 +232,7 @@ public class UserController {
     }
 
     @GetMapping("/panel/myrequests/delete/{requestId}")
-    public String deleteMyRequest (Model model, @PathVariable Long requestId) {
+    public String deleteMyRequest(Model model, @PathVariable Long requestId) {
         Request requestToDelete = requestService.getRequestById(requestId);
 
         mySqlService.deleteRequest(requestToDelete);
@@ -251,8 +251,8 @@ public class UserController {
     }
 
     @GetMapping("/panel/myrequests/modify/{requestId}")
-    public String modifyMyRequestGet (Model model, @PathVariable Long requestId,
-                                   @ModelAttribute Request requestToModify) {
+    public String modifyMyRequestGet(Model model, @PathVariable Long requestId,
+                                     @ModelAttribute Request requestToModify) {
 
         Request currentRequest = requestService.getRequestById(requestId);
 
@@ -267,8 +267,8 @@ public class UserController {
 
 
     @PostMapping("/panel/myrequests/modify/{requestId}")
-    public String modifyMyRequestPost (Model model, @PathVariable Long requestId,
-                                   @ModelAttribute Request requestToModify) {
+    public String modifyMyRequestPost(Model model, @PathVariable Long requestId,
+                                      @ModelAttribute Request requestToModify) {
         model.addAttribute("searchWord", new SearchHelp());
 
         String loggedUserEmail = userService.getLoggedUserEmail();
@@ -361,7 +361,7 @@ public class UserController {
 
     @GetMapping("/adminpanel/accounts/show/{userLoginEmail}")
     public String adminShowLoginData(Model model, @PathVariable String userLoginEmail,
-                    @ModelAttribute UserDto userToModify) {
+                                     @ModelAttribute UserDto userToModify) {
         User currentUser = userService.getUserByLogin(userLoginEmail);
         userToModify.setCurrentLoginEmail(currentUser.getLoginEmail());
         userToModify.setCurrentPassword(currentUser.getPassword());
@@ -449,21 +449,18 @@ public class UserController {
         model.addAttribute("content", "filled");
         try {
             mySqlService.fillUsers();
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
 
-//        TEMPORARY DISABLED
         try {
             mySqlService.fillRequests();
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
         return "main";
     }
 
     @GetMapping("/adminpanel/requests/all")
-    public String showAllRequests (Model model) {
+    public String showAllRequests(Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
 
@@ -477,7 +474,7 @@ public class UserController {
     }
 
     @GetMapping("/adminpanel/requests/delete/{requestId}")
-    public String deleteUserRequest (Model model, @PathVariable Long requestId) {
+    public String deleteUserRequest(Model model, @PathVariable Long requestId) {
         Request requestToDelete = requestService.getRequestById(requestId);
         mySqlService.deleteRequest(requestToDelete);
 

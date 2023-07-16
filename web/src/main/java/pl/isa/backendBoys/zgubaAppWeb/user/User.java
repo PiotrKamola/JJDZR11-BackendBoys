@@ -1,8 +1,12 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
+
 import java.util.List;
 
 @Entity
@@ -27,7 +31,7 @@ public class User {
 
     private String contactNumber;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval=true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Request> request;
 
     public User(String name, String contactNumber, String loginEmail, String password, String city) {

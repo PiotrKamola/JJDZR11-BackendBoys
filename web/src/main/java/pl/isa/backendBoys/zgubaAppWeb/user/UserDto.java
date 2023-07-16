@@ -22,19 +22,19 @@ public class UserDto {
         this.password = password;
     }
 
-    public void setCurrentLoginEmail(String currentLoginEmail) {
-        this.currentLoginEmail = currentLoginEmail;
-    }
-
-    public void setCurrentPassword(String currentPassword) {
-        this.currentPassword = currentPassword;
-    }
-
     public String getCurrentLoginEmail() {
         return currentLoginEmail;
     }
 
+    public void setCurrentLoginEmail(String currentLoginEmail) {
+        this.currentLoginEmail = currentLoginEmail;
+    }
+
     public String getCurrentPassword() {
         return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 }

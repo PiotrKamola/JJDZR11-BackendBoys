@@ -30,8 +30,8 @@
                 <div class="form-group mt-3">
                     <label for="phone">Numer telefonu:</label>
                     <input type="tel" class="form-control" id="phone" name="phone" required
-                           onfocusout="this.value = this.value.trim()" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
-                           th:title="${modify} ? 'Proszę wpisać number z myślnikami co 3 cyfry, np. 888-777-666.' : ''"
+                           onfocusout="this.value = this.value.trim()" pattern="[0-9]{9}"
+                           th:title="${modify} ? 'Proszę wpisać 9 cyfr bez oddzielania spacjami, ani myślnikami.' : ''"
                            th:field="*{contactNumber}" th:attr="disabled=${!modify}">
                 </div>
 
