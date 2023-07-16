@@ -17,19 +17,56 @@
         </div>
     </div>
 
+    <div class="filters-section">
+        <button class="collapsible">Wyszukiwanie zaawansowane</button>
+        <div class="content">
+            <div class="input-container">
+                <div class="input-labels">
+                    <label for="input1">Rodzaj zgłoszenia:</label>
+                    <input type="text" id="input1">
+                </div>
+                <div class="input-labels">
+                    <label for="input2">Nazwa przedmiotu:</label>
+                    <input type="text" id="input2">
+                </div>
+                <div class="input-labels">
+                    <label for="input3">Dokładny opis przedmiotu:</label>
+                    <input type="text" id="input3">
+                </div>
+                <div class="input-labels">
+                    <label for="input4">Data zgłoszenia:</label>
+                    <input type="text" id="input4">
+                </div>
+                <div class="input-labels">
+                    <label for="input5">Miasto:</label>
+                    <input type="text" id="input5">
+                </div>
+            </div>
+            <div class="filter-button-section">
+                <button class="filter-button" onclick="applyFilters()">Szukaj</button>
+                <button style="margin-left:20px" class="filter-button" onclick="clearFilters()">Usuń filtry</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
     <table class="table table-striped mt-1">
         <thead class="table-dark text-center">
         <tr>
             <th class="text-center">Rodzaj zgłoszenia</th>
             <th class="text-center">Nazwa przedmiotu</th>
-            <th class="text-center">Dokładny opis przedmiodu</th>
+            <th class="text-center">Dokładny opis przedmiotu</th>
             <th class="text-center">Data zgłoszenia</th>
             <th class="text-center">Miasto</th>
             <th class="text-center">Adres e-mail</th>
 
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tableBody">
         <tr th:each="request : ${allRequests}">
             <td class="text-center" th:text="${request.lostOrFound}"></td>
             <td class="text-center" th:text="${request.objectName}"></td>
@@ -37,9 +74,111 @@
             <td class="text-center" th:text="${request.requestDate}"></td>
             <td class="text-center" th:text="${request.city}"></td>
             <td class="text-center" th:text="${request.requesterLogin}"></td>
-
         </tr>
         </tbody>
     </table>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const input1Value = localStorage.getItem('input1Value');
+    const input2Value = localStorage.getItem('input2Value');
+    const input3Value = localStorage.getItem('input3Value');
+    const input4Value = localStorage.getItem('input4Value');
+    const input5Value = localStorage.getItem('input5Value');
+
+    if (input1Value !== null) {
+      document.getElementById('input1').value = input1Value;
+    }
+    if (input2Value !== null) {
+      document.getElementById('input2').value = input2Value;
+    }
+    if (input3Value !== null) {
+      document.getElementById('input3').value = input3Value;
+    }
+    if (input4Value !== null) {
+      document.getElementById('input4').value = input4Value;
+    }
+    if (input5Value !== null) {
+      document.getElementById('input5').value = input5Value;
+    }
+
+    // Fetch the actual array of requests from the server or any other source
+    fetch('http://localhost:8080/request/all')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch requests');
+        }
+        return response.json();
+      })
+      .then(allRequests => {
+        applyFilters(allRequests);
+      })
+      .catch(error => {
+        console.error('Error fetching requests:', error);
+      });
+  });
+
+  function applyFilters(allRequests) {
+    const input1Value = document.getElementById('input1').value.trim().toLowerCase();
+    const input2Value = document.getElementById('input2').value.trim().toLowerCase();
+    const input3Value = document.getElementById('input3').value.trim().toLowerCase();
+    const input4Value = document.getElementById('input4').value.trim().toLowerCase();
+    const input5Value = document.getElementById('input5').value.trim().toLowerCase();
+
+    const filteredRequests = allRequests.filter(request => {
+      const isInput1Match = input1Value === '' || request.lostOrFound.toLowerCase().includes(input1Value);
+      const isInput2Match = input2Value === '' || request.objectName.toLowerCase().includes(input2Value);
+      const isInput3Match = input3Value === '' || request.description.toLowerCase().includes(input3Value);
+      const isInput4Match = input4Value === '' || request.requestDate.toLowerCase().includes(input4Value);
+      const isInput5Match = input5Value === '' || request.city.toLowerCase().includes(input5Value);
+
+      return isInput1Match && isInput2Match && isInput3Match && isInput4Match && isInput5Match;
+    });
+
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = '';
+
+    filteredRequests.forEach(request => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="text-center">${request.lostOrFound}</td>
+        <td class="text-center">${request.objectName}</td>
+        <td class="text-center">${request.description}</td>
+        <td class="text-center">${request.requestDate}</td>
+        <td class="text-center">${request.city}</td>
+        <td class="text-center">${request.requesterLogin}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  const collapsibleBtn = document.querySelector('.collapsible');
+  const content = document.querySelector('.content');
+
+  collapsibleBtn.addEventListener('click', function() {
+    this.classList.toggle('active');
+    if (content.style.display === 'block') {
+      content.style.display = 'none';
+    } else {
+      content.style.display = 'block';
+    }
+  });
+
+  function clearFilters() {
+    document.getElementById('input1').value = '';
+    document.getElementById('input2').value = '';
+    document.getElementById('input3').value = '';
+    document.getElementById('input4').value = '';
+    document.getElementById('input5').value = '';
+
+    sessionStorage.removeItem('input1Value');
+    sessionStorage.removeItem('input2Value');
+    sessionStorage.removeItem('input3Value');
+    sessionStorage.removeItem('input4Value');
+    sessionStorage.removeItem('input5Value');
+    applyFilters([]);
+  }
+</script>
+
+
 
 </div>

@@ -31,6 +31,88 @@ body {
     text-transform: uppercase;
 }
 
+.filters-section {
+margin-bottom: 20px;
+}
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.collapsible:hover {
+  background-color: #ccc;
+  transition: background-color 0.3s;
+}
+
+.content {
+  padding: 0 18px;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  display: flex;
+   transition: max-height 0.3s;
+    overflow: hidden;
+    max-height: 0;
+
+}
+.input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collapsible.active + .content {
+  max-height: 500px;
+}
+
+
+.input-labels {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  flex-direction: column;
+
+}
+
+.input-labels label {
+margin: 10px 5px;
+}
+
+.filter-button {
+  margin: 20px;
+  background-color: #074dcf;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.9s;
+}
+
+
+
+.filter-button:hover {
+  background-color: #063ba9;
+}
+
+.filter-button-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 
 .user-option-icon {
     font-size: 2.5rem;
@@ -171,5 +253,5 @@ img {
 }
 
 .placeholder-sm::placeholder {
-    font-size: 12px; /* dostosuj rozmiar czcionki według potrzeb */
+    font-size: 12px;
 }
