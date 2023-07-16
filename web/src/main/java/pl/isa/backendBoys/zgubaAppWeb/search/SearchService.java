@@ -19,9 +19,7 @@ public class SearchService {
     public List<Request> searchByWord(List<Request> allRequests, String word) {
 
         List<Request> foundRequests;
-        foundRequests = allRequests.stream()
-                .filter(request -> request.myToString().toLowerCase().contains(word.toLowerCase()))
-                .toList();
+        foundRequests = allRequests.stream().filter(request -> request.myToString().toLowerCase().contains(word.toLowerCase())).toList();
 
         return foundRequests;
     }

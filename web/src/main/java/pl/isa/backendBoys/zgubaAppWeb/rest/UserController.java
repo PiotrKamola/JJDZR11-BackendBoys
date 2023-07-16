@@ -3,6 +3,7 @@ package pl.isa.backendBoys.zgubaAppWeb.rest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 import pl.isa.backendBoys.zgubaAppWeb.request.RequestService;
 import pl.isa.backendBoys.zgubaAppWeb.search.SearchHelp;
@@ -16,11 +17,15 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController {
 
-    final UserService userService;
-    final RequestService requestService;
+    private final UserService userService;
+    private final MySqlService mySqlService;
+    private final RequestService requestService;
 
-    public UserController(UserService userService, RequestService requestService) {
+    public UserController(UserService userService,
+                          MySqlService mySqlService,
+                          RequestService requestService) {
         this.userService = userService;
+        this.mySqlService = mySqlService;
         this.requestService = requestService;
     }
 
@@ -214,11 +219,10 @@ public class UserController {
 
 
     @GetMapping("/panel/myrequests")
-    public String showMyRequests (Model model) {
+    public String showMyRequests(Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
-        User loggedUser = userService.getUserByLogin(loggedUserEmail);
 
-        List<Request> loggedUserRequests = requestService.getRequestsByUser(loggedUser);
+        List<Request> loggedUserRequests = userService.getUserByLogin(loggedUserEmail).getRequest();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("searchWordUser", new SearchHelp());
@@ -228,15 +232,15 @@ public class UserController {
     }
 
     @GetMapping("/panel/myrequests/delete/{requestId}")
-    public String deleteMyRequest (Model model, @PathVariable Long requestId) {
+    public String deleteMyRequest(Model model, @PathVariable Long requestId) {
         Request requestToDelete = requestService.getRequestById(requestId);
-        requestService.deleteRequestById(requestToDelete);
 
+        mySqlService.deleteRequest(requestToDelete);
 
         String loggedUserEmail = userService.getLoggedUserEmail();
-        User loggedUser = userService.getUserByLogin(loggedUserEmail);
 
-        List<Request> loggedUserRequests = requestService.getRequestsByUser(loggedUser);
+        List<Request> loggedUserRequests = requestService.getRequestsByUser(loggedUserEmail);
+
         model.addAttribute("loggedUserEmail", loggedUserEmail);
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute("searchWordUser", new SearchHelp());
@@ -247,8 +251,8 @@ public class UserController {
     }
 
     @GetMapping("/panel/myrequests/modify/{requestId}")
-    public String modifyMyRequestGet (Model model, @PathVariable Long requestId,
-                                   @ModelAttribute Request requestToModify) {
+    public String modifyMyRequestGet(Model model, @PathVariable Long requestId,
+                                     @ModelAttribute Request requestToModify) {
 
         Request currentRequest = requestService.getRequestById(requestId);
 
@@ -263,8 +267,8 @@ public class UserController {
 
 
     @PostMapping("/panel/myrequests/modify/{requestId}")
-    public String modifyMyRequestPost (Model model, @PathVariable Long requestId,
-                                   @ModelAttribute Request requestToModify) {
+    public String modifyMyRequestPost(Model model, @PathVariable Long requestId,
+                                      @ModelAttribute Request requestToModify) {
         model.addAttribute("searchWord", new SearchHelp());
 
         String loggedUserEmail = userService.getLoggedUserEmail();
@@ -279,9 +283,10 @@ public class UserController {
             return "main";
         }
 
-        User loggedUser = userService.getUserByLogin(loggedUserEmail);
-        List<Request> loggedUserRequests = requestService.getRequestsByUser(loggedUser);
+        List<Request> loggedUserRequests = userService.getUserByLogin(loggedUserEmail).getRequest();
+
         requestService.modifyRequest(currentRequest, requestToModify);
+
         model.addAttribute("myRequests", loggedUserRequests);
         model.addAttribute("showModifyRequestInformation", currentRequest.getObjectName());
 
@@ -356,7 +361,7 @@ public class UserController {
 
     @GetMapping("/adminpanel/accounts/show/{userLoginEmail}")
     public String adminShowLoginData(Model model, @PathVariable String userLoginEmail,
-                    @ModelAttribute UserDto userToModify) {
+                                     @ModelAttribute UserDto userToModify) {
         User currentUser = userService.getUserByLogin(userLoginEmail);
         userToModify.setCurrentLoginEmail(currentUser.getLoginEmail());
         userToModify.setCurrentPassword(currentUser.getPassword());
@@ -375,6 +380,8 @@ public class UserController {
         String loggedUserEmail = userService.getLoggedUserEmail();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
 
+        userToModify.setLoginEmail(userLoginEmail);
+        userToModify.setPassword(userService.getUserByLogin(loggedUserEmail).getPassword());
         userToModify.setCurrentLoginEmail(userLoginEmail);
 
         model.addAttribute("userToModify", userToModify);
@@ -436,9 +443,24 @@ public class UserController {
         return "main";
     }
 
+    @GetMapping("/fill")
+    public String fillDtabase(Model model) {
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("content", "filled");
+        try {
+            mySqlService.fillUsers();
+        } catch (Exception ignored) {
+        }
+
+        try {
+            mySqlService.fillRequests();
+        } catch (Exception ignored) {
+        }
+        return "main";
+    }
 
     @GetMapping("/adminpanel/requests/all")
-    public String showAllRequests (Model model) {
+    public String showAllRequests(Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
 
@@ -452,14 +474,16 @@ public class UserController {
     }
 
     @GetMapping("/adminpanel/requests/delete/{requestId}")
-    public String deleteUserRequest (Model model, @PathVariable Long requestId) {
+    public String deleteUserRequest(Model model, @PathVariable Long requestId) {
         Request requestToDelete = requestService.getRequestById(requestId);
-        requestService.deleteRequestById(requestToDelete);
+        mySqlService.deleteRequest(requestToDelete);
 
         String loggedUserEmail = userService.getLoggedUserEmail();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
 
         List<Request> allRequests = requestService.getAllRequests();
+
+
         model.addAttribute("requests", allRequests);
 
         model.addAttribute("searchWord", new SearchHelp());

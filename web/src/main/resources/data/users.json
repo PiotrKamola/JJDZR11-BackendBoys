@@ -1,33 +1,46 @@
 [
   {
+    "userId": null,
     "loginEmail": "ADMIN@ADMIN",
-    "password": "123",
+    "password": "admin",
     "name": "",
     "city": "",
     "contactNumber": ""
   },
   {
-    "loginEmail": "john@wp.pl2",
-    "password": "1",
+    "userId": null,
+    "loginEmail": "pawel01@wp.pl",
+    "password": "pawel01",
+    "name": "Paweł",
+    "city": "Warszawa",
+    "contactNumber": "109876543"
+  },
+  {
+    "userId": null,
+    "loginEmail": "ewa2002@onet.pl",
+    "password": "M5#u",
     "name": "Ewa",
     "city": "Gdynia",
     "contactNumber": "210987654"
   },
   {
-    "loginEmail": "ewa@wp.pl",
-    "password": "asdasdasdsadasdasdasdas",
+    "userId": null,
+    "loginEmail": "natalia@gmail.com",
+    "password": "W4*8",
     "name": "Natalia",
     "city": "Poznań",
     "contactNumber": "098765432"
   },
   {
-    "loginEmail": "ewa@wp.pl2",
+    "userId": null,
+    "loginEmail": "piotr1999@gmail.coma",
     "password": "F#n6",
     "name": "Piotr",
     "city": "Gdynia",
     "contactNumber": "654321098"
   },
   {
+    "userId": null,
     "loginEmail": "marcin88@yahoo.com",
     "password": "asd",
     "name": "Marcin",
@@ -35,6 +48,7 @@
     "contactNumber": "432109876"
   },
   {
+    "userId": null,
     "loginEmail": "iza1992@gmail.com",
     "password": "d!3G",
     "name": "Iza",
@@ -42,6 +56,7 @@
     "contactNumber": "321098765"
   },
   {
+    "userId": null,
     "loginEmail": "adam90@onet.pl",
     "password": "J5*7e",
     "name": "Adam",
@@ -49,6 +64,7 @@
     "contactNumber": "210987654"
   },
   {
+    "userId": null,
     "loginEmail": "tom@gmail.com",
     "password": "tom",
     "name": "Tomek",
@@ -56,6 +72,7 @@
     "contactNumber": "098765432"
   },
   {
+    "userId": null,
     "loginEmail": "aga@aaa.com",
     "password": "aaa",
     "name": "Agnieszka",

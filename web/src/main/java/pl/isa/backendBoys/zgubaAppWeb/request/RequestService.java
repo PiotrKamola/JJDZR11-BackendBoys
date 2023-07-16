@@ -1,97 +1,42 @@
 package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import org.springframework.stereotype.Component;
-import pl.isa.backendBoys.zgubaAppWeb.user.User;
+import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class RequestService {
 
-    private final RequestDatabase requestDatabase;
+    private final MySqlService mySqlService;
 
-    public RequestService(RequestDatabase requestDatabase) {
-        this.requestDatabase = requestDatabase;
-    }
-
-    public void addRequest(String requesterLogin, Request.LostOrFound lostOrFound, String objectName, String description, String city) {
-        requestDatabase.add(new Request(requesterLogin, lostOrFound, objectName, description, city));
+    public RequestService(MySqlService mySqlService) {
+        this.mySqlService = mySqlService;
     }
 
     public void addRequest(Request request) {
-        requestDatabase.add(request);
-        exportRequestDatabaseToJson();
+        mySqlService.addNewRequest(request);
     }
 
     public List<Request> getAllRequests() {
-        return requestDatabase.getRequests();
+        return mySqlService.getRequests();
+    }
+
+    public List<Request> getRequestsByUser(String loggedUser) {
+        return mySqlService.getRequests().stream().filter(request -> request.getUser().getLoginEmail().equals(loggedUser)).toList();
     }
 
     public Request getRequestById(Long requestId) {
-        return requestDatabase.getRequests().stream()
-                .filter(request -> request.getRequestId().equals(requestId))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public void changeRequesterLogin(String currentLoginEmail, String newLoginEmail) {
-        requestDatabase.getRequests().stream()
-                .filter(request -> request.getRequesterLogin()
-                        .equals(currentLoginEmail))
-                .forEach(request -> request.setRequesterLogin(newLoginEmail));
-
-        exportRequestDatabaseToJson();
-
-    }
-
-    public boolean deleteRequestsByLogin(String loginEmail) {
-
-        boolean isRequestFound = false;
-
-        Iterator<Request> iterator = requestDatabase.getRequests().iterator();
-        while (iterator.hasNext()) {
-            Request request = iterator.next();
-            if (request.getRequesterLogin().equals(loginEmail)) {
-                iterator.remove();
-                isRequestFound = true;
-            }
-        }
-        return isRequestFound;
-    }
-
-    public List<Request> getRequestByloginEmail(String loginEmail) {
-        return requestDatabase.getRequests().stream()
-                .filter(request -> request.getRequesterLogin()
-                        .equals(loginEmail)).collect(Collectors.toList());
-    }
-
-    public void exportRequestDatabaseToJson() {
-        requestDatabase.exportToJson();
-    }
-
-    public List<Request> getRequestsByUser(User loggedUser) {
-        return requestDatabase.getRequests().stream()
-                .filter(request -> request.getRequesterLogin().equals(loggedUser.getLoginEmail()))
-                .toList();
-    }
-
-    public void deleteRequestById(Long requestId) {
-        deleteRequestById(getRequestById(requestId));
-    }
-
-    public void deleteRequestById(Request request) {
-        requestDatabase.getRequests().remove(request);
-        exportRequestDatabaseToJson();
+        return mySqlService.getRequests().stream().filter(request -> request.getRequestId().equals(requestId)).findFirst().orElse(null);
     }
 
     public void modifyRequest(Request currentRequest, Request requestToModify) {
         currentRequest.setCity(requestToModify.getCity());
         currentRequest.setDescription(requestToModify.getDescription());
-        currentRequest.setLostOrFound(Request.LostOrFound.getFromText(requestToModify.getLostOrFound()));
+
+        currentRequest.setLostOrFound(requestToModify.getLostOrFound());
+
         currentRequest.setObjectName(requestToModify.getObjectName());
         currentRequest.setRequestDate(requestToModify.getRequestDate());
-        exportRequestDatabaseToJson();
     }
 }

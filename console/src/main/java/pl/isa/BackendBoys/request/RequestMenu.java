@@ -2,7 +2,7 @@ package pl.isa.BackendBoys.request;
 
 import pl.isa.BackendBoys.abstractMenu.AppMenu;
 import pl.isa.BackendBoys.search.SearchMenu;
-import pl.isa.BackendBoys.user.UserService;
+import pl.isa.BackendBoys.user.UserController;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class RequestMenu extends AppMenu {
     private static final int EXIT_APP = 5;
     public static String loggedUserLogin;
     private final RequestController requestController = new RequestController();
-    private final UserService userService = new UserService();
+    private final UserController userController = new UserController();
     private final SearchMenu searchMenu = new SearchMenu();
 
     public RequestController getRequestController() {
@@ -29,7 +29,7 @@ public class RequestMenu extends AppMenu {
 
         for (Request request : requests) {
             System.out.println("-----------------------------------------------------");
-            System.out.println("Login(e-mail): " + request.getRequesterLogin() + ", Telephone: " + userService.getUserByLogin(request.getRequesterLogin()).getContactNumber() + ".");
+            System.out.println("Login(e-mail): " + request.getRequesterLogin() + ", Telephone: " + userController.getUserByLogin(request.getRequesterLogin()).getContactNumber() + ".");
             System.out.print("He/She " + request.getLostOrFound() + ": ");
             System.out.println(request.getObjectName() + " in city: " + request.getCity() + ".");
             System.out.println("Description: " + request.getDescription() + ".");
@@ -55,7 +55,7 @@ public class RequestMenu extends AppMenu {
 
             //noinspection SwitchStatementWithoutDefaultBranch
             switch (userChoice) {
-                case SIGN_REGISTER -> userService.getUserMenu().runMenu(userService);
+                case SIGN_REGISTER -> userController.getUserMenu().runMenu(userController);
                 case SENT_REQUEST -> sendRequestData();
                 case SHOW_ALL_REQUESTS -> printRequests(requestController.getAllRequests());
                 case SEARCH_REQUESTS -> searchMenu.runMenu(this);

@@ -51,18 +51,18 @@
                             <td class="text-center" style="width: 550px" th:text="${request.description}"></td>
                             <!--                            style="width: 70px">-->
                             <td class="text-center py-2" style="width: 60px">
-                                <div th:if="${request.lostOrFound =='Znalezione'}">
+                                <div th:if="${request.lostOrFound.text =='Zgubione'}">
                                     <i class="bi bi-puzzle-fill" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
                                     <p class="text-strong mb-0" style="font-size: 12px">ZNALAZŁEM</p>
                                 </div>
-                                <div th:if="${request.lostOrFound =='Zgubione'}">
+                                <div th:if="${request.lostOrFound.text =='Znalezione'}">
                                     <i class="bi bi-puzzle" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
                                     <p class="text-strong mb-0" style="font-size: 12px">ZGUBIŁEM</p>
                                 </div>
                             </td>
                             <td class="text-center" style="width: 20px">
-                                <span th:text="${request.requesterLogin}">  </span>
-                                <a th:href="'mailto:' + ${request.requesterLogin}">
+                                <span th:text="${request.user.loginEmail}">  </span>
+                                <a th:href="'mailto:' + ${request.user.loginEmail}">
                                     <i class="bi bi-envelope-fill" style="color: #000;"></i>
                                 </a>
                             </td>
