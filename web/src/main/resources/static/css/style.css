@@ -201,17 +201,7 @@ img {
 }
 
 /*zamrażanie nagłówka tabeli*/
-/*.fixed-header-table {*/
-/*    position: sticky;*/
-/*}*/
-
-/*.fixed-header-table thead {*/
-/*    position: sticky;*/
-/*    top: 70px;*/
-/*    background-color: #f8f9fa; !* Kolor tła nagłówka *!*/
-/*    !*z-index: 0;*!*/
-/*}*/
-
+/*tabele users*/
 .fixed-header-table-container {
     max-height: 710px; /* Maksymalna wysokość kontenera tabeli */
     overflow-y: auto; /* Dodaje pasek przewijania, gdy tabela przekracza maksymalną wysokość */
@@ -225,6 +215,26 @@ img {
 }
 
 .fixed-header-table th {
+    position: sticky;
+    top: 0px;
+    /*background-color: #f8f9fa; !* Kolor tła wierszy nagłówka *!*/
+    z-index: 2;
+}
+
+/*tabele requests*/
+.requests-fixed-header-table-container {
+    max-height: 710px; /* Maksymalna wysokość kontenera tabeli */
+    overflow-y: auto; /* Dodaje pasek przewijania, gdy tabela przekracza maksymalną wysokość */
+}
+
+.requests-fixed-header-table {
+    position: sticky;
+    top: 0;
+    /*background-color: #f8f9fa; !* Kolor tła nagłówka *!*/
+    z-index: 1;
+}
+
+.requests-fixed-header-table th {
     position: sticky;
     top: 0px;
     /*background-color: #f8f9fa; !* Kolor tła wierszy nagłówka *!*/

@@ -1,6 +1,7 @@
 package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import org.springframework.stereotype.Component;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +27,13 @@ public class RequestService {
 
     public List<Request> getAllRequests() {
         return requestDatabase.getRequests();
+    }
+
+    public Request getRequestById(Long requestId) {
+        return requestDatabase.getRequests().stream()
+                .filter(request -> request.getRequestId().equals(requestId))
+                .findFirst()
+                .orElse(null);
     }
 
     public void changeRequesterLogin(String currentLoginEmail, String newLoginEmail) {
@@ -61,5 +69,29 @@ public class RequestService {
 
     public void exportRequestDatabaseToJson() {
         requestDatabase.exportToJson();
+    }
+
+    public List<Request> getRequestsByUser(User loggedUser) {
+        return requestDatabase.getRequests().stream()
+                .filter(request -> request.getRequesterLogin().equals(loggedUser.getLoginEmail()))
+                .toList();
+    }
+
+    public void deleteRequestById(Long requestId) {
+        deleteRequestById(getRequestById(requestId));
+    }
+
+    public void deleteRequestById(Request request) {
+        requestDatabase.getRequests().remove(request);
+        exportRequestDatabaseToJson();
+    }
+
+    public void modifyRequest(Request currentRequest, Request requestToModify) {
+        currentRequest.setCity(requestToModify.getCity());
+        currentRequest.setDescription(requestToModify.getDescription());
+        currentRequest.setLostOrFound(Request.LostOrFound.getFromText(requestToModify.getLostOrFound()));
+        currentRequest.setObjectName(requestToModify.getObjectName());
+        currentRequest.setRequestDate(requestToModify.getRequestDate());
+        exportRequestDatabaseToJson();
     }
 }
