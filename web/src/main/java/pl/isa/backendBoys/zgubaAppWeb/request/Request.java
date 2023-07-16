@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +29,8 @@ public class Request {
     @Enumerated(EnumType.STRING)
     private LostOrFound lostOrFound;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private String requestDate;
 
     private String city;
@@ -38,15 +41,29 @@ public class Request {
     public String myToString() {
         return this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }
+    public String stringToCompareRequestswhileModify() {
+        return this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
+    }
+
 
     public enum LostOrFound {
-        LOST("Lost"), FOUND("Found");
+        LOST("Zgubione"), FOUND("Znalezione");
 
         public final String text;
 
         LostOrFound(String lostOrFoundString) {
             this.text = lostOrFoundString;
         }
+
+        public static LostOrFound getFromText(String text) {
+            for (LostOrFound foundEnum : LostOrFound.values()) {
+                if (foundEnum.text.equalsIgnoreCase(text)) {
+                    return foundEnum;
+                }
+            }
+            return null;
+        }
+
 
         @JsonValue
         public String getText() {

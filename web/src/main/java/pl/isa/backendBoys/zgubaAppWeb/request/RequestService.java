@@ -2,6 +2,7 @@ package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import org.springframework.stereotype.Component;
 import pl.isa.backendBoys.zgubaAppWeb.database.MySqlService;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
 import java.util.Iterator;
 import java.util.List;
@@ -37,5 +38,25 @@ public class RequestService {
             }
         }
         return isRequestFound;
+    }
+
+    public Request getRequestById(Long requestId) {
+        return mySqlService.getRequests().stream()
+                .filter(request -> request.getRequestId().equals(requestId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void deleteRequestById(Request request) {
+        mySqlService.deleteRequest(request);
+    }
+
+    public void modifyRequest(Request currentRequest, Request requestToModify) {
+        currentRequest.setCity(requestToModify.getCity());
+        currentRequest.setDescription(requestToModify.getDescription());
+        currentRequest.setLostOrFound(requestToModify.getLostOrFound());
+        currentRequest.setObjectName(requestToModify.getObjectName());
+        currentRequest.setRequestDate(requestToModify.getRequestDate());
+        mySqlService.updateRequest(currentRequest);
     }
 }

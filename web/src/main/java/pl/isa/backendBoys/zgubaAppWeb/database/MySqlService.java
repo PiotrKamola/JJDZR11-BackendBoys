@@ -91,4 +91,11 @@ public class MySqlService {
         return StreamSupport.stream(requestRepository.findAll().spliterator(), false)
                 .toList();
     }
+
+    public void deleteRequest(Request request) { requestRepository.delete(request);}
+
+    public void updateRequest(Request request){
+        System.out.println(request.myToString());
+        requestRepository.save(request);
+    }
 }
