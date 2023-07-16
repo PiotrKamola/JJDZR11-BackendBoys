@@ -228,7 +228,7 @@ public class UserController {
     }
 
     @GetMapping("/panel/myrequests/delete/{requestId}")
-    public String deleteRequest (Model model, @PathVariable Long requestId) {
+    public String deleteMyRequest (Model model, @PathVariable Long requestId) {
         Request requestToDelete = requestService.getRequestById(requestId);
         requestService.deleteRequestById(requestToDelete);
 
@@ -359,6 +359,7 @@ public class UserController {
                     @ModelAttribute UserDto userToModify) {
         User currentUser = userService.getUserByLogin(userLoginEmail);
         userToModify.setCurrentLoginEmail(currentUser.getLoginEmail());
+        userToModify.setCurrentPassword(currentUser.getPassword());
 
         model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         model.addAttribute("userToModify", userToModify);
@@ -398,9 +399,9 @@ public class UserController {
         userToModify.setCurrentPassword(userService.getUserByLogin(userLoginEmail).getPassword());
 
         boolean isLoginChanged = !userToModify.getLoginEmail().equals(userToModify.getCurrentLoginEmail())
-                && !userToModify.getLoginEmail().equals("");
+                && !userToModify.getLoginEmail().isBlank();
         boolean isPasswordChanged = !userToModify.getPassword().equals(userToModify.getCurrentPassword())
-                && !userToModify.getPassword().equals("");
+                && !userToModify.getPassword().isBlank();
         boolean isAnyFieldChanged = isLoginChanged || isPasswordChanged;
 
         if (!isAnyFieldChanged) {
@@ -424,6 +425,7 @@ public class UserController {
                 userService.changeUserPassword(userService.getUserByLogin(userToModify.getLoginEmail()), userToModify.getPassword());
             } else {
                 userService.changeUserPassword(userService.getUserByLogin(userLoginEmail), userToModify.getPassword());
+                userToModify.setLoginEmail(userLoginEmail);
             }
         }
 
@@ -435,4 +437,36 @@ public class UserController {
     }
 
 
+    @GetMapping("/adminpanel/requests/all")
+    public String showAllRequests (Model model) {
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+
+        List<Request> allRequests = requestService.getAllRequests();
+        model.addAttribute("requests", allRequests);
+
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("searchWordUser", new SearchHelp());
+        model.addAttribute("content", "adminPanel_allRequests");
+        return "main";
+    }
+
+    @GetMapping("/adminpanel/requests/delete/{requestId}")
+    public String deleteUserRequest (Model model, @PathVariable Long requestId) {
+        Request requestToDelete = requestService.getRequestById(requestId);
+        requestService.deleteRequestById(requestToDelete);
+
+        String loggedUserEmail = userService.getLoggedUserEmail();
+        model.addAttribute("loggedUserEmail", loggedUserEmail);
+
+        List<Request> allRequests = requestService.getAllRequests();
+        model.addAttribute("requests", allRequests);
+
+        model.addAttribute("searchWord", new SearchHelp());
+        model.addAttribute("searchWordUser", new SearchHelp());
+
+        model.addAttribute("content", "adminPanel_allRequests");
+        model.addAttribute("deletedRequest", requestToDelete.getObjectName());
+        return "main";
+    }
 }

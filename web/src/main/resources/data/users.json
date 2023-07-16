@@ -7,22 +7,15 @@
     "contactNumber": ""
   },
   {
-    "loginEmail": "pawel01@wp.pl",
-    "password": "pawel01",
-    "name": "Paweł",
-    "city": "Warszawa",
-    "contactNumber": "109876543"
-  },
-  {
-    "loginEmail": "john@wp.pl",
-    "password": "123",
+    "loginEmail": "john@wp.pl2",
+    "password": "1",
     "name": "Ewa",
     "city": "Gdynia",
     "contactNumber": "210987654"
   },
   {
     "loginEmail": "ewa@wp.pl",
-    "password": "W4*8",
+    "password": "asdasdasdsadasdasdasdas",
     "name": "Natalia",
     "city": "Poznań",
     "contactNumber": "098765432"

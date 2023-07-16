@@ -1,5 +1,9 @@
 <div th:fragment="content" class="container" xmlns="http://www.w3.org/1999/html">
-    <h2 class="text-center text-strong p-4" style="color: #a81616;">PANEL ADMINISTRATORA</h2>
+
+    <div class="text-center pt-4">
+        <h2 class="text-center text-strong p-4" style="color: #a81616;">PANEL ADMINISTRATORA</h2>
+    </div>
+
 
     <div class="row text-center grid gap-4">
         <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
@@ -12,11 +16,11 @@
             </a>
         </div>
         <div class="col-12 col-md-6 col-lg-4 mx-auto p-auto">
-            <a th:href="@{/user/panel/showUserData}" style="color:inherit">
+            <a th:href="@{/user/adminpanel/requests/all}" style="color:inherit">
                 <button type="button" class="admin-option-box btn btn-outline-danger border text-dark p-5, m-auto">
                     <h3>Zarządzanie zgłoszeniami</h3>
                     <i class="bi bi-card-list admin-option-icon"></i>
-                    <p>Wejdź, aby przeglądać i edytować zgłoszenia użytkowników.</p>
+                    <p>Wejdź, aby przeglądać i usuwać zgłoszenia użytkowników.</p>
                 </button>
             </a>
         </div>
