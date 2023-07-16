@@ -8,11 +8,7 @@ import pl.isa.backendBoys.zgubaAppWeb.Repository.UserRepository;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;
 
-import pl.isa.backendBoys.zgubaAppWeb.database.JsonService;
-
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
@@ -83,19 +79,18 @@ public class MySqlService {
     }
 
     public List<User> getUsers(){
-        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
+        return userRepository.findAll().stream()
                         .toList();
     }
 
     public List<Request> getRequests(){
-        return StreamSupport.stream(requestRepository.findAll().spliterator(), false)
+        return requestRepository.findAll().stream()
                 .toList();
     }
 
     public void deleteRequest(Request request) { requestRepository.delete(request);}
 
     public void updateRequest(Request request){
-        System.out.println(request.myToString());
         requestRepository.save(request);
     }
 }

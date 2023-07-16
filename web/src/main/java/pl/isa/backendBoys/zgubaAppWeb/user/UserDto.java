@@ -6,7 +6,6 @@ public class UserDto {
     private String currentLoginEmail;
     private String currentPassword;
 
-
     public String getLoginEmail() {
         return loginEmail;
     }

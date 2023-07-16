@@ -1,6 +1,5 @@
 package pl.isa.backendBoys.zgubaAppWeb.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.isa.backendBoys.zgubaAppWeb.request.Request;

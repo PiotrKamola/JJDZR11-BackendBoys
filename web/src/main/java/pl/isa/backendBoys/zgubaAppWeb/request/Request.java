@@ -6,10 +6,6 @@ import lombok.*;
 import pl.isa.backendBoys.zgubaAppWeb.user.User;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-//@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "REQUESTS", schema = "zgubaDatabase")
 @Getter
@@ -54,16 +50,6 @@ public class Request {
         LostOrFound(String lostOrFoundString) {
             this.text = lostOrFoundString;
         }
-
-        public static LostOrFound getFromText(String text) {
-            for (LostOrFound foundEnum : LostOrFound.values()) {
-                if (foundEnum.text.equalsIgnoreCase(text)) {
-                    return foundEnum;
-                }
-            }
-            return null;
-        }
-
 
         @JsonValue
         public String getText() {

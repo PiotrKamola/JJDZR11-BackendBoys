@@ -221,7 +221,6 @@ public class UserController {
     @GetMapping("/panel/myrequests")
     public String showMyRequests (Model model) {
         String loggedUserEmail = userService.getLoggedUserEmail();
-        User loggedUser = userService.getUserByLogin(loggedUserEmail);
 
         List<Request> loggedUserRequests = userService.getUserByLogin(loggedUserEmail).getRequest();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
@@ -239,7 +238,6 @@ public class UserController {
         mySqlService.deleteRequest(requestToDelete);
 
         String loggedUserEmail = userService.getLoggedUserEmail();
-        User loggedUser = userService.getUserByLogin(loggedUserEmail);
 
         List<Request> loggedUserRequests = userService.getUserByLogin(loggedUserEmail).getRequest();
         model.addAttribute("loggedUserEmail", loggedUserEmail);
@@ -284,7 +282,6 @@ public class UserController {
             return "main";
         }
 
-        User loggedUser = userService.getUserByLogin(loggedUserEmail);
         List<Request> loggedUserRequests = userService.getUserByLogin(loggedUserEmail).getRequest();
 
         requestService.modifyRequest(currentRequest, requestToModify);
