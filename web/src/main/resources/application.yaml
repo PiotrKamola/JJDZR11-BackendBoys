@@ -1,7 +1,7 @@
 
 spring:
   thymeleaf:
-    check-template-location: true
+    check-template-location: false
     cache: false
     prefix: file:./web/src/main/resources/templates/
 
