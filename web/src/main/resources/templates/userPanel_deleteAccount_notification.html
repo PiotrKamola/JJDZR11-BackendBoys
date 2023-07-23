@@ -1,0 +1,9 @@
+<div th:fragment="content" class="col-xs-1 py-2 mb-0 text-center">
+    <a th:href="@{/}" style="color:inherit">
+        <h3 class="btn btn-danger mt-3">
+            Konto użytkownika "
+            <span class="text-strong" th:text="${userToModify.loginEmail}"></span>
+            " (oraz wszystkie powiązane zgłoszenia) zostało usunięte.
+        </h3>
+    </a>
+</div>

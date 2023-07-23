@@ -8,7 +8,7 @@
 		<version>3.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>pl.isa.backendBoys</groupId>
+	<groupId>pl.isa.backendBoys.zgubaAppWeb</groupId>
 	<artifactId>zgubaAppWeb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ZgubaApp</name>
@@ -20,7 +20,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>3.0.6</version>
 		</dependency>
 
 		<dependency>
@@ -35,12 +34,23 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<version>3.0.6</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
 		<dependency>
-			<groupId>pl.isa</groupId>
-			<artifactId>zguba</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>compile</scope>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.32</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
 
 	<build>

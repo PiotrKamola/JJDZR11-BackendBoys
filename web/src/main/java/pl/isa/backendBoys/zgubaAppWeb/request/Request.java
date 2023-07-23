@@ -1,63 +1,53 @@
 package pl.isa.backendBoys.zgubaAppWeb.request;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+import pl.isa.backendBoys.zgubaAppWeb.user.User;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
+@Table(name = "REQUESTS", schema = "zgubaDatabase")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Request {
-    private String requesterLogin;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long requestId;
+
     private String objectName;
+
     private String description;
+
+    @Enumerated(EnumType.STRING)
     private LostOrFound lostOrFound;
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String requestDate;
+
     private String city;
 
-    public Request() {
-        this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.city = null;
-        this.requesterLogin = null;
-        this.lostOrFound = null;
-        this.objectName = null;
-        this.description = null;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+
+    public String myToString() {
+        return this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }
 
-    public Request(String requesterLogin, LostOrFound lostOrFound, String objectName, String description, String city) {
-        this.requestDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.city = city;
-        this.requesterLogin = requesterLogin;
-        this.lostOrFound = lostOrFound;
-        this.objectName = objectName;
-        this.description = description;
+    public String stringToCompareRequestswhileModify() {
+        return this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
     }
 
-    public String getRequesterLogin() {
-        return requesterLogin;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getObjectName() {
-        return objectName;
-    }
-
-    public String getLostOrFound() {
-        return lostOrFound.getText();
-    }
-
-    public String getRequestDate() {
-        return requestDate;
-    }
-
-    public String getCity() {
-        return city;
-    }
 
     public enum LostOrFound {
-        LOST("Lost"), FOUND("Found");
+        LOST("Zgubione"), FOUND("Znalezione");
 
         public final String text;
 
@@ -65,46 +55,18 @@ public class Request {
             this.text = lostOrFoundString;
         }
 
+        public static LostOrFound getFromText(String text) {
+            for (LostOrFound foundEnum : LostOrFound.values()) {
+                if (foundEnum.text.equalsIgnoreCase(text)) {
+                    return foundEnum;
+                }
+            }
+            return null;
+        }
+
         @JsonValue
         public String getText() {
             return text;
         }
-    }
-
-    public void setRequesterLogin(String requesterLogin) {
-        this.requesterLogin = requesterLogin;
-    }
-
-    public void setObjectName(String objectName) {
-        this.objectName = objectName;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setLostOrFound(LostOrFound lostOrFound) {
-        this.lostOrFound = lostOrFound;
-    }
-
-    public void setRequestDate(String requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String myToString() {
-        return this.requesterLogin + "\n" + this.objectName + "\n" + this.description + "\n" + this.lostOrFound.toString() + "\n" + this.requestDate + "\n" + this.city;
-    }
-
-    public void nicePrint() {
-        System.out.println("Login: " + this.requesterLogin);
-        System.out.println("Object name: " + this.objectName);
-        System.out.println("Description: " + this.description);
-        System.out.println("Lost or Found: " + this.lostOrFound);
-        System.out.println("Date: " + this.requestDate);
-        System.out.println("City: " + this.city);
     }
 }

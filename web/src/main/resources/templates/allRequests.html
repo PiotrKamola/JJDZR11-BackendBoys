@@ -1,7 +1,11 @@
 <div th:fragment="content" class="container mt-5 mb-5 ">
 
-    <div>
-        <h2 class="text-center" style="color: #074dcf;">Zgłoszenia</h2>
+    <div class="text-center" th:if="${loggedUserEmail != 'ADMIN@ADMIN'}">
+        <h2 style="color: #074dcf;">Zgłoszenia</h2>
+        <span th:if="${loggedUserEmail != null}">
+            <a th:href="@{/request/mineRequests}" class="btn btn-primary btn-sm py-0 mx-2"> Pokaż moje zguby </a>
+            <a th:href="@{/request/all}" class="btn btn-primary btn-sm py-0 mx-2"> Pokaż wszystkie </a>
+        </span>
     </div>
 
     <div class="alert alert-info mb-3 p-1" role="alert" th:if="${String != null}">
@@ -32,7 +36,7 @@
             <td class="text-center" th:text="${request.description}"></td>
             <td class="text-center" th:text="${request.requestDate}"></td>
             <td class="text-center" th:text="${request.city}"></td>
-            <td class="text-center" th:text="${request.requesterLogin}"></td>
+            <td class="text-center" th:text="${request.user.loginEmail}"></td>
 
         </tr>
         </tbody>
