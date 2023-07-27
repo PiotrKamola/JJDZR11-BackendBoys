@@ -87,7 +87,7 @@ ZgubaApp is a platform that helps you find lost items. Our mission is to facilit
 ### Built With
 
 * [![Java][Java]][Java-url]
-* [![Spring Boot][Spring]][Spring-url]
+* [![Spring][Spring]][Spring-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -283,6 +283,7 @@ Thanks to the creators and developers. And also to infoShareAcademy for all the 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
-[Java]: https://img.shields.io/badge/logo-java-blue?logo=java
+[Java]: https://img.shields.io/badge/logo-java-blue?Java=java
 [Java-url]: https://www.java.com/pl/
+[Spring]: https://img.shields.io/badge/logo-spring-blue?Spring=spring
 [Spring-url]: https://spring.io/projects/spring-boot
