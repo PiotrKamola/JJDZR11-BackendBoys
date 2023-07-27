@@ -283,7 +283,6 @@ Thanks to the creators and developers. And also to infoShareAcademy for all the 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
-[Java]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Java]: https://img.shields.io/badge/logo-java-blue?logo=java
 [Java-url]: https://www.java.com/pl/
-[Spring]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [Spring-url]: https://spring.io/projects/spring-boot
