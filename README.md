@@ -39,9 +39,6 @@
   <p align="center">
     Find your missing item!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
@@ -80,8 +77,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 ZgubaApp is a platform that helps you find lost items. Our mission is to facilitate the process of recovering lost items and returning them to their rightful owners. Join our community and help us create a world where no lost items are left without an owner.
 
@@ -254,10 +249,10 @@ Tomasz Płoński - [@your_twitter](https://twitter.com/your_username) - email@ex
 
 Piotr Kamola - [@your_twitter](https://twitter.com/your_username) - email@example.com
 
-Aleksander Kulej - [@your_twitter](https://twitter.com/AleksanderKulej)
+Aleksander Kulej - [@AleksanderKulej](https://twitter.com/AleksanderKulej)
 
 
-Project Link: [https://github.com/your_username/repo_name]([https://github.com/your_username/repo_name](https://github.com/infoshareacademy/JJDZR11-BackendBoys)
+Project Link: (https://github.com/infoshareacademy/JJDZR11-BackendBoys)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -289,6 +284,6 @@ Thanks to the creators and developers. And also to infoShareAcademy for all the 
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
 [Java]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Java-url]: https://nextjs.org/](https://www.java.com/pl/
+[Java-url]: https://www.java.com/pl/
 [Spring]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[Spring-url]: https://reactjs.org/](https://spring.io/projects/spring-boot
+[Spring-url]: https://spring.io/projects/spring-boot
