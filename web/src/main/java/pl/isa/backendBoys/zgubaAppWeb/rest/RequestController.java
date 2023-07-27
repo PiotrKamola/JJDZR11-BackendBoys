@@ -64,6 +64,13 @@ public class RequestController {
         model.addAttribute("searchWord", new SearchHelp());
         model.addAttribute(requestToAdd);
         model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
+
+        if (userService.getLoggedUserEmail() == null) {
+            model.addAttribute("enum", Request.LostOrFound.class.getName());
+            model.addAttribute("content", "addRequest");
+            return "main";
+        }
+
         requestToAdd.setUser(userService.getUserByLogin(userService.getLoggedUserEmail()));
         requestService.addRequest(requestToAdd);
         mySqlService.addNewRequest(requestToAdd);
@@ -84,6 +91,7 @@ public class RequestController {
 
     @PostMapping("/search")
     public String search(Model model, @ModelAttribute SearchHelp searchWord) {
+
         model.addAttribute(searchWord);
         model.addAttribute("loggedUserEmail", userService.getLoggedUserEmail());
         List<Request> searchList = searchService.searchByWord(requestService.getAllRequests(), searchWord.getSearchWord());
