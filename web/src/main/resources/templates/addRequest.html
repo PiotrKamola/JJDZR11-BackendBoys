@@ -1,6 +1,12 @@
 <div th:fragment="content" class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="justify-content-center mt-2 px-2 bg-warning text-white text-center text-wrap"
+             th:if="${loggedUserEmail == null}">
+
+            <p class="text-cemter pt-3 text-strong"> Proszę się zalogować, aby dodawać nowe zguby.</p>
+        </div>
+
+        <div class="col-md-6" th:if="${loggedUserEmail}">
             <h2 class="text-center" style="color: #074dcf;">Zgłaszanie zguby</h2>
 
             <form th:action="@{/request/submitted}" th:object="${requestToAdd}" method="post">
@@ -21,18 +27,35 @@
                     <label for="lostOrFound">Status:</label>
 
                     <select class="form-control border-2" name="lostOrFound" id="lostOrFound">
-                        <option th:each="lostOrFound : ${T(__${enum}__).values()}"
-                                th:value="${lostOrFound}" th:text="${lostOrFound}"></option>
+
+                        <option value="LOST" th:selected="*{lostOrFound == 'Zgubione'}">Zgubiłem</option>
+                        <option value="FOUND" th:selected="*{lostOrFound == 'Znalezione'}">Znalazłem</option>
+
+<!--                        <option th:each="lostOrFound : ${T(__${enum}__).values()}"-->
+<!--                                th:value="${lostOrFound}" th:text="${lostOrFound}"></option>-->
                     </select>
 
                 </div>
 
 
+<!--                <div class="form-group mt-3">-->
+<!--                    <label for="date">Data:</label>-->
+<!--                    <input type="date" class="form-control border-2" id="date" name="date" max="2023-06-18" required-->
+<!--                           th:field="*{requestDate}">-->
+<!--                </div>-->
+
+
                 <div class="form-group mt-3">
-                    <label for="date">Data:</label>
-                    <input type="date" class="form-control border-2" id="date" name="date" max="2023-06-18" required
-                           th:field="*{requestDate}">
+                    <label for="requestDate">Data:</label>
+                    <input type="date" class="form-control border-2" id="requestDate" name="requestDate"
+                           max=today required th:value="*{requestDate}">
                 </div>
+
+                <script>
+                    // Ustaw dzisiejszą datę jako maksymalną wartość dla pola daty
+                    var today = new Date().toISOString().split('T')[0];
+                    document.getElementById("date").setAttribute("max", today);
+                </script>
 
                 <div class="form-group mt-3">
                     <label for="city">Miasto:</label>

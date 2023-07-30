@@ -1,10 +1,21 @@
 [
   {
     "requestId": null,
-    "objectName": "Zegarek",
-    "description": "Czarny zegarek z paskiem skórzanym",
+    "objectName": "Portfel",
+    "description": "Brązowy portfel z dokumentami",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-01",
+    "city": "Kraków",
+    "user": {
+      "loginEmail": "pawel01@wp.pl"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Telefon",
+    "description": "Czarny telefon marki Samsung",
     "lostOrFound": "Zgubione",
-    "requestDate": "2023-07-05",
+    "requestDate": "2023-07-15",
     "city": "Warszawa",
     "user": {
       "loginEmail": "pawel01@wp.pl"
@@ -12,13 +23,211 @@
   },
   {
     "requestId": null,
-    "objectName": "Portfel",
-    "description": "Brązowy portfel z dokumentami",
-    "lostOrFound": "Znalezione",
-    "requestDate": "2023-07-01",
-    "city": "Kraków",
+    "objectName": "Okulary przeciwsłoneczne",
+    "description": "Białe okulary zielonego projektanta",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-10",
+    "city": "Gdańsk",
     "user": {
-      "loginEmail": "ewa2002@onet.pl"
+      "loginEmail": "pawel01@wp.pl"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Klucze do samochodu",
+    "description": "Zestaw kluczy z breloczkiem",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-20",
+    "city": "Poznań",
+    "user": {
+      "loginEmail": "piotr1999@gmail.coma"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Długopis",
+    "description": "Niebieski długopis Parker",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-05",
+    "city": "Łódź",
+    "user": {
+      "loginEmail": "piotr1999@gmail.coma"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Zegarek",
+    "description": "Męski zegarek w stylu retro",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-25",
+    "city": "Wrocław",
+    "user": {
+      "loginEmail": "piotr1999@gmail.coma"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Kamera",
+    "description": "Czarna kamera cyfrowa Canon",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-12",
+    "city": "Katowice",
+    "user": {
+      "loginEmail": "piotr1999@gmail.coma"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Plecak",
+    "description": "Niebieski plecak turystyczny",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-18",
+    "city": "Szczecin",
+    "user": {
+      "loginEmail": "adam90@onet.pl"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Zeszyt",
+    "description": "Zielony zeszyt linowany",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-07",
+    "city": "Bydgoszcz",
+    "user": {
+      "loginEmail": "adam90@onet.pl"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Słuchawki",
+    "description": "Czarne bezprzewodowe słuchawki",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-23",
+    "city": "Lublin",
+    "user": {
+      "loginEmail": "adam90@onet.pl"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Klucz do roweru",
+    "description": "Mały srebrny klucz do roweru",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-04",
+    "city": "Białystok",
+    "user": {
+      "loginEmail": "adam90@onet.pl"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Książka",
+    "description": "Tytuł: \"Władca Pierścieni\"",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-27",
+    "city": "Kielce",
+    "user": {
+      "loginEmail": "tom@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Okulary do czytania",
+    "description": "Czarne okulary do czytania",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-02",
+    "city": "Olsztyn",
+    "user": {
+      "loginEmail": "tom@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Koszulka",
+    "description": "Biała koszulka rozmiar M",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-11",
+    "city": "Rzeszów",
+    "user": {
+      "loginEmail": "tom@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Zakładka do książki",
+    "description": "Zakładka w kształcie kota",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-21",
+    "city": "Częstochowa",
+    "user": {
+      "loginEmail": "iza1992@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Kubek",
+    "description": "Niebieski kubek z napisem \"Best Dad\"",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-06",
+    "city": "Gdynia",
+    "user": {
+      "loginEmail": "iza1992@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Laptop",
+    "description": "Czarny laptop Dell",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-26",
+    "city": "Radom",
+    "user": {
+      "loginEmail": "iza1992@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Gitara",
+    "description": "Akustyczna gitara z futerałem",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-08",
+    "city": "Sosnowiec",
+    "user": {
+      "loginEmail": "iza1992@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Bateria zewnętrzna",
+    "description": "Czarna bateria zewnętrzna 10000 mAh",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-22",
+    "city": "Toruń",
+    "user": {
+      "loginEmail": "iza1992@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Klucz do mieszkania",
+    "description": "Duży srebrny klucz do mieszkania",
+    "lostOrFound": "Zgubione",
+    "requestDate": "2023-07-09",
+    "city": "Kalisz",
+    "user": {
+      "loginEmail": "iza1992@gmail.com"
+    }
+  },
+  {
+    "requestId": null,
+    "objectName": "Podręcznik",
+    "description": "Fizyka dla początkujących",
+    "lostOrFound": "Znalezione",
+    "requestDate": "2023-07-24",
+    "city": "Bielsko-Biała",
+    "user": {
+      "loginEmail": "natalia@gmail.com"
     }
   }
 ]

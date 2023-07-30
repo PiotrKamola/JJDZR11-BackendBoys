@@ -20,23 +20,39 @@
     <table class="table table-striped mt-1">
         <thead class="table-dark text-center">
         <tr>
-            <th class="text-center">Rodzaj zgłoszenia</th>
-            <th class="text-center">Nazwa przedmiotu</th>
-            <th class="text-center">Dokładny opis przedmiodu</th>
             <th class="text-center">Data zgłoszenia</th>
             <th class="text-center">Miasto</th>
+            <th class="text-center">Rodzaj zgłoszenia</th>
+            <th class="text-center">Nazwa przedmiotu</th>
+            <th class="text-center">Opis</th>
             <th class="text-center">Adres e-mail</th>
 
         </tr>
         </thead>
         <tbody>
         <tr th:each="request : ${allRequests}">
-            <td class="text-center" th:text="${request.lostOrFound}"></td>
-            <td class="text-center" th:text="${request.objectName}"></td>
-            <td class="text-center" th:text="${request.description}"></td>
             <td class="text-center" th:text="${request.requestDate}"></td>
             <td class="text-center" th:text="${request.city}"></td>
-            <td class="text-center" th:text="${request.user.loginEmail}"></td>
+<!--            <td class="text-center" th:text="${request.lostOrFound}"></td>-->
+            <td class="text-center m-0 p-0" style="width: 60px">
+                <div th:if="${request.lostOrFound.text =='Zgubione'}">
+                    <i class="bi bi-puzzle-fill" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
+                    <p class="text-strong mb-0" style="font-size: 12px">ZNALAZŁEM</p>
+                </div>
+                <div th:if="${request.lostOrFound.text =='Znalezione'}">
+                    <i class="bi bi-puzzle" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
+                    <p class="text-strong mb-0" style="font-size: 12px">ZGUBIŁEM</p>
+                </div>
+            </td>
+            <td class="text-center" th:text="${request.objectName}"></td>
+            <td class="text-center" th:text="${request.description}"></td>
+<!--            <td class="text-center" th:text="${request.user.loginEmail}"></td>-->
+            <td class="text-center" style="width: 20px">
+                <span th:text="${request.user.loginEmail}">  </span>
+                <a th:href="'mailto:' + ${request.user.loginEmail}">
+                    <i class="bi bi-envelope-fill" style="color: #000;"></i>
+                </a>
+            </td>
 
         </tr>
         </tbody>
