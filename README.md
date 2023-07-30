@@ -64,8 +64,13 @@ Join our community and help us create a world where no lost items are left witho
 
 ### Built With
 
-* [![Java][Java]][Java-url]
-* [![Spring][Spring]][Spring-url]
+* Java
+* Spring Boot
+* MySQL
+* Hibernate
+* Bootstrap
+* Thymeleaf
+* HTML5 & CSS3
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -163,7 +168,7 @@ Distributed under the MIT License. See LICENSE.txt for more information.
 <!-- CONTACT -->
 ## Contact
 
-Tomasz Płoński - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Tomasz Płoński - tplonski@outlook.com
 
 Piotr Kamola - p.kamola98@wp.pl
 
