@@ -27,7 +27,6 @@
                     <label for="lostOrFound">Status:</label>
 
                     <select class="form-control border-2" name="lostOrFound" id="lostOrFound">
-
                         <option value="LOST" th:selected="*{lostOrFound == 'Zgubione'}">Zgubiłem</option>
                         <option value="FOUND" th:selected="*{lostOrFound == 'Znalezione'}">Znalazłem</option>
                     </select>
@@ -40,7 +39,6 @@
                     <input type="date" class="form-control border-2" id="requestDate" name="requestDate"
                            min='1899-01-01' max='2000-13-13' required th:value="*{requestDate}">
                 </div>
-
 
                 <script>
                     var today = new Date();

@@ -15,7 +15,7 @@ public class RequestService {
     }
 
     public void addRequest(Request request) {
-        mySqlService.addNewRequest(request);
+        mySqlService.addRequest(request);
     }
 
     public List<Request> getAllRequests() {
@@ -38,5 +38,6 @@ public class RequestService {
 
         currentRequest.setObjectName(requestToModify.getObjectName());
         currentRequest.setRequestDate(requestToModify.getRequestDate());
+        mySqlService.addRequest(currentRequest);
     }
 }

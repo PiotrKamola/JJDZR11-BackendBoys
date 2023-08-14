@@ -52,7 +52,7 @@ public class MySqlService {
         userRepository.delete(user);
     }
 
-    public void addNewRequest(Request request) {
+    public void addRequest(Request request) {
         requestRepository.save(request);
     }
 
@@ -92,9 +92,5 @@ public class MySqlService {
 
     public void deleteRequest(Request request) {
         requestRepository.delete(request);
-    }
-
-    public void updateRequest(Request request) {
-        requestRepository.save(request);
     }
 }
