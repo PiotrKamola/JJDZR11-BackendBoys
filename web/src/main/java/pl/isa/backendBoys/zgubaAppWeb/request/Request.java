@@ -47,7 +47,8 @@ public class Request {
 
 
     public enum LostOrFound {
-        LOST("Zgubione"), FOUND("Znalezione");
+        LOST("Zgubione"),
+        FOUND("Znalezione");
 
         public final String text;
 

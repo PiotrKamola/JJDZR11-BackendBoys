@@ -70,11 +70,15 @@ public class RequestController {
             model.addAttribute("content", "addRequest");
             return "main";
         }
-
         requestToAdd.setUser(userService.getUserByLogin(userService.getLoggedUserEmail()));
-        requestService.addRequest(requestToAdd);
-        mySqlService.addNewRequest(requestToAdd);
         model.addAttribute("content", "submittedRequest");
+
+        try {
+            requestService.addRequest(requestToAdd);
+        }catch (Exception e){
+            model.addAttribute("content", "wrongRequest");
+            return "main";
+        }
         return "main";
     }
 
@@ -102,6 +106,5 @@ public class RequestController {
         model.addAttribute("Integer", searchList.size());
         model.addAttribute("content", "allRequests");
         return "main";
-
     }
 }

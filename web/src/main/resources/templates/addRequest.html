@@ -12,13 +12,13 @@
             <form th:action="@{/request/submitted}" th:object="${requestToAdd}" method="post">
                 <div class="form-group mt-3">
                     <label for="name">Nazwa:</label>
-                    <input type="text" class="form-control border-2" id="name" name="name" required
+                    <input type="text" class="form-control border-2" id="name" name="name" required maxlength="100"
                            onfocusout="this.value = this.value.trim()" th:field="*{objectName}">
                 </div>
 
                 <div class="form-group mt-3">
                     <label for="description">Opis:</label>
-                    <textarea class="form-control border-2" id="description" name="description" rows="3" required
+                    <textarea class="form-control border-2" id="description" name="description" rows="3" required maxlength="255"
                               th:field="*{description}"
                     ></textarea>
                 </div>
@@ -30,36 +30,37 @@
 
                         <option value="LOST" th:selected="*{lostOrFound == 'Zgubione'}">Zgubiłem</option>
                         <option value="FOUND" th:selected="*{lostOrFound == 'Znalezione'}">Znalazłem</option>
-
-<!--                        <option th:each="lostOrFound : ${T(__${enum}__).values()}"-->
-<!--                                th:value="${lostOrFound}" th:text="${lostOrFound}"></option>-->
                     </select>
 
                 </div>
 
 
-<!--                <div class="form-group mt-3">-->
-<!--                    <label for="date">Data:</label>-->
-<!--                    <input type="date" class="form-control border-2" id="date" name="date" max="2023-06-18" required-->
-<!--                           th:field="*{requestDate}">-->
-<!--                </div>-->
-
-
                 <div class="form-group mt-3">
                     <label for="requestDate">Data:</label>
                     <input type="date" class="form-control border-2" id="requestDate" name="requestDate"
-                           max=today required th:value="*{requestDate}">
+                           min='1899-01-01' max='2000-13-13' required th:value="*{requestDate}">
                 </div>
 
+
                 <script>
-                    // Ustaw dzisiejszą datę jako maksymalną wartość dla pola daty
-                    var today = new Date().toISOString().split('T')[0];
-                    document.getElementById("date").setAttribute("max", today);
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1; //January is 0!
+                    var yyyy = today.getFullYear();
+                     if(dd<10){
+                            dd='0'+dd
+                        }
+                        if(mm<10){
+                            mm='0'+mm
+                        }
+
+                    today = yyyy+'-'+mm+'-'+dd;
+                    document.getElementById("requestDate").setAttribute("max", today);
                 </script>
 
                 <div class="form-group mt-3">
                     <label for="city">Miasto:</label>
-                    <input type="text" title="Minimum 2 litery, maksymalnie 30" pattern=".{2,30}"
+                    <input type="text" title="Minimum 2 litery, maksymalnie 30" pattern=".{2,30}" maxlength="30"
                            class="form-control border-2" id="city" name="city" required
                            onfocusout="this.value = this.value.trim()" th:field="*{city}">
                 </div>
