@@ -283,6 +283,11 @@ public class UserController {
             return "main";
         }
 
+        if (!currentRequest.getUser().equals(userService.getUserByLogin(loggedUserEmail))) {
+            model.addAttribute("content", "wrongRequest");
+            return "main";
+        }
+
         List<Request> loggedUserRequests = userService.getUserByLogin(loggedUserEmail).getRequest();
 
         requestService.modifyRequest(currentRequest, requestToModify);

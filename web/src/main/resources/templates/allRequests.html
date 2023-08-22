@@ -26,6 +26,7 @@
             <th class="text-center">Nazwa przedmiotu</th>
             <th class="text-center">Opis</th>
             <th class="text-center">Adres e-mail</th>
+            <th class="text-center">Numer telefonu</th>
 
         </tr>
         </thead>
@@ -33,12 +34,12 @@
         <tr th:each="request : ${allRequests}">
             <td class="text-center" th:text="${request.requestDate}"></td>
             <td class="text-center" th:text="${request.city}"></td>
-            <td class="text-center m-0 p-0" style="width: 60px">
-                <div th:if="${request.lostOrFound.text =='Znalezione'}">
+            <td class="text-center m-0 p-0" style="width: 200px">
+                <div th:if="${request.lostOrFound.text =='Znalazłem'}">
                     <i class="bi bi-puzzle-fill" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
                     <p class="text-strong mb-0" style="font-size: 12px">ZNALAZŁEM</p>
                 </div>
-                <div th:if="${request.lostOrFound.text =='Zgubione'}">
+                <div th:if="${request.lostOrFound.text =='Zgubiłem'}">
                     <i class="bi bi-puzzle" style="font-size: 1.5rem; color: DodgerBlue ;"></i>
                     <p class="text-strong mb-0" style="font-size: 12px">ZGUBIŁEM</p>
                 </div>
@@ -46,11 +47,14 @@
             <td class="text-center" th:text="${request.objectName}"></td>
             <td class="text-center" th:text="${request.description}"></td>
 <!--            <td class="text-center" th:text="${request.user.loginEmail}"></td>-->
-            <td class="text-center" style="width: 20px">
+            <td class="text-center" style="width: 200px">
                 <span th:text="${request.user.loginEmail}">  </span>
                 <a th:href="'mailto:' + ${request.user.loginEmail}">
                     <i class="bi bi-envelope-fill" style="color: #000;"></i>
                 </a>
+            </td>
+            <td class="text-center" style="width: 150px">
+                <span th:text="${request.user.contactNumber}">  </span>
             </td>
 
         </tr>
